@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk0dctfihdx6d"]
+
+[ext_resource type="Script" path="res://buckground.gd" id="1_ij4ha"]
+[ext_resource type="Texture2D" uid="uid://ce5o06qlf2q4j" path="res://bg.png" id="2_34law"]
+
+[node name="buckground" type="Node"]
+script = ExtResource("1_ij4ha")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="Bg" type="Sprite2D" parent="ParallaxBackground"]
+position = Vector2(270, 480)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_34law")

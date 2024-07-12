@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpt1iblh7a5fa"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_ft8yw"]
+[ext_resource type="Texture2D" uid="uid://cao57xyn37kxi" path="res://enemy_ammo.png" id="2_8v0a2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ny1mb"]
+size = Vector2(10, 10)
+
+[node name="bullet" type="Area2D"]
+script = ExtResource("1_ft8yw")
+speed = 30
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ny1mb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_8v0a2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2

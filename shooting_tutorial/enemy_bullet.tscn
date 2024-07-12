@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://dekt4gx5dupcx"]
+
+[ext_resource type="Script" path="res://enemy_bullet.gd" id="1_2yx3l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33ptt"]
+size = Vector2(10, 10)
+
+[node name="enemy_bullet" type="Area2D"]
+script = ExtResource("1_2yx3l")
+speed = 300
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+color = Color(0.698774, 3.08037e-06, 0.427213, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_33ptt")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

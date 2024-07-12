@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd5iiqkb37huj"]
+
+[ext_resource type="Texture2D" uid="uid://ce5o06qlf2q4j" path="res://bg.png" id="1_g6aat"]
+[ext_resource type="PackedScene" uid="uid://x3abtxlca7ir" path="res://player.tscn" id="1_vhi3p"]
+[ext_resource type="PackedScene" uid="uid://ciii3554log2o" path="res://boss.tscn" id="2_pqsl0"]
+[ext_resource type="PackedScene" uid="uid://dtjbx1l44wetw" path="res://enemy.tscn" id="3_jgjne"]
+
+[node name="Main" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 540.0
+offset_bottom = 960.0
+color = Color(0.332881, 0.332881, 0.332881, 1)
+
+[node name="Bg" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(265, 478)
+texture = ExtResource("1_g6aat")
+
+[node name="boss" parent="." instance=ExtResource("2_pqsl0")]
+position = Vector2(270, 200)
+scale = Vector2(0.8, 0.8)
+
+[node name="player" parent="." instance=ExtResource("1_vhi3p")]
+position = Vector2(270, 700)
+
+[node name="enemy" parent="." instance=ExtResource("3_jgjne")]
+position = Vector2(150, 100)
+
+[node name="enemy2" parent="." instance=ExtResource("3_jgjne")]
+position = Vector2(390, 100)
+angle_plusminus = -1
