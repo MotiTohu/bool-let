@@ -1,11 +1,15 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
-import { join } from 'path'
+import { join, resolve } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import * as child_process from 'node:child_process'
+
+let mainWindow: BrowserWindow
+let running: boolean = false
 
 function createWindow(): void {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 900,
     height: 670,
     show: false,
@@ -40,7 +44,7 @@ function createWindow(): void {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   // Set app user model id for windows
-  electronApp.setAppUserModelId('com.electron')
+  electronApp.setAppUserModelId('com.yosshipaopao')
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
@@ -49,16 +53,39 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  // IPC test
-  ipcMain.on('ping', (event, args) => {
-    console.log('pong')
-    event.sender.send('ev', args)
+  // run games
+  ipcMain.on('run', (event, args) => {
+    if (running) return
+    const resources =
+      process.env.NODE_ENV_ELECTRON_VITE === 'development'
+        ? join(resolve(), 'resources')
+        : join(process.resourcesPath, 'resources')
+    console.log('path', resources)
+    let game = ''
+    switch (args) {
+      case 'shooting':
+        game = 'shooting.x86_64'
+        break
+    }
+    console.log('game', game)
+    if (!game || game.length < 1) return event.sender.send('fin')
+    running = true
+    child_process.execFile(join(resources, game)).on('exit', () => {
+      event.sender.send('fin')
+      mainWindow.show()
+      running = false
+    })
+    mainWindow.hide()
+  })
+
+  ipcMain.on('enable_game', () => {
+    running = false
   })
 
   createWindow()
 
   app.on('activate', function () {
-    // On macOS it's common to re-create a window in the app when the
+    // On macOS, it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
@@ -68,9 +95,7 @@ app.whenReady().then(() => {
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+  if (process.platform !== 'darwin') app.quit()
 })
 
 // In this file you can include the rest of your app"s specific main process

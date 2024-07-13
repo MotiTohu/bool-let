@@ -12,18 +12,17 @@
     "svelte-check": "svelte-check --tsconfig ./tsconfig.json",
     "typecheck": "bun typecheck:node && bun svelte-check",
     "start": "electron-vite preview",
-    "dev": "electron-vite dev",
+    "dev": "NODE_ENV=development electron-vite dev",
     "build": "bun typecheck && electron-vite build",
     "postinstall": "electron-builder install-app-deps",
-    "build:unpack": "bun build && electron-builder --dir",
-    "build:win": "bun build && electron-builder --win",
-    "build:mac": "bun build && electron-builder --mac",
-    "build:linux": "bun build && electron-builder --linux"
+    "build:unpack": "bun run build && electron-builder --dir",
+    "build:win": "bun run build && electron-builder --win",
+    "build:mac": "bun run build && electron-builder --mac",
+    "build:linux": "bun run build && electron-builder --linux"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^3.0.0",
-    "@kuiper/svelte-scan-qrcode": "^0.0.5",
     "electron-updater": "^6.2.1"
   },
   "devDependencies": {
@@ -37,6 +36,7 @@
     "electron-vite": "^2.3.0",
     "eslint": "^8.57.0",
     "eslint-plugin-svelte": "^2.42.0",
+    "jsqr": "^1.4.0",
     "prettier": "^3.3.2",
     "prettier-plugin-svelte": "^3.2.5",
     "svelte": "^4.2.18",
@@ -47,5 +47,10 @@
   },
   "trustedDependencies": [
     "svelte-preprocess"
-  ]
+  ],
+  "build": {
+    "extraResources": [
+      "resources/"
+    ]
+  }
 }
