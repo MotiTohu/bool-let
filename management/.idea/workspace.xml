@@ -5,21 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f98da73-323b-4a0e-8ffd-f5ec96a5bc90" name="変更" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/renderer/src/components/ScanQRCode.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/management.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.vscode/extensions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.vscode/launch.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/bun.lockb" beforeDir="false" afterPath="$PROJECT_DIR$/app/bun.lockb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/electron-builder.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/electron-builder.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/renderer/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/renderer/src/App.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,19 +35,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/yosshipaopao/dev/bool-let/management/app/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/home/yosshipaopao/dev/bool-let/management/api",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/home/yosshipaopao/dev/bool-let/management/app/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/src/renderer/src/components" />
@@ -86,7 +73,11 @@
       <workItem from="1720771833655" duration="1732000" />
       <workItem from="1720775013529" duration="13000" />
       <workItem from="1720775382873" duration="2490000" />
-      <workItem from="1720836758470" duration="7291000" />
+      <workItem from="1720836758470" duration="7403000" />
+      <workItem from="1720844210657" duration="21000" />
+      <workItem from="1720844992650" duration="156000" />
+      <workItem from="1720851910816" duration="3000" />
+      <workItem from="1720852774532" duration="12000" />
     </task>
     <servers />
   </component>
