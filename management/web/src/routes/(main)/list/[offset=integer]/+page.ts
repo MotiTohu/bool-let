@@ -10,6 +10,6 @@ export const load: PageLoad = async ({ params }) => {
 	});
 	const data = await res.json();
 	return {
-		data
+		...data
 	};
 };

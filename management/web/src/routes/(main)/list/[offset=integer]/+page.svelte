@@ -28,7 +28,7 @@
 			});
 		}
 	};
-	$:update_pages(data.data);
+	$:update_pages(data);
 </script>
 
 <div class="flex flex-col gap-2">
@@ -41,7 +41,7 @@
 			<TableHeadCell>updated At</TableHeadCell>
 		</TableHead>
 		<TableBody tableBodyClass="divide-y">
-			{#each data.data.result as res}
+			{#each data.result as res}
 				<TableBodyRow>
 					<TableBodyCell>{res.id}</TableBodyCell>
 					<TableBodyCell>{res.backup_id}</TableBodyCell>
@@ -54,8 +54,8 @@
 	</Table>
 	<div class="w-full flex justify-end">
 		<Pagination {pages}
-								on:previous={()=>goto(`/list/${Math.max(0,data.data.offset-1)}`)}
-								on:next={()=>goto(`/list/${Math.min(data.data.offset+1,Math.ceil(data.data.count / 10)-1)}`)}
+								on:previous={()=>goto(`/list/${Math.max(0,data.offset-1)}`)}
+								on:next={()=>goto(`/list/${Math.min(data.offset+1,Math.ceil(data.count / 10)-1)}`)}
 		>
 			<svelte:fragment slot="prev">
 				<ChevronLeftOutline class="w-6 h-6" />

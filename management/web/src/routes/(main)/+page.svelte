@@ -16,10 +16,11 @@
 		}
 	};
 </script>
+
 <div class="w-full h-full flex items-center justify-center">
 	<div>
 		<label for="count">count</label>
-		<input id="count" type="number" required bind:value={count} />
+		<input id="count" type="number" required bind:value={count} min="0" />
 		<button on:click={add}>add</button>
 	</div>
 </div>

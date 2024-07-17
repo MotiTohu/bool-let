@@ -1,0 +1,10 @@
+name = "bootlet-management-api"
+main = "src/index.ts"
+compatibility_date = "2024-07-13"
+node_compat = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "boot-let-management-dev"
+database_id = "deb69437-c675-497b-b189-a80d97389381"
+migrations_dir = "migrations"
