@@ -45,7 +45,10 @@
     "api": "file:../api"
   },
   "trustedDependencies": [
-    "svelte-preprocess"
+    "electron",
+    "esbuild",
+    "svelte-preprocess",
+    "workerd"
   ],
   "build": {
     "extraResources": [
