@@ -3,19 +3,24 @@
   import ScanQRCode from './components/ScanQRCode.svelte'
 
   let scanning = true
+  let id = ''
   const onResulted = async (result: string): Promise<void> => {
     if (!scanning) return
     scanning = false
+    console.log('qr result:', result)
     if (result && result.length > 0) {
+      console.log('result passed')
       const res = await client.auth.$get({
         query: {
           id: result
         }
       })
+      console.log('api result', res.ok)
       if (res.ok) {
         const data = await res.json()
-        console.log(data)
+        console.log('api data', data)
         if (data.status) {
+          id = result
           window.electron.ipcRenderer.send('run', 'shooting')
           return
         }
@@ -24,9 +29,14 @@
     }
     scanning = true
   }
-  window.electron.ipcRenderer.on('fin', (_event, args) => {
+  window.electron.ipcRenderer.on('fin', async () => {
     scanning = true
-    console.log('ipcRenderer.ipcRenderer.send', args)
+    console.log('game finish got, id = ', id)
+    if (id)
+      await client.query.$post({
+        json: { id, diff: -1 }
+      })
+    id = ''
   })
 
   const force_enable_scanning = (): void => {
