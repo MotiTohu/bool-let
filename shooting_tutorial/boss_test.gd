@@ -1,8 +1,8 @@
 extends Area2D
 var angle = 0
 const bullet = preload("res://enemy_bullet.tscn")
-@onready
-var player := $"/root/Main/player"
+const missile = preload("res://homing_missile.tscn")
+@onready var player := $"/root/Main/player"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -50,7 +50,12 @@ func shootforp2():
 			print(angle)
 		await get_tree().create_timer(0.1).timeout
 
+func homing_missile():
+	var homing_missile1 = missile.instantiate()
+	angle = global_position.angle_to_point(player.global_position)
+	homing_missile1.rotation_degrees = angle
+	add_child(homing_missile1)
 
 func _on_timer_timeout():
-	pass
-	#shootforp()
+	#pass
+	homing_missile()

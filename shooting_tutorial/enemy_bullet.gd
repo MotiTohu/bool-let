@@ -10,6 +10,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	velocity = transform.x * speed
+	#print(velocity)
 	position += velocity * delta
 
 

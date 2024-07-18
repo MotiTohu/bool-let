@@ -21,9 +21,9 @@ texture = ExtResource("1_g6aat")
 position = Vector2(270, 700)
 
 [node name="enemy" parent="." instance=ExtResource("3_jgjne")]
+visible = false
 position = Vector2(270, 300)
 angle_plusminus = 10
 
 [node name="boss_test" parent="." instance=ExtResource("5_2kvur")]
-visible = false
 position = Vector2(270, 100)
