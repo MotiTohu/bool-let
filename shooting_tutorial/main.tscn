@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://ce5o06qlf2q4j" path="res://bg.png" id="1_g6aat"]
 [ext_resource type="PackedScene" uid="uid://x3abtxlca7ir" path="res://player.tscn" id="1_vhi3p"]
-[ext_resource type="PackedScene" uid="uid://ciii3554log2o" path="res://boss.tscn" id="2_pqsl0"]
 [ext_resource type="PackedScene" uid="uid://dtjbx1l44wetw" path="res://enemy.tscn" id="3_jgjne"]
+[ext_resource type="PackedScene" uid="uid://ccjpecpcycg3k" path="res://boss_test.tscn" id="5_2kvur"]
 
 [node name="Main" type="Node2D"]
 
@@ -17,16 +17,13 @@ visible = false
 position = Vector2(265, 478)
 texture = ExtResource("1_g6aat")
 
-[node name="boss" parent="." instance=ExtResource("2_pqsl0")]
-position = Vector2(270, 200)
-scale = Vector2(0.8, 0.8)
-
 [node name="player" parent="." instance=ExtResource("1_vhi3p")]
 position = Vector2(270, 700)
 
 [node name="enemy" parent="." instance=ExtResource("3_jgjne")]
-position = Vector2(150, 100)
+position = Vector2(270, 300)
+angle_plusminus = 10
 
-[node name="enemy2" parent="." instance=ExtResource("3_jgjne")]
-position = Vector2(390, 100)
-angle_plusminus = -1
+[node name="boss_test" parent="." instance=ExtResource("5_2kvur")]
+visible = false
+position = Vector2(270, 100)

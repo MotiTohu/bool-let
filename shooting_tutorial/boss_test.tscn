@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccjpecpcycg3k"]
+
+[ext_resource type="Script" path="res://boss_test.gd" id="1_wwd5p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4qxe3"]
+size = Vector2(150, 150)
+
+[node name="boss_test" type="Area2D"]
+script = ExtResource("1_wwd5p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4qxe3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
+color = Color(0.836327, 0.339884, 1, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

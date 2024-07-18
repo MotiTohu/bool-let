@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://buckground.gd" id="1_ij4ha"]
 [ext_resource type="Texture2D" uid="uid://ce5o06qlf2q4j" path="res://bg.png" id="2_34law"]
 
-[node name="buckground" type="Node"]
+[node name="background" type="Node"]
 script = ExtResource("1_ij4ha")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]

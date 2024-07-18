@@ -17,6 +17,7 @@ visible = false
 texture = ExtResource("1_wuiiv")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = -75.0
 offset_top = -75.0
 offset_right = 75.0

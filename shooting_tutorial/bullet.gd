@@ -9,3 +9,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	position.y -= speed
+
+
+func _on_visible_on_screen_enabler_2d_screen_exited():
+	print("deleted")
+	queue_free()

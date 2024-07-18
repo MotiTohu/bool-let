@@ -7,6 +7,7 @@ size = Vector2(40, 40)
 
 [node name="enemy" type="Area2D"]
 script = ExtResource("1_qsqyj")
+angle_plusminus = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_n1pfo")
@@ -17,3 +18,9 @@ offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 color = Color(0.462745, 0.25098, 0.560784, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

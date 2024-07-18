@@ -36,8 +36,10 @@ func _process(delta):
 		
 	#print(velocity)
 	
-	
-	velocity_delta = velocity.normalized() * speed
+	if Input.is_action_pressed("move_shift"):
+		velocity_delta = velocity.normalized() * speed*0.5
+	else:
+		velocity_delta = velocity.normalized() * speed
 	
 	position += velocity_delta * delta
 	position = position.clamp(Vector2.ZERO, screen_size)
