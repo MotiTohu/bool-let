@@ -1,16 +1,23 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "1921d229-87da-4e75-92e6-96d9685a4a13",
+  "id": "77da31ea-1f59-4cc8-98dd-300c07052387",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "users": {
       "name": "users",
       "columns": {
+        "num": {
+          "name": "num",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
         "id": {
           "name": "id",
           "type": "text",
-          "primaryKey": true,
+          "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
@@ -47,9 +54,24 @@
         }
       },
       "indexes": {
+        "users_id_unique": {
+          "name": "users_id_unique",
+          "columns": [
+            "id"
+          ],
+          "isUnique": true
+        },
         "users_backup_id_unique": {
           "name": "users_backup_id_unique",
           "columns": [
+            "backup_id"
+          ],
+          "isUnique": true
+        },
+        "users_id_backup_id_unique": {
+          "name": "users_id_backup_id_unique",
+          "columns": [
+            "id",
             "backup_id"
           ],
           "isUnique": true

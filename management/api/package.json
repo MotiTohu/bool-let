@@ -3,7 +3,9 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "wrangler dev src/index.ts",
-    "deploy": "wrangler deploy --minify src/index.ts"
+    "deploy": "wrangler deploy --minify src/index.ts",
+    "generate": "drizzle-kit generate",
+    "miragate": "wrangler d1 migrations apply boot-let-management-dev "
   },
   "dependencies": {
     "@hono/zod-openapi": "^0.14.9",
