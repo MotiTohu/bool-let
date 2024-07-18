@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { ChartPieSolid, CirclePlusOutline } from 'flowbite-svelte-icons';
-	import { Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte';
+	import { DarkMode, Sidebar, SidebarGroup, SidebarItem, SidebarWrapper } from 'flowbite-svelte';
+
 	const iconClass = 'w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white';
 </script>
 
 <div class="flex">
 	<Sidebar>
-		<SidebarWrapper divClass="h-screen overflow-y-auto py-4 px-3 rounded bg-gray-200">
-			<SidebarGroup>
+		<SidebarWrapper divClass="h-screen overflow-y-auto py-4 px-3 bg-gray-200 dark:bg-gray-600">
+			<SidebarGroup ulClass="h-full flex flex-col">
 				<SidebarItem label="Register" href="/">
 					<svelte:fragment slot="icon">
 						<CirclePlusOutline class={iconClass} />
@@ -18,6 +19,9 @@
 						<ChartPieSolid class={iconClass} />
 					</svelte:fragment>
 				</SidebarItem>
+				<div class="mt-auto">
+					<DarkMode />
+				</div>
 			</SidebarGroup>
 		</SidebarWrapper>
 	</Sidebar>
