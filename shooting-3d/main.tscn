@@ -4,26 +4,30 @@
 [ext_resource type="Texture2D" uid="uid://de8xj35je0hpf" path="res://assets/player.png" id="2_d5qgy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yh23i"]
+size = Vector3(1, 0.4, 0.2)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0caby"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e3kl8"]
 transparency = 1
 albedo_texture = ExtResource("2_d5qgy")
-uv1_triplanar = true
+billboard_keep_scale = true
 
 [node name="Node3D" type="Node3D"]
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("1_7afo2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-visible = false
 shape = SubResource("BoxShape3D_yh23i")
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.43, 0)
-polygon = PackedVector2Array(0, 0.2, 0, 0.66, 1, 0.665, 1, 0.2)
-depth = 0.01
-material = SubResource("StandardMaterial3D_0caby")
+[node name="Node3D" type="Node3D" parent="CharacterBody3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D/Node3D"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_e3kl8")
+texture = ExtResource("2_d5qgy")
+region_enabled = true
+region_rect = Rect2(0, 87, 256, 119)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
