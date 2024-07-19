@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://cuc8vp65tt001"]
+[gd_scene load_steps=13 format=3 uid="uid://cuc8vp65tt001"]
 
 [ext_resource type="Script" path="res://CharacterBody3D.gd" id="1_7afo2"]
-[ext_resource type="Texture2D" uid="uid://de8xj35je0hpf" path="res://assets/player.png" id="2_d5qgy"]
 [ext_resource type="Texture2D" uid="uid://dc6qjcd2qtnfa" path="res://assets/target.png" id="3_13j34"]
+[ext_resource type="Texture2D" uid="uid://dd20xvod0mrl7" path="res://assets/player_body.png" id="3_dmmio"]
+[ext_resource type="Texture2D" uid="uid://db6ak5o5hp3r8" path="res://assets/player_blaster.png" id="3_u8r68"]
 [ext_resource type="Script" path="res://Label.gd" id="4_84x7h"]
+[ext_resource type="Script" path="res://Blaster.gd" id="4_cceni"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_riohe"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -28,7 +30,12 @@ size = Vector3(1, 0.4, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e3kl8"]
 transparency = 1
-albedo_texture = ExtResource("2_d5qgy")
+albedo_texture = ExtResource("3_dmmio")
+billboard_keep_scale = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya2kg"]
+transparency = 1
+albedo_texture = ExtResource("3_u8r68")
 billboard_keep_scale = true
 
 [node name="Control" type="Control"]
@@ -68,12 +75,21 @@ shape = SubResource("BoxShape3D_yh23i")
 
 [node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport/Node3D/Player"]
 
-[node name="Sprite3D" type="Sprite3D" parent="SubViewportContainer/SubViewport/Node3D/Player/Node3D"]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+[node name="Body" type="Sprite3D" parent="SubViewportContainer/SubViewport/Node3D/Player/Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_e3kl8")
-texture = ExtResource("2_d5qgy")
+texture = ExtResource("3_dmmio")
 region_enabled = true
-region_rect = Rect2(0, 87, 256, 119)
+region_rect = Rect2(0, 168.395, 641.682, 411.569)
+
+[node name="Blaster" type="Sprite3D" parent="SubViewportContainer/SubViewport/Node3D/Player/Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+top_level = true
+material_override = SubResource("StandardMaterial3D_ya2kg")
+texture = ExtResource("3_u8r68")
+region_enabled = true
+region_rect = Rect2(245.579, 264.267, 782.41, 244.369)
+script = ExtResource("4_cceni")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer/SubViewport/Node3D/Player"]
 light_energy = 2.0
