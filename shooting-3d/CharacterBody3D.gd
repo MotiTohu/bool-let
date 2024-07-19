@@ -44,7 +44,7 @@ var shootable := true
 func _on_shoot_interval_timeout()->void:shootable=true
 func _shoot():
 	if Input.is_action_just_pressed("change_shoot_mode"):
-		shoot_mode+=1
+		shoot_mode += 1
 		shoot_mode %= 2
 	if shootable && Input.is_action_pressed("shoot"):
 		shootable = false

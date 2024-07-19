@@ -91,9 +91,6 @@ region_enabled = true
 region_rect = Rect2(245.579, 264.267, 782.41, 244.369)
 script = ExtResource("4_cceni")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer/SubViewport/Node3D/Player"]
-light_energy = 2.0
-
 [node name="ShootInterval" type="Timer" parent="SubViewportContainer/SubViewport/Node3D/Player"]
 wait_time = 0.2
 one_shot = true

@@ -1,7 +1,7 @@
 extends Sprite3D
 
-@export var follow_weight := 30.0
-@export var z_offset := 0.02
+@export var follow_weight := 20.0
+@export var z_offset := 0.1
 @export_category("float")
 @export var float_speed := 1.0
 @export var float_weight := 50.0
