@@ -1,34 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2draqjl0wjyt"]
+[gd_scene load_steps=4 format=3 uid="uid://c6fm0nm00aan5"]
 
-[ext_resource type="Script" path="res://scenes/Bullet.gd" id="1_4dgen"]
+[ext_resource type="Script" path="res://scenes/Bullet.gd" id="1_y72qa"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_aksn2"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_758oy"]
 size = Vector3(0.1, 0.1, 0.2)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1v0tx"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wqm4t"]
 metallic = 1.0
 metallic_specular = 0.0
 emission_enabled = true
-emission = Color(0.940281, 0.534208, 0, 1)
+emission = Color(0.941176, 1, 0, 1)
 emission_energy_multiplier = 5.0
 grow = true
 grow_amount = 0.05
 
-[node name="bullet" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.05)
-top_level = true
-collision_layer = 4
-collision_mask = 6
-script = ExtResource("1_4dgen")
+[node name="Bullet" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.98493)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_y72qa")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-shape = SubResource("BoxShape3D_aksn2")
+shape = SubResource("BoxShape3D_758oy")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -1.05)
-radius = 0.04
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.432582)
+radius = 0.01
 height = 6.0
 sides = 6
 cone = true
-material = SubResource("StandardMaterial3D_1v0tx")
+material = SubResource("StandardMaterial3D_wqm4t")
