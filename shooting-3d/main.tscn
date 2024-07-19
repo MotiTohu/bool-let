@@ -18,9 +18,9 @@ sky_material = SubResource("ProceduralSkyMaterial_riohe")
 background_mode = 3
 sky = SubResource("Sky_wvq2f")
 glow_enabled = true
+glow_intensity = 3.0
 glow_blend_mode = 0
-glow_hdr_threshold = 0.33
-fog_enabled = true
+glow_hdr_threshold = 0.3
 fog_light_color = Color(0.300973, 0.451671, 0.781024, 1)
 adjustment_enabled = true
 adjustment_contrast = 1.5
@@ -102,15 +102,16 @@ one_shot = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
 fov = 20.0
 
 [node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer/SubViewport/Node3D/Camera3D"]
-light_energy = 3.0
-spot_range = 22.0
-spot_angle = 15.0
+light_energy = 5.0
+spot_range = 100.0
+spot_angle = 30.0
 
 [node name="Aim" type="Sprite2D" parent="."]
+position = Vector2(100, 100)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("3_13j34")
 script = ExtResource("4_84x7h")
