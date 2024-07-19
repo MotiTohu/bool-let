@@ -22,15 +22,26 @@ func _move(delta:float)->void:
 	move_and_slide()
 	position.x = clampf(position.x,-3,3)
 	position.y = clampf(position.y,-3,3)
+
 func _rotate(delta:float)->void:
 	var rotate_to := -Input.get_axis("left","right") * PI / 6
 	collision_shape_3d.rotation.z = lerp_angle(collision_shape_3d.rotation.z,rotate_to,delta * ROTATE_SPEED)
 	node_3d.rotation = collision_shape_3d.rotation
+
+@onready var shoot_interval = $ShootInterval
 const BULLET = preload("res://scenes/bullet.tscn")
+var shootable := true
+func _on_shoot_interval_timeout()->void:shootable=true
+func _shoot():
+	if shootable && Input.is_action_pressed("shoot"):
+		var bullet = BULLET.instantiate()
+		shootable = false
+		add_child(bullet)
+		shoot_interval.start()
+		
 func _physics_process(delta:float)->void:
 	_move(delta)
 	_rotate(delta)
-	
-	if Input.is_action_just_pressed("shoot"):
-		var bullet = BULLET.instantiate()
-		add_child(bullet)
+	_shoot()
+
+
