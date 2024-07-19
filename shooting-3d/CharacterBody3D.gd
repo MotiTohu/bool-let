@@ -1,10 +1,13 @@
 extends CharacterBody3D
 
 
+@export_category("movement")
 @export var SPEED := 600.0
 @export var DEPTH_SPEED := 3.0
 @export var ROTATE_SPEED := 10.0
 @export var MOVE_DEPTH := 10.0
+@export_category("shoot")
+@export_enum("1:0","2:1") var shoot_mode := 1
 
 @onready var node_3d = $Node3D
 @onready var collision_shape_3d = $CollisionShape3D
@@ -40,11 +43,26 @@ const BULLET = preload("res://scenes/bullet.tscn")
 var shootable := true
 func _on_shoot_interval_timeout()->void:shootable=true
 func _shoot():
+	if Input.is_action_just_pressed("change_shoot_mode"):
+		shoot_mode+=1
+		shoot_mode %= 2
 	if shootable && Input.is_action_pressed("shoot"):
-		var bullet = BULLET.instantiate()
 		shootable = false
-		add_child(bullet)
-		shoot_interval.start()
+		if shoot_mode == 0:
+			var bullet := BULLET.instantiate()
+			add_child(bullet)
+			shoot_interval.start(.1)
+		elif shoot_mode == 1:
+			var bullet_l = BULLET.instantiate()
+			var bullet_r = BULLET.instantiate()
+			var bullet_pos := Vector2(.25,0).rotated(node_3d.rotation.z)
+			bullet_l.position.x -= bullet_pos.x
+			bullet_l.position.y -= bullet_pos.y
+			bullet_r.position.x += bullet_pos.x
+			bullet_r.position.y += bullet_pos.y
+			add_child(bullet_l)
+			add_child(bullet_r)
+			shoot_interval.start(.2)
 		
 func _physics_process(delta:float)->void:
 	_move(delta)

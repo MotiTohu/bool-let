@@ -10,7 +10,7 @@ var delta_sum := 0.0
 func _process(delta):
 	rotation.z = lerpf(rotation.z,get_parent().rotation.z,delta * follow_weight)
 	global_position = global_position.slerp(get_parent().global_position,delta * follow_weight)
-	global_position.z += z_offset
+	global_position.z -= z_offset
 	
 	delta_sum += delta * float_speed
 	delta_sum = fmod(delta_sum,PI*2)
