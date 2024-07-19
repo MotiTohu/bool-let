@@ -5,7 +5,7 @@ extends CharacterBody3D
 @export var SPEED := 600.0
 @export var DEPTH_SPEED := 3.0
 @export var ROTATE_SPEED := 3.0
-@export var MOVE_DEPTH := 10.0
+@export var MOVE_DEPTH := 5.0
 @export_category("shoot")
 @export_enum("1:0","2:1") var shoot_mode := 1
 
@@ -13,12 +13,16 @@ extends CharacterBody3D
 @onready var collision_shape_3d := $CollisionShape3D
 @onready var aim := $Aim
 @onready var blaster := $Node3D/Blaster
+@onready var ray_cast_3d := $RayCast3D
 
 
 var aim_pos : Vector2:
 	get:
-		var cam := get_viewport().get_camera_3d()		
-		return cam.unproject_position(aim.global_position)
+		var target_pos = aim.global_position
+		if ray_cast_3d.is_colliding():
+			target_pos = ray_cast_3d.get_collision_point()
+		var cam := get_viewport().get_camera_3d()
+		return cam.unproject_position(target_pos)
 
 func _move(delta:float)->void:
 	var input_movement := Input.get_vector("left", "right", "down", "up")
@@ -72,5 +76,4 @@ func _physics_process(delta:float)->void:
 	_move(delta)
 	_rotate(delta)
 	_shoot()
-
 

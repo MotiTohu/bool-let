@@ -7,7 +7,8 @@ emission_enabled = true
 emission = Color(1, 1, 1, 1)
 
 [node name="Line" type="CSGCylinder3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.214, 0, -300)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -300)
+top_level = true
 radius = 0.1
 height = 8.0
 cone = true
