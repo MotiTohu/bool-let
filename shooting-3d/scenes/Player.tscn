@@ -19,6 +19,7 @@ albedo_texture = ExtResource("3_83v6y")
 billboard_keep_scale = true
 
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 5
 script = ExtResource("1_grt17")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

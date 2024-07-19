@@ -1,4 +1,4 @@
-extends RigidBody3D
+extends StaticBody3D
 class_name Enemy
 
 var delta_sum := 0.0
@@ -9,3 +9,8 @@ func _process(delta: float) -> void:
 	var to := Vector2.from_angle(delta_sum) * 5
 	position.x = to.x
 	position.y = to.y
+
+const ENEMY_BULLET = preload("res://scenes/EnemyBullet.tscn")
+func _on_timer_timeout() -> void:
+	var bullet := ENEMY_BULLET.instantiate()
+	add_child(bullet)

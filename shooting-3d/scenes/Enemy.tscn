@@ -25,14 +25,12 @@ albedo_texture = ExtResource("3_0gkyw")
 transparency = 1
 albedo_texture = ExtResource("4_u88tk")
 
-[node name="Enemy" type="RigidBody3D"]
+[node name="Enemy" type="StaticBody3D"]
 collision_layer = 2
-max_contacts_reported = 8
-contact_monitor = true
 script = ExtResource("1_aaq5x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.75)
 shape = SubResource("BoxShape3D_n2f7j")
 
 [node name="Body" type="Sprite3D" parent="."]
@@ -54,3 +52,9 @@ texture = ExtResource("3_0gkyw")
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.1)
 material_override = SubResource("StandardMaterial3D_ati5e")
 texture = ExtResource("4_u88tk")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

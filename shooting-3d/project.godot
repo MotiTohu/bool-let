@@ -61,4 +61,4 @@ change_shoot_mode={
 [layer_names]
 
 3d_physics/layer_2="Enemy"
-3d_physics/layer_3="Bullet"
+3d_physics/layer_4="Player"

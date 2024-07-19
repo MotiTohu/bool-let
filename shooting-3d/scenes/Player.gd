@@ -1,5 +1,5 @@
 extends CharacterBody3D
-
+class_name Player
 
 @export_category("movement")
 @export var SPEED := 600.0
