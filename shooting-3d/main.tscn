@@ -1,8 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnysy0kn7sdbg"]
+[gd_scene load_steps=5 format=3 uid="uid://cnysy0kn7sdbg"]
 
 [ext_resource type="Script" path="res://CharacterBody3D.gd" id="1_7afo2"]
+[ext_resource type="Texture2D" uid="uid://de8xj35je0hpf" path="res://assets/player.png" id="2_d5qgy"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yh23i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0caby"]
+transparency = 1
+albedo_texture = ExtResource("2_d5qgy")
+uv1_triplanar = true
 
 [node name="Node3D" type="Node3D"]
 
@@ -10,9 +16,17 @@
 script = ExtResource("1_7afo2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+visible = false
 shape = SubResource("BoxShape3D_yh23i")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CharacterBody3D"]
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.43, 0)
+polygon = PackedVector2Array(0, 0.2, 0, 0.66, 1, 0.665, 1, 0.2)
+depth = 0.01
+material = SubResource("StandardMaterial3D_0caby")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+light_energy = 2.0
