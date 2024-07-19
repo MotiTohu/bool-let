@@ -1,8 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cuc8vp65tt001"]
+[gd_scene load_steps=9 format=3 uid="uid://cuc8vp65tt001"]
 
 [ext_resource type="PackedScene" uid="uid://dn0y7naesn817" path="res://scenes/Player.tscn" id="1_rktla"]
+[ext_resource type="Script" path="res://scenes/BG.gd" id="1_yb4l5"]
 [ext_resource type="Texture2D" uid="uid://dc6qjcd2qtnfa" path="res://assets/target.png" id="2_81f3d"]
 [ext_resource type="Script" path="res://scenes/AimUI.gd" id="3_cdyac"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ou757"]
+bg_color = Color(0.0605065, 0.0516476, 0.255408, 1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_riohe"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -30,6 +34,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ou757")
+
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -46,6 +59,13 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="BG" type="Node3D" parent="SubViewportContainer/SubViewport/Node3D"]
+script = ExtResource("1_yb4l5")
+
+[node name="Timer" type="Timer" parent="SubViewportContainer/SubViewport/Node3D/BG"]
+wait_time = 0.05
+autostart = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/Node3D"]
 environment = SubResource("Environment_ui131")
@@ -67,3 +87,5 @@ position = Vector2(100, 100)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_81f3d")
 script = ExtResource("3_cdyac")
+
+[connection signal="timeout" from="SubViewportContainer/SubViewport/Node3D/BG/Timer" to="SubViewportContainer/SubViewport/Node3D/BG" method="_on_timer_timeout"]
