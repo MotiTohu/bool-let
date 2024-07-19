@@ -9,8 +9,3 @@ func _process(delta: float) -> void:
 	var to := Vector2.from_angle(delta_sum) * 5
 	position.x = to.x
 	position.y = to.y
-
-
-
-func _on_body_entered(body: Node) -> void:
-	print(body)

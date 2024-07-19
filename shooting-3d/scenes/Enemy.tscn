@@ -54,5 +54,3 @@ texture = ExtResource("3_0gkyw")
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.1)
 material_override = SubResource("StandardMaterial3D_ati5e")
 texture = ExtResource("4_u88tk")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
