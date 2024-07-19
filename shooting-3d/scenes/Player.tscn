@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://dn0y7naesn817"]
+
+[ext_resource type="Script" path="res://scenes/Player.gd" id="1_grt17"]
+[ext_resource type="Texture2D" uid="uid://dd20xvod0mrl7" path="res://assets/player_body.png" id="2_hbt23"]
+[ext_resource type="Texture2D" uid="uid://db6ak5o5hp3r8" path="res://assets/player_blaster.png" id="3_83v6y"]
+[ext_resource type="Script" path="res://scenes/Blaster.gd" id="4_ibdyr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yh23i"]
+size = Vector3(1.2, 0.8, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e3kl8"]
+transparency = 1
+albedo_texture = ExtResource("2_hbt23")
+billboard_keep_scale = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya2kg"]
+transparency = 1
+albedo_texture = ExtResource("3_83v6y")
+billboard_keep_scale = true
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_grt17")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_yh23i")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Body" type="Sprite3D" parent="Node3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_e3kl8")
+texture = ExtResource("2_hbt23")
+region_enabled = true
+region_rect = Rect2(0, 168.395, 641.682, 411.569)
+
+[node name="Blaster" type="Sprite3D" parent="Node3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+top_level = true
+material_override = SubResource("StandardMaterial3D_ya2kg")
+texture = ExtResource("3_83v6y")
+region_enabled = true
+region_rect = Rect2(245.579, 264.267, 782.41, 244.369)
+script = ExtResource("4_ibdyr")
+
+[node name="ShootInterval" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Aim" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
+
+[connection signal="timeout" from="ShootInterval" to="." method="_on_shoot_interval_timeout"]

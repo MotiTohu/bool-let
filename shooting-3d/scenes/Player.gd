@@ -4,24 +4,26 @@ extends CharacterBody3D
 @export_category("movement")
 @export var SPEED := 600.0
 @export var DEPTH_SPEED := 3.0
-@export var ROTATE_SPEED := 10.0
+@export var ROTATE_SPEED := 3.0
 @export var MOVE_DEPTH := 10.0
 @export_category("shoot")
 @export_enum("1:0","2:1") var shoot_mode := 1
 
-@onready var node_3d = $Node3D
-@onready var collision_shape_3d = $CollisionShape3D
-@onready var aim = $Aim
+@onready var node_3d := $Node3D
+@onready var collision_shape_3d := $CollisionShape3D
+@onready var aim := $Aim
+@onready var blaster := $Node3D/Blaster
+
 
 var aim_pos : Vector2:
 	get:
-		var cam = get_viewport().get_camera_3d()		
+		var cam := get_viewport().get_camera_3d()		
 		return cam.unproject_position(aim.global_position)
 
 func _move(delta:float)->void:
 	var input_movement := Input.get_vector("left", "right", "down", "up")
 	var input_depth := Input.get_axis("back","front")
-	var direction = (transform.basis * Vector3(input_movement.x,  input_movement.y,0)).normalized()
+	var direction := (transform.basis * Vector3(input_movement.x,  input_movement.y,0)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED * delta
 		velocity.y = direction.y * SPEED * delta
@@ -34,12 +36,12 @@ func _move(delta:float)->void:
 	position.y = clampf(position.y,-6,6)
 
 func _rotate(delta:float)->void:
-	var rotate_to := -Input.get_axis("left","right") * PI / 8
+	var rotate_to := -Input.get_axis("left","right") * PI / 6
 	collision_shape_3d.rotation.z = lerp_angle(collision_shape_3d.rotation.z,rotate_to,delta * ROTATE_SPEED)
 	node_3d.rotation = collision_shape_3d.rotation
 
-@onready var shoot_interval = $ShootInterval
-const BULLET = preload("res://scenes/bullet.tscn")
+@onready var shoot_interval := $ShootInterval
+const BULLET := preload("res://scenes/Bullet.tscn")
 var shootable := true
 func _on_shoot_interval_timeout()->void:shootable=true
 func _shoot():
@@ -53,9 +55,11 @@ func _shoot():
 			add_child(bullet)
 			shoot_interval.start(.1)
 		elif shoot_mode == 1:
-			var bullet_l = BULLET.instantiate()
-			var bullet_r = BULLET.instantiate()
-			var bullet_pos := Vector2(.25,0).rotated(node_3d.rotation.z)
+			var bullet_l := BULLET.instantiate()
+			var bullet_r := BULLET.instantiate()
+			var bullet_pos := Vector2(.55,0).rotated(node_3d.rotation.z)
+			bullet_pos.x += blaster.global_position.x - node_3d.global_position.x
+			bullet_pos.y += blaster.global_position.y - node_3d.global_position.y
 			bullet_l.position.x -= bullet_pos.x
 			bullet_l.position.y -= bullet_pos.y
 			bullet_r.position.x += bullet_pos.x

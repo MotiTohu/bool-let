@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://cuc8vp65tt001"]
+
+[ext_resource type="PackedScene" uid="uid://dn0y7naesn817" path="res://scenes/Player.tscn" id="1_rktla"]
+[ext_resource type="Texture2D" uid="uid://dc6qjcd2qtnfa" path="res://assets/target.png" id="2_81f3d"]
+[ext_resource type="Script" path="res://scenes/AimUI.gd" id="3_cdyac"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_riohe"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_wvq2f"]
+sky_material = SubResource("ProceduralSkyMaterial_riohe")
+
+[sub_resource type="Environment" id="Environment_ui131"]
+background_mode = 3
+sky = SubResource("Sky_wvq2f")
+glow_enabled = true
+glow_intensity = 1.0
+glow_blend_mode = 0
+glow_hdr_threshold = 0.3
+fog_light_color = Color(0.300973, 0.451671, 0.781024, 1)
+adjustment_enabled = true
+adjustment_contrast = 1.5
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/Node3D"]
+environment = SubResource("Environment_ui131")
+
+[node name="Player" parent="SubViewportContainer/SubViewport/Node3D" instance=ExtResource("1_rktla")]
+unique_name_in_owner = true
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
+fov = 20.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer/SubViewport/Node3D/Camera3D"]
+light_energy = 5.0
+spot_range = 100.0
+spot_angle = 30.0
+
+[node name="Aim" type="Sprite2D" parent="."]
+position = Vector2(100, 100)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_81f3d")
+script = ExtResource("3_cdyac")
