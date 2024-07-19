@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnysy0kn7sdbg"]
+[gd_scene load_steps=10 format=3 uid="uid://cuc8vp65tt001"]
 
 [ext_resource type="Script" path="res://CharacterBody3D.gd" id="1_7afo2"]
 [ext_resource type="Texture2D" uid="uid://de8xj35je0hpf" path="res://assets/player.png" id="2_d5qgy"]
+[ext_resource type="Texture2D" uid="uid://dc6qjcd2qtnfa" path="res://assets/target.png" id="3_13j34"]
+[ext_resource type="Script" path="res://Label.gd" id="4_84x7h"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_riohe"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -15,6 +17,9 @@ background_mode = 3
 sky = SubResource("Sky_wvq2f")
 glow_enabled = true
 glow_blend_mode = 0
+glow_hdr_threshold = 0.33
+fog_enabled = true
+fog_light_color = Color(0.300973, 0.451671, 0.781024, 1)
 adjustment_enabled = true
 adjustment_contrast = 1.5
 
@@ -26,38 +31,69 @@ transparency = 1
 albedo_texture = ExtResource("2_d5qgy")
 billboard_keep_scale = true
 
-[node name="Node3D" type="Node3D"]
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/Node3D"]
 environment = SubResource("Environment_ui131")
 
-[node name="Player" type="CharacterBody3D" parent="."]
+[node name="Player" type="CharacterBody3D" parent="SubViewportContainer/SubViewport/Node3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("1_7afo2")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Node3D/Player"]
 shape = SubResource("BoxShape3D_yh23i")
 
-[node name="Node3D" type="Node3D" parent="Player"]
+[node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport/Node3D/Player"]
 
-[node name="Sprite3D" type="Sprite3D" parent="Player/Node3D"]
+[node name="Sprite3D" type="Sprite3D" parent="SubViewportContainer/SubViewport/Node3D/Player/Node3D"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_e3kl8")
 texture = ExtResource("2_d5qgy")
 region_enabled = true
 region_rect = Rect2(0, 87, 256, 119)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Player"]
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer/SubViewport/Node3D/Player"]
 light_energy = 2.0
 
-[node name="ShootInterval" type="Timer" parent="Player"]
+[node name="ShootInterval" type="Timer" parent="SubViewportContainer/SubViewport/Node3D/Player"]
 wait_time = 0.2
 one_shot = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Aim" type="Node3D" parent="SubViewportContainer/SubViewport/Node3D/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer/SubViewport/Node3D/Camera3D"]
 light_energy = 2.0
 
-[connection signal="timeout" from="Player/ShootInterval" to="Player" method="_on_shoot_interval_timeout"]
+[node name="Aim" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_13j34")
+script = ExtResource("4_84x7h")
+
+[connection signal="timeout" from="SubViewportContainer/SubViewport/Node3D/Player/ShootInterval" to="SubViewportContainer/SubViewport/Node3D/Player" method="_on_shoot_interval_timeout"]

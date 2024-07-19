@@ -7,6 +7,12 @@ const ROTATE_SPEED := 10.0
 @onready var sprite_3d := $Node3D/Sprite3D
 @onready var node_3d = $Node3D
 @onready var collision_shape_3d = $CollisionShape3D
+@onready var aim = $Aim
+
+var aim_pos : Vector2:
+	get:
+		var cam = get_viewport().get_camera_3d()		
+		return cam.unproject_position(aim.global_position)
 
 func _move(delta:float)->void:
 	var input_movement := Input.get_vector("left", "right", "down", "up")
@@ -24,7 +30,7 @@ func _move(delta:float)->void:
 	position.y = clampf(position.y,-3,3)
 
 func _rotate(delta:float)->void:
-	var rotate_to := -Input.get_axis("left","right") * PI / 6
+	var rotate_to := -Input.get_axis("left","right") * PI / 8
 	collision_shape_3d.rotation.z = lerp_angle(collision_shape_3d.rotation.z,rotate_to,delta * ROTATE_SPEED)
 	node_3d.rotation = collision_shape_3d.rotation
 
