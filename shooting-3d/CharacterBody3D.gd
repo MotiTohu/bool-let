@@ -26,7 +26,7 @@ func _move(delta:float)->void:
 		velocity.y = move_toward(velocity.y,0,SPEED * delta)
 	velocity.z = (input_depth - position.z) * DEPTH_SPEED * (2.0 if input_depth else 1.0)
 	move_and_slide()
-	position.x = clampf(position.x,-3,3)
+	position.x = clampf(position.x,-4,4)
 	position.y = clampf(position.y,-3,3)
 
 func _rotate(delta:float)->void:

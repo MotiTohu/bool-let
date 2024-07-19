@@ -1,6 +1,6 @@
 extends Area3D
 
-@export var SPEED := 20.0
+@export var SPEED := 100.0
 @export var DEL_POS := 200.0
 
 func _physics_process(delta):
