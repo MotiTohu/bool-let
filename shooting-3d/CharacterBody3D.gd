@@ -26,6 +26,11 @@ func _rotate(delta:float)->void:
 	var rotate_to := -Input.get_axis("left","right") * PI / 6
 	collision_shape_3d.rotation.z = lerp_angle(collision_shape_3d.rotation.z,rotate_to,delta * ROTATE_SPEED)
 	node_3d.rotation = collision_shape_3d.rotation
+const BULLET = preload("res://scenes/bullet.tscn")
 func _physics_process(delta:float)->void:
 	_move(delta)
 	_rotate(delta)
+	
+	if Input.is_action_just_pressed("shoot"):
+		var bullet = BULLET.instantiate()
+		add_child(bullet)
