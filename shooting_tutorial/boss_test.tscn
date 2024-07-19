@@ -22,4 +22,9 @@ color = Color(0.836327, 0.339884, 1, 1)
 wait_time = 6.0
 autostart = true
 
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

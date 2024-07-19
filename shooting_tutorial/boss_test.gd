@@ -10,7 +10,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func cutoffR():
+func cutoffr():
 	angle = 0
 	for i in range(6):
 		var enemy_bullet1 = bullet.instantiate()
@@ -19,7 +19,7 @@ func cutoffR():
 		angle += 20
 		await get_tree().create_timer(0.1).timeout
 		
-func cutoffL():
+func cutoffl():
 	angle = 180
 	for i in range(6):
 		var enemy_bullet1 = bullet.instantiate()
@@ -35,7 +35,7 @@ func shootforp():
 			add_child(enemy_bullet1)
 			angle = enemy_bullet1.global_position.angle_to_point(player.global_position)*180/PI + j
 			enemy_bullet1.rotation_degrees = angle
-			print(angle)
+			#print(angle)
 		await get_tree().create_timer(0.3).timeout
 		
 func shootforp2():
@@ -47,7 +47,7 @@ func shootforp2():
 			add_child(enemy_bullet1)
 			angle_temp = angle*180/PI + j
 			enemy_bullet1.rotation_degrees = angle_temp
-			print(angle)
+			#print(angle)
 		await get_tree().create_timer(0.1).timeout
 
 func homing_missile():
@@ -59,3 +59,7 @@ func homing_missile():
 func _on_timer_timeout():
 	#pass
 	homing_missile()
+
+
+func _on_timer_2_timeout():
+	shootforp2()
