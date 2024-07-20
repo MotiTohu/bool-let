@@ -14,6 +14,7 @@ class_name Player
 @onready var aim := $Aim
 @onready var blaster := $Node3D/Blaster
 @onready var ray_cast_3d := $RayCast3D
+@onready var ui: = %UI
 
 
 var aim_pos : Vector2:
@@ -77,3 +78,6 @@ func _physics_process(delta:float)->void:
 	_rotate(delta)
 	_shoot()
 
+func decrease_hp(diff_value:float)->void:
+	print("decrease")
+	ui.HP -= diff_value

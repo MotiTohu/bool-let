@@ -5,7 +5,7 @@ func _physics_process(delta:float)->void:
 	for i in get_slide_collision_count():
 		var col := get_slide_collision(i).get_collider()
 		if col is Player:
-			print("DAMAGE!")
+			col.decrease_hp(1.0)
 			queue_free()
 	velocity.z = SPEED * delta
 	move_and_slide()

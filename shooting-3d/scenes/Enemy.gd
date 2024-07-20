@@ -1,6 +1,8 @@
 extends StaticBody3D
 class_name Enemy
 
+@onready var ui: = %UI
+
 var delta_sum := 0.0
 
 func _process(delta: float) -> void:
@@ -15,3 +17,6 @@ const ENEMY_BULLET = preload("res://scenes/EnemyBullet.tscn")
 func _on_timer_timeout() -> void:
 	var bullet := ENEMY_BULLET.instantiate()
 	add_child(bullet)
+
+func decrease_hp(diff_value:float)->void:
+	ui.EnemyHP -= diff_value

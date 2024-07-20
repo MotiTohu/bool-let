@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cuc8vp65tt001"]
+[gd_scene load_steps=14 format=3 uid="uid://cuc8vp65tt001"]
 
 [ext_resource type="PackedScene" uid="uid://dn0y7naesn817" path="res://scenes/Player.tscn" id="1_rktla"]
 [ext_resource type="Script" path="res://scenes/BG.gd" id="1_yb4l5"]
 [ext_resource type="Texture2D" uid="uid://dc6qjcd2qtnfa" path="res://assets/target.png" id="2_81f3d"]
 [ext_resource type="Script" path="res://scenes/AimUI.gd" id="3_cdyac"]
 [ext_resource type="PackedScene" uid="uid://bwbk28tfs0tao" path="res://scenes/Enemy.tscn" id="3_yb7xp"]
+[ext_resource type="Theme" uid="uid://ce6jlv373j142" path="res://themes/UI.tres" id="6_uvjrd"]
+[ext_resource type="Script" path="res://UI.gd" id="7_6vis0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ou757"]
 bg_color = Color(0.0605065, 0.0516476, 0.255408, 1)
@@ -26,6 +28,18 @@ glow_hdr_threshold = 0.3
 fog_light_color = Color(0.300973, 0.451671, 0.781024, 1)
 adjustment_enabled = true
 adjustment_contrast = 1.5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87lmb"]
+bg_color = Color(0.294118, 0, 0.207843, 0.713726)
+skew = Vector2(-1, 0)
+corner_radius_top_left = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xq6uq"]
+bg_color = Color(1, 0.261603, 0.446184, 1)
+skew = Vector2(-1, 0)
+corner_radius_top_left = 10
+corner_radius_bottom_right = 10
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -56,7 +70,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1152, 648)
+size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="Node3D" type="Node3D" parent="SubViewportContainer/SubViewport"]
@@ -91,11 +105,41 @@ texture = ExtResource("2_81f3d")
 script = ExtResource("3_cdyac")
 
 [node name="UI" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_uvjrd")
+script = ExtResource("7_6vis0")
+
+[node name="HPBar" type="ProgressBar" parent="UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -813.0
+offset_top = -90.0
+offset_right = -87.0
+offset_bottom = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+value = 100.0
+show_percentage = false
+
+[node name="EnemyHPBar" type="ProgressBar" parent="UI"]
+layout_mode = 1
+offset_left = 83.0
+offset_top = 63.0
+offset_right = 809.0
+offset_bottom = 103.0
+theme_override_styles/background = SubResource("StyleBoxFlat_87lmb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xq6uq")
+value = 100.0
+show_percentage = false
 
 [connection signal="timeout" from="SubViewportContainer/SubViewport/Node3D/BG/Timer" to="SubViewportContainer/SubViewport/Node3D/BG" method="_on_timer_timeout"]

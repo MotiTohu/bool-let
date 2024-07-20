@@ -19,7 +19,7 @@ top_level = true
 script = ExtResource("1_ewlip")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 shape = SubResource("BoxShape3D_08tl6")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
@@ -31,5 +31,6 @@ cone = true
 material = SubResource("StandardMaterial3D_6h5u7")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+aabb = AABB(-0.2, -0.2, -4, 0.4, 0.4, 6)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
