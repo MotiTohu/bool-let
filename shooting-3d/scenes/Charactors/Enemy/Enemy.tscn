@@ -54,6 +54,7 @@ material_override = SubResource("StandardMaterial3D_ati5e")
 texture = ExtResource("4_u88tk")
 
 [node name="Timer" type="Timer" parent="."]
+process_callback = 0
 wait_time = 0.05
 autostart = true
 

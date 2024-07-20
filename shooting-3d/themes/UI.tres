@@ -1,4 +1,15 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://ce6jlv373j142"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://ce6jlv373j142"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h8sf6"]
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qv2u7"]
 bg_color = Color(0.145098, 0.247059, 0.388235, 0.843137)
@@ -13,5 +24,6 @@ corner_radius_top_left = 10
 corner_radius_bottom_right = 10
 
 [resource]
+Panel/styles/panel = SubResource("StyleBoxFlat_h8sf6")
 ProgressBar/styles/background = SubResource("StyleBoxFlat_qv2u7")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_bkp1i")

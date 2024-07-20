@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dc6qjcd2qtnfa" path="res://assets/target.png" id="2_81f3d"]
 [ext_resource type="Script" path="res://scenes/UI/AimUI.gd" id="3_cdyac"]
 [ext_resource type="PackedScene" uid="uid://bwbk28tfs0tao" path="res://scenes/Charactors/Enemy/Enemy.tscn" id="3_yb7xp"]
-[ext_resource type="Script" path="res://CamCenter.gd" id="4_ai5xl"]
+[ext_resource type="Script" path="res://scenes/Graphics/CamCenter.gd" id="4_rtse8"]
 [ext_resource type="PackedScene" uid="uid://b3mbwm3jpoh6t" path="res://scenes/UI/UI.tscn" id="6_malv5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ou757"]
@@ -80,11 +80,12 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
 
 [node name="CamCenter" type="Node3D" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
-script = ExtResource("4_ai5xl")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+script = ExtResource("4_rtse8")
+weight = 10.0
 
 [node name="Camera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D/CamCenter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 64)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 44)
 fov = 20.0
 
 [node name="SpotLight3D" type="DirectionalLight3D" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D/CamCenter/Camera3D"]
