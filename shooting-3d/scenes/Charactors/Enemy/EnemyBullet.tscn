@@ -1,9 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://bwyti4gmqk68a"]
 
-[ext_resource type="Script" path="res://scenes/EnemyBullet.gd" id="1_ewlip"]
+[ext_resource type="Script" path="res://scenes/Charactors/Enemy/EnemyBullet.gd" id="1_fsmon"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_08tl6"]
-size = Vector3(0.1, 0.1, 0.2)
+size = Vector3(0.1, 0.1, 3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6h5u7"]
 metallic = 1.0
@@ -15,11 +15,12 @@ grow = true
 grow_amount = 0.05
 
 [node name="EnemyBullet" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 top_level = true
-script = ExtResource("1_ewlip")
+script = ExtResource("1_fsmon")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.465)
 shape = SubResource("BoxShape3D_08tl6")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]

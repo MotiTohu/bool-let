@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 	position.y = to.y
 	position.z = -40 + sin(delta_sum * 2) * 10
 
-const ENEMY_BULLET = preload("res://scenes/EnemyBullet.tscn")
+const ENEMY_BULLET = preload("res://scenes/Charactors/Enemy/EnemyBullet.tscn")
 func _on_timer_timeout() -> void:
 	var bullet := ENEMY_BULLET.instantiate()
 	add_child(bullet)

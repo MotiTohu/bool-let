@@ -46,7 +46,7 @@ func _rotate(delta:float)->void:
 	node_3d.rotation = collision_shape_3d.rotation
 
 @onready var shoot_interval := $ShootInterval
-const BULLET := preload("res://scenes/Bullet.tscn")
+const BULLET := preload("res://scenes/Charactors/Player/Bullet.tscn")
 var shootable := true
 func _on_shoot_interval_timeout()->void:shootable=true
 func _shoot():
@@ -79,5 +79,4 @@ func _physics_process(delta:float)->void:
 	_shoot()
 
 func decrease_hp(diff_value:float)->void:
-	print("decrease")
 	ui.HP -= diff_value

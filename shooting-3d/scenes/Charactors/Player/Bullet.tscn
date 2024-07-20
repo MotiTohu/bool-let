@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c6fm0nm00aan5"]
 
-[ext_resource type="Script" path="res://scenes/Bullet.gd" id="1_y72qa"]
+[ext_resource type="Script" path="res://scenes/Charactors/Player/Bullet.gd" id="1_mj0rq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_758oy"]
 size = Vector3(0.1, 0.1, 0.2)
@@ -18,7 +18,7 @@ grow_amount = 0.05
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.98493)
 top_level = true
 collision_mask = 2
-script = ExtResource("1_y72qa")
+script = ExtResource("1_mj0rq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)

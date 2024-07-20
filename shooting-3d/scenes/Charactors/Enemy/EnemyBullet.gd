@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-@export var SPEED := 600.0
+@export var SPEED := 1200.0
 func _physics_process(delta:float)->void:
 	for i in get_slide_collision_count():
 		var col := get_slide_collision(i).get_collider()

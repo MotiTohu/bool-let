@@ -19,3 +19,8 @@ class_name UI
 		EnemyHP = v
 		if(enemy_hp_bar):
 			enemy_hp_bar.value = v
+			
+
+#func _ready() -> void:
+	#get_window().size =  Vector2i(320, 180)
+
