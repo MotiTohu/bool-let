@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://h2c8fo2diads"]
+[gd_scene load_steps=4 format=3 uid="uid://bwyti4gmqk68a"]
 
-[ext_resource type="Script" path="res://scenes/EnemyBullet.gd" id="1_otv57"]
+[ext_resource type="Script" path="res://scenes/EnemyBullet.gd" id="1_ewlip"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_aksn2"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_08tl6"]
 size = Vector3(0.1, 0.1, 0.2)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kt834"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6h5u7"]
 metallic = 1.0
 metallic_specular = 0.0
 emission_enabled = true
@@ -15,14 +15,12 @@ grow = true
 grow_amount = 0.05
 
 [node name="EnemyBullet" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.95)
 top_level = true
-collision_layer = 4
-script = ExtResource("1_otv57")
+script = ExtResource("1_ewlip")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
-shape = SubResource("BoxShape3D_aksn2")
+shape = SubResource("BoxShape3D_08tl6")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -1.05)
@@ -30,7 +28,7 @@ radius = 0.04
 height = 6.0
 sides = 6
 cone = true
-material = SubResource("StandardMaterial3D_kt834")
+material = SubResource("StandardMaterial3D_6h5u7")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
 

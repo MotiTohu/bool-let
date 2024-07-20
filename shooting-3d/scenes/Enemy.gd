@@ -9,6 +9,7 @@ func _process(delta: float) -> void:
 	var to := Vector2.from_angle(delta_sum) * 5
 	position.x = to.x
 	position.y = to.y
+	position.z = -40 + sin(delta_sum * 2) * 10
 
 const ENEMY_BULLET = preload("res://scenes/EnemyBullet.tscn")
 func _on_timer_timeout() -> void:
