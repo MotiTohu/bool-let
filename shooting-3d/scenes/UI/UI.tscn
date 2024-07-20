@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3mbwm3jpoh6t"]
+[gd_scene load_steps=7 format=3 uid="uid://b3mbwm3jpoh6t"]
 
 [ext_resource type="Theme" uid="uid://ce6jlv373j142" path="res://themes/UI.tres" id="1_koony"]
 [ext_resource type="Script" path="res://scenes/UI/UI.gd" id="2_42fy7"]
+[ext_resource type="Texture2D" uid="uid://b7pushatr0211" path="res://assets/UI.png" id="3_vfvgf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87lmb"]
 bg_color = Color(0.294118, 0, 0.207843, 0.713726)
@@ -14,6 +15,9 @@ bg_color = Color(1, 0.261603, 0.446184, 1)
 skew = Vector2(-1, 0)
 corner_radius_top_left = 10
 corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_awlat"]
+texture = ExtResource("3_vfvgf")
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -57,9 +61,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 462.0
-offset_top = 240.0
-offset_right = -459.0
-offset_bottom = -240.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_awlat")
