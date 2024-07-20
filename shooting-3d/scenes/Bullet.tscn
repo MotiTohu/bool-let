@@ -16,6 +16,7 @@ grow_amount = 0.05
 
 [node name="Bullet" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.98493)
+top_level = true
 collision_mask = 2
 script = ExtResource("1_y72qa")
 

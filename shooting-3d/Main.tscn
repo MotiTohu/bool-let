@@ -90,4 +90,12 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_81f3d")
 script = ExtResource("3_cdyac")
 
+[node name="UI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [connection signal="timeout" from="SubViewportContainer/SubViewport/Node3D/BG/Timer" to="SubViewportContainer/SubViewport/Node3D/BG" method="_on_timer_timeout"]
