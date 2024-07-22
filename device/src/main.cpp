@@ -5,7 +5,7 @@
 
 const int cnt = 8;
 const int pins[] = {2,3,4,5,9,11,13,14};
-const char keys[] = {'w','s','a','d','i','j','k','l'};;
+const char keys[] = {'w','s','a','d',' ','f',KEY_LEFT_CTRL,KEY_LEFT_SHIFT};;
 
 void setup() {
   Keyboard.begin();
