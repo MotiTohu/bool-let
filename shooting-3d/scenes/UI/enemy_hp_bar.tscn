@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cck7gvctshquq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87lmb"]
+bg_color = Color(0.294118, 0, 0.207843, 0.713726)
+skew = Vector2(-1, 0)
+corner_radius_top_left = 10
+corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xq6uq"]
+bg_color = Color(1, 0.261603, 0.446184, 1)
+skew = Vector2(-1, 0)
+corner_radius_top_left = 10
+corner_radius_bottom_right = 10
+
+[node name="EnemyHPBar" type="ProgressBar"]
+offset_right = 726.0
+offset_bottom = 40.0
+theme_override_styles/background = SubResource("StyleBoxFlat_87lmb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xq6uq")
+value = 100.0
+show_percentage = false

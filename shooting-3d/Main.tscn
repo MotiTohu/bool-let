@@ -99,5 +99,6 @@ script = ExtResource("3_cdyac")
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource("6_malv5")]
 unique_name_in_owner = true
+MaxEnemyHP = 300.0
 
 [connection signal="timeout" from="CanvasLayer/SubViewportContainer/SubViewport/Node3D/BG/Timer" to="CanvasLayer/SubViewportContainer/SubViewport/Node3D/BG" method="_on_timer_timeout"]
