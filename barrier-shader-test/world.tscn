@@ -1,29 +1,33 @@
-[gd_scene load_steps=7 format=3 uid="uid://cr2m3v183wr1n"]
+[gd_scene load_steps=8 format=3 uid="uid://cr2m3v183wr1n"]
 
 [ext_resource type="Shader" uid="uid://bhyjpd7gtvmg6" path="res://barrier.tres" id="1_5j8sg"]
-[ext_resource type="Texture2D" uid="uid://d1o58esewbfm3" path="res://hex1.png" id="2_u1ome"]
-[ext_resource type="Texture2D" uid="uid://os5esmxfrqip" path="res://noise1.png" id="3_c3plw"]
-[ext_resource type="ArrayMesh" uid="uid://bf56bee5lirvo" path="res://barrier2.obj" id="4_lk2m3"]
+[ext_resource type="Texture2D" uid="uid://b2gy77wveobso" path="res://holo-noise1.png" id="2_pmlcx"]
+[ext_resource type="Texture2D" uid="uid://b3j031xl2ler" path="res://hex2.png" id="3_r5x72"]
+[ext_resource type="Texture2D" uid="uid://c0753uoreuf8n" path="res://digitalnoise1.png" id="4_sfd1l"]
+[ext_resource type="ArrayMesh" uid="uid://s8oale66jwtm" path="res://barrier3.obj" id="5_0ej2y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3aqy6"]
 render_priority = 0
 shader = ExtResource("1_5j8sg")
-shader_parameter/Vector2Parameter = Vector2(50, 25)
-shader_parameter/noisespeed = Vector2(0, -0.5)
+shader_parameter/Vector2Parameter = Vector2(6, 3)
+shader_parameter/noisespeed = Vector2(-0.1, 0)
 shader_parameter/noiseparam = 3.0
-shader_parameter/maintex = ExtResource("2_u1ome")
-shader_parameter/noise = ExtResource("3_c3plw")
+shader_parameter/noisespeed2 = Vector2(0, 0)
+shader_parameter/noiseparam2 = 1.0
+shader_parameter/maintex = ExtResource("3_r5x72")
+shader_parameter/noise = ExtResource("4_sfd1l")
+shader_parameter/hologram = ExtResource("2_pmlcx")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_na62r"]
 gravity = Vector3(0, 0, 0)
-color = Color(4.865, 0, 14.594, 1)
+color = Color(3.2549, 0, 3.91765, 0.972549)
 
 [node name="world" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0)
 material_override = SubResource("ShaderMaterial_3aqy6")
 amount = 1
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_na62r")
-draw_pass_1 = ExtResource("4_lk2m3")
+draw_pass_1 = ExtResource("5_0ej2y")
