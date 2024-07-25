@@ -45,7 +45,7 @@ operator = 5
 parameter_name = "maintex"
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_m80n7"]
-parameter_name = "noiseparam2"
+parameter_name = "holoparam"
 default_value_enabled = true
 default_value = 1.0
 
@@ -55,7 +55,7 @@ default_value = 1.0
 input_name = "time"
 
 [sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_orfip"]
-parameter_name = "noisespeed2"
+parameter_name = "holospeed"
 default_value_enabled = true
 
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_cs6oy"]
@@ -108,9 +108,9 @@ uniform sampler2D maintex;
 uniform vec2 noisespeed = vec2(0.000000, 0.000000);
 uniform sampler2D noise;
 uniform float noiseparam = 1;
-uniform vec2 noisespeed2 = vec2(0.000000, 0.000000);
+uniform vec2 holospeed = vec2(0.000000, 0.000000);
 uniform sampler2D hologram;
-uniform float noiseparam2 = 1;
+uniform float holoparam = 1;
 
 
 
@@ -183,7 +183,7 @@ void fragment() {
 
 
 // Vector2Parameter:23
-	vec2 n_out23p0 = noisespeed2;
+	vec2 n_out23p0 = holospeed;
 
 
 // VectorOp:24
@@ -201,7 +201,7 @@ void fragment() {
 
 
 // FloatParameter:20
-	float n_out20p0 = noiseparam2;
+	float n_out20p0 = holoparam;
 
 
 // FloatOp:19
@@ -216,7 +216,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-313.563, -88.2404)
+graph_offset = Vector2(-508.589, 119.891)
 nodes/fragment/0/position = Vector2(1040, -20)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_pq35m")
 nodes/fragment/2/position = Vector2(-180, 20)
