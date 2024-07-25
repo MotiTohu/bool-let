@@ -1,0 +1,185 @@
+[gd_resource type="VisualShader" load_steps=19 format=3 uid="uid://bhyjpd7gtvmg6"]
+
+[ext_resource type="Texture2D" uid="uid://djglmmp7r5cmh" path="res://Dots1.png" id="1_pcjx7"]
+[ext_resource type="Texture2D" uid="uid://os5esmxfrqip" path="res://noise1.png" id="2_i5u6h"]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_e0ge3"]
+default_input_values = [0, 0.0, 1, 3.0]
+operator = 5
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_2s5d0"]
+parameter_name = "noiseparam"
+default_value_enabled = true
+default_value = 1.0
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_cppou"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_30sq5"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_akvi3"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 0)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_d5m83"]
+parameter_name = "noisespeed"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_yvuvs"]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_x6ydc"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_pq35m"]
+parameter_name = "maintex"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_7musf"]
+source = 5
+texture = ExtResource("1_pcjx7")
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_51f2t"]
+default_input_values = [0, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_cuiue"]
+function = 1
+
+[sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_kgu52"]
+parameter_name = "Vector2Parameter"
+default_value_enabled = true
+default_value = Vector2(1, 1)
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_v0vqy"]
+parameter_name = "noise"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ccd43"]
+source = 5
+texture = ExtResource("2_i5u6h")
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_xubro"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+operator = 2
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform vec2 Vector2Parameter = vec2(1.000000, 1.000000);
+uniform sampler2D maintex;
+uniform vec2 noisespeed = vec2(0.000000, 0.000000);
+uniform sampler2D noise;
+uniform float noiseparam = 1;
+
+
+
+void fragment() {
+// Input:16
+	vec4 n_out16p0 = COLOR;
+
+
+// Vector2Parameter:6
+	vec2 n_out6p0 = Vector2Parameter;
+
+
+// UVFunc:5
+	vec2 n_in5p2 = vec2(0.00000, 0.00000);
+	vec2 n_out5p0 = (UV - n_in5p2) * n_out6p0 + n_in5p2;
+
+
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(maintex, n_out5p0);
+
+
+// Input:13
+	float n_out13p0 = TIME;
+
+
+// Vector2Parameter:15
+	vec2 n_out15p0 = noisespeed;
+
+
+// VectorOp:14
+	vec2 n_out14p0 = vec2(n_out13p0) * n_out15p0;
+
+
+// UVFunc:12
+	vec2 n_in12p1 = vec2(1.00000, 1.00000);
+	vec2 n_out12p0 = n_out14p0 * n_in12p1 + UV;
+
+
+	vec4 n_out8p0;
+// Texture2D:8
+	n_out8p0 = texture(noise, n_out12p0);
+
+
+// FloatParameter:11
+	float n_out11p0 = noiseparam;
+
+
+// FloatOp:10
+	float n_out10p0 = pow(n_out8p0.x, n_out11p0);
+
+
+// VectorOp:9
+	vec4 n_out9p0 = n_out3p0 * vec4(n_out10p0);
+
+
+// VectorOp:17
+	vec4 n_out17p0 = n_out16p0 * n_out9p0;
+
+
+// VectorDecompose:4
+	float n_out4p0 = n_out17p0.x;
+	float n_out4p1 = n_out17p0.y;
+	float n_out4p2 = n_out17p0.z;
+	float n_out4p3 = n_out17p0.w;
+
+
+// Output:0
+	ALBEDO = vec3(n_out17p0.xyz);
+	ALPHA = n_out4p3;
+
+
+}
+"
+graph_offset = Vector2(-336.53, -169.152)
+nodes/fragment/0/position = Vector2(1040, -20)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_pq35m")
+nodes/fragment/2/position = Vector2(-180, 20)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_7musf")
+nodes/fragment/3/position = Vector2(180, 0)
+nodes/fragment/4/node = SubResource("VisualShaderNodeVectorDecompose_51f2t")
+nodes/fragment/4/position = Vector2(780, 280)
+nodes/fragment/5/node = SubResource("VisualShaderNodeUVFunc_cuiue")
+nodes/fragment/5/position = Vector2(-160, -200)
+nodes/fragment/6/node = SubResource("VisualShaderNodeVec2Parameter_kgu52")
+nodes/fragment/6/position = Vector2(-500, -260)
+nodes/fragment/7/node = SubResource("VisualShaderNodeTexture2DParameter_v0vqy")
+nodes/fragment/7/position = Vector2(-240, 560)
+nodes/fragment/8/node = SubResource("VisualShaderNodeTexture_ccd43")
+nodes/fragment/8/position = Vector2(180, 440)
+nodes/fragment/9/node = SubResource("VisualShaderNodeVectorOp_xubro")
+nodes/fragment/9/position = Vector2(500, 220)
+nodes/fragment/10/node = SubResource("VisualShaderNodeFloatOp_e0ge3")
+nodes/fragment/10/position = Vector2(460, 440)
+nodes/fragment/11/node = SubResource("VisualShaderNodeFloatParameter_2s5d0")
+nodes/fragment/11/position = Vector2(180, 600)
+nodes/fragment/12/node = SubResource("VisualShaderNodeUVFunc_cppou")
+nodes/fragment/12/position = Vector2(-140, 380)
+nodes/fragment/13/node = SubResource("VisualShaderNodeInput_30sq5")
+nodes/fragment/13/position = Vector2(-740, 320)
+nodes/fragment/14/node = SubResource("VisualShaderNodeVectorOp_akvi3")
+nodes/fragment/14/position = Vector2(-412.349, 383.226)
+nodes/fragment/15/node = SubResource("VisualShaderNodeVec2Parameter_d5m83")
+nodes/fragment/15/position = Vector2(-740, 440)
+nodes/fragment/16/node = SubResource("VisualShaderNodeInput_yvuvs")
+nodes/fragment/16/position = Vector2(180, -80)
+nodes/fragment/17/node = SubResource("VisualShaderNodeVectorOp_x6ydc")
+nodes/fragment/17/position = Vector2(600, 40)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 4, 3, 0, 1, 5, 0, 3, 0, 6, 0, 5, 1, 7, 0, 8, 2, 3, 0, 9, 0, 8, 0, 10, 0, 10, 0, 9, 1, 11, 0, 10, 1, 12, 0, 8, 0, 13, 0, 14, 0, 15, 0, 14, 1, 14, 0, 12, 2, 16, 0, 17, 0, 9, 0, 17, 1, 17, 0, 0, 0, 17, 0, 4, 0)
