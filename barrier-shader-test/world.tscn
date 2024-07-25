@@ -10,18 +10,18 @@
 render_priority = 0
 shader = ExtResource("1_5j8sg")
 shader_parameter/hexsize = Vector2(4, 2)
-shader_parameter/noisespeed = Vector2(-0.1, 0)
-shader_parameter/noiseparam = 0.0
-shader_parameter/alpha = 0.7
+shader_parameter/noisespeed = Vector2(-0.1, 0.1)
+shader_parameter/noiseparam = -1.09
+shader_parameter/alpha = 0.4
 shader_parameter/holospeed = Vector2(0, 0.05)
-shader_parameter/holoparam = 0.975
+shader_parameter/holoparam = 0.935
 shader_parameter/maintex = ExtResource("3_r5x72")
 shader_parameter/noise = ExtResource("4_sfd1l")
 shader_parameter/hologram = ExtResource("2_pmlcx")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_na62r"]
 gravity = Vector3(0, 0, 0)
-color = Color(3.2549, 0, 3.91765, 0.972549)
+color = Color(7.027, 2.703, 9.189, 0.168)
 
 [node name="world" type="Node3D"]
 
