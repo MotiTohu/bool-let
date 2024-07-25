@@ -4,14 +4,15 @@
 [ext_resource type="Texture2D" uid="uid://b2gy77wveobso" path="res://holo-noise1.png" id="2_pmlcx"]
 [ext_resource type="Texture2D" uid="uid://b3j031xl2ler" path="res://hex2.png" id="3_r5x72"]
 [ext_resource type="Texture2D" uid="uid://c0753uoreuf8n" path="res://digitalnoise1.png" id="4_sfd1l"]
-[ext_resource type="ArrayMesh" uid="uid://s8oale66jwtm" path="res://barrier3.obj" id="5_0ej2y"]
+[ext_resource type="ArrayMesh" uid="uid://c7vjkum1xd5kb" path="res://barrier5.obj" id="5_i6b35"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3aqy6"]
 render_priority = 0
 shader = ExtResource("1_5j8sg")
-shader_parameter/Vector2Parameter = Vector2(6, 3)
+shader_parameter/hexsize = Vector2(4, 2)
 shader_parameter/noisespeed = Vector2(-0.1, 0)
-shader_parameter/noiseparam = 4.57
+shader_parameter/noiseparam = 0.0
+shader_parameter/alpha = 0.7
 shader_parameter/holospeed = Vector2(0, 0.05)
 shader_parameter/holoparam = 0.975
 shader_parameter/maintex = ExtResource("3_r5x72")
@@ -30,4 +31,4 @@ material_override = SubResource("ShaderMaterial_3aqy6")
 amount = 1
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_na62r")
-draw_pass_1 = ExtResource("5_0ej2y")
+draw_pass_1 = ExtResource("5_i6b35")
