@@ -1,34 +1,99 @@
-[gd_scene load_steps=8 format=3 uid="uid://cr2m3v183wr1n"]
+[gd_scene load_steps=21 format=3 uid="uid://cr2m3v183wr1n"]
 
-[ext_resource type="Shader" uid="uid://bhyjpd7gtvmg6" path="res://barrier.tres" id="1_5j8sg"]
-[ext_resource type="Texture2D" uid="uid://b2gy77wveobso" path="res://holo-noise1.png" id="2_pmlcx"]
-[ext_resource type="Texture2D" uid="uid://b3j031xl2ler" path="res://hex2.png" id="3_r5x72"]
-[ext_resource type="Texture2D" uid="uid://c0753uoreuf8n" path="res://digitalnoise1.png" id="4_sfd1l"]
-[ext_resource type="ArrayMesh" uid="uid://c7vjkum1xd5kb" path="res://barrier5.obj" id="5_i6b35"]
+[ext_resource type="Shader" uid="uid://bhyjpd7gtvmg6" path="res://barrier/barrier.tres" id="1_5j8sg"]
+[ext_resource type="Texture2D" uid="uid://p23s7w1h6uuh" path="res://barrier/holo-noise2.png" id="2_6b0nl"]
+[ext_resource type="Texture2D" uid="uid://b3j031xl2ler" path="res://barrier/hex2.png" id="3_r5x72"]
+[ext_resource type="Texture2D" uid="uid://c0753uoreuf8n" path="res://barrier/digitalnoise1.png" id="4_sfd1l"]
+[ext_resource type="ArrayMesh" uid="uid://3m8d0enn1myj" path="res://barrier/barrier6.obj" id="5_q7625"]
+[ext_resource type="Shader" uid="uid://dt82gij4abjb6" path="res://beam/beam.tres" id="6_iss6e"]
+[ext_resource type="Texture2D" uid="uid://crv2mr68okqpw" path="res://beam/noise3.PNG" id="7_crdy6"]
+[ext_resource type="ArrayMesh" uid="uid://ctye28fil1hsr" path="res://beam/beam1.obj" id="7_fi1io"]
+[ext_resource type="Texture2D" uid="uid://vq1akxy0df77" path="res://beam/noise2.PNG" id="9_vlhjc"]
+[ext_resource type="ArrayMesh" uid="uid://cfeok53gga6u0" path="res://beam/beam2.obj" id="10_muqjq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3aqy6"]
 render_priority = 0
 shader = ExtResource("1_5j8sg")
-shader_parameter/hexsize = Vector2(4, 2)
-shader_parameter/noisespeed = Vector2(-0.1, 0.1)
-shader_parameter/noiseparam = -1.09
-shader_parameter/alpha = 0.4
-shader_parameter/holospeed = Vector2(0, 0.05)
-shader_parameter/holoparam = 0.935
+shader_parameter/hexspeed = Vector2(0.1, 0)
+shader_parameter/hexsize = Vector2(6, 3)
+shader_parameter/noisespeed = Vector2(-0.05, 0.05)
+shader_parameter/noiseparam = 0.0
+shader_parameter/alpha = 1.0
+shader_parameter/holosize = Vector2(1, 1)
+shader_parameter/holospeed = Vector2(-0.1, 0)
+shader_parameter/holoparam = 1.265
 shader_parameter/maintex = ExtResource("3_r5x72")
 shader_parameter/noise = ExtResource("4_sfd1l")
-shader_parameter/hologram = ExtResource("2_pmlcx")
+shader_parameter/hologram = ExtResource("2_6b0nl")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_na62r"]
 gravity = Vector3(0, 0, 0)
-color = Color(7.027, 2.703, 9.189, 0.168)
+color = Color(7.027, 0.107, 8.109, 0.027)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ayb07"]
+render_priority = 0
+shader = ExtResource("6_iss6e")
+shader_parameter/speed = Vector2(2, -1)
+shader_parameter/texturepower = 1.3
+shader_parameter/energytexture = ExtResource("7_crdy6")
+
+[sub_resource type="Curve" id="Curve_s2q0w"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_uvv8w"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_io1is"]
+max_value = 8.0
+_data = [Vector2(0, 0.076923), 0.0, 17.7555, 0, 0, Vector2(0.210145, 8), 0.0, 0.0, 0, 0, Vector2(0.99999, 8), 0.0, 4.77922, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_nuskw"]
+curve_x = SubResource("Curve_s2q0w")
+curve_y = SubResource("Curve_uvv8w")
+curve_z = SubResource("Curve_io1is")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_13bet"]
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveXYZTexture_nuskw")
+color = Color(3.244, 1.621, 6.486, 0.363)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5u7l1"]
+render_priority = 0
+shader = ExtResource("6_iss6e")
+shader_parameter/speed = Vector2(1.5, 1)
+shader_parameter/texturepower = 1.5
+shader_parameter/energytexture = ExtResource("9_vlhjc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jonec"]
+gravity = Vector3(0, 0, 0)
+color = Color(6.486, 2.162, 9.729, 0.129)
 
 [node name="world" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0)
+visible = false
 material_override = SubResource("ShaderMaterial_3aqy6")
 amount = 1
 lifetime = 5.0
 process_material = SubResource("ParticleProcessMaterial_na62r")
-draw_pass_1 = ExtResource("5_i6b35")
+draw_pass_1 = ExtResource("5_q7625")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D"]
+material_override = SubResource("ShaderMaterial_ayb07")
+amount = 1
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_13bet")
+draw_pass_1 = ExtResource("7_fi1io")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Node3D"]
+material_override = SubResource("ShaderMaterial_5u7l1")
+amount = 1
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_jonec")
+draw_pass_1 = ExtResource("10_muqjq")

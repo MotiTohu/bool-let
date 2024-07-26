@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2gy77wveobso"
-path.s3tc="res://.godot/imported/holo-noise1.png-3ae5aff615a8ed506385b73200ab8205.s3tc.ctex"
+uid="uid://b3j031xl2ler"
+path.s3tc="res://.godot/imported/hex2.png-42c0bbcdbc6ca022670caa4b65e25412.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://holo-noise1.png"
-dest_files=["res://.godot/imported/holo-noise1.png-3ae5aff615a8ed506385b73200ab8205.s3tc.ctex"]
+source_file="res://barrier/hex2.png"
+dest_files=["res://.godot/imported/hex2.png-42c0bbcdbc6ca022670caa4b65e25412.s3tc.ctex"]
 
 [params]
 

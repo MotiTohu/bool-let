@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1o58esewbfm3"
-path.s3tc="res://.godot/imported/hex1.png-da2091672fa259e8587778aee6a8010a.s3tc.ctex"
+uid="uid://vq1akxy0df77"
+path.s3tc="res://.godot/imported/noise2.PNG-d4132af8be056fc8414d779d764c201d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://hex1.png"
-dest_files=["res://.godot/imported/hex1.png-da2091672fa259e8587778aee6a8010a.s3tc.ctex"]
+source_file="res://beam/noise2.PNG"
+dest_files=["res://.godot/imported/noise2.PNG-d4132af8be056fc8414d779d764c201d.s3tc.ctex"]
 
 [params]
 
