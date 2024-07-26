@@ -6,10 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://c0753uoreuf8n" path="res://barrier/digitalnoise1.png" id="4_sfd1l"]
 [ext_resource type="ArrayMesh" uid="uid://3m8d0enn1myj" path="res://barrier/barrier6.obj" id="5_q7625"]
 [ext_resource type="Shader" uid="uid://dt82gij4abjb6" path="res://beam/beam.tres" id="6_iss6e"]
-[ext_resource type="Texture2D" uid="uid://crv2mr68okqpw" path="res://beam/noise3.PNG" id="7_crdy6"]
 [ext_resource type="ArrayMesh" uid="uid://ctye28fil1hsr" path="res://beam/beam1.obj" id="7_fi1io"]
+[ext_resource type="Texture2D" uid="uid://5h3bk6v6uhf2" path="res://beam/beamnoise1.png" id="7_tqpbj"]
 [ext_resource type="Texture2D" uid="uid://vq1akxy0df77" path="res://beam/noise2.PNG" id="9_vlhjc"]
-[ext_resource type="ArrayMesh" uid="uid://cfeok53gga6u0" path="res://beam/beam2.obj" id="10_muqjq"]
+[ext_resource type="ArrayMesh" uid="uid://dcr0gx6q4cm32" path="res://beam/beam3.obj" id="10_vlie1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3aqy6"]
 render_priority = 0
@@ -33,26 +33,26 @@ color = Color(7.027, 0.107, 8.109, 0.027)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ayb07"]
 render_priority = 0
 shader = ExtResource("6_iss6e")
-shader_parameter/speed = Vector2(2, -1)
-shader_parameter/texturepower = 1.3
-shader_parameter/energytexture = ExtResource("7_crdy6")
+shader_parameter/speed = Vector2(4, -1)
+shader_parameter/texturepower = 1.0
+shader_parameter/energytexture = ExtResource("7_tqpbj")
 
 [sub_resource type="Curve" id="Curve_s2q0w"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Curve" id="Curve_uvv8w"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+[sub_resource type="Curve" id="Curve_46e1u"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.985507, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_io1is"]
-max_value = 8.0
-_data = [Vector2(0, 0.076923), 0.0, 17.7555, 0, 0, Vector2(0.210145, 8), 0.0, 0.0, 0, 0, Vector2(0.99999, 8), 0.0, 4.77922, 0, 0]
+max_value = 100.0
+_data = [Vector2(0, 0.076923), 0.0, 17.7555, 0, 0, Vector2(0.0797101, 100), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 4.77922, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_nuskw"]
 curve_x = SubResource("Curve_s2q0w")
-curve_y = SubResource("Curve_uvv8w")
+curve_y = SubResource("Curve_46e1u")
 curve_z = SubResource("Curve_io1is")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_13bet"]
@@ -63,7 +63,7 @@ color = Color(3.244, 1.621, 6.486, 0.363)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5u7l1"]
 render_priority = 0
 shader = ExtResource("6_iss6e")
-shader_parameter/speed = Vector2(1.5, 1)
+shader_parameter/speed = Vector2(1.5, -1)
 shader_parameter/texturepower = 1.5
 shader_parameter/energytexture = ExtResource("9_vlhjc")
 
@@ -87,13 +87,14 @@ draw_pass_1 = ExtResource("5_q7625")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D"]
 material_override = SubResource("ShaderMaterial_ayb07")
 amount = 1
-lifetime = 2.0
+lifetime = 4.0
 process_material = SubResource("ParticleProcessMaterial_13bet")
 draw_pass_1 = ExtResource("7_fi1io")
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1.31134e-07, -1, 0, 1, 1.31134e-07, 0, 0, -0.669768)
 material_override = SubResource("ShaderMaterial_5u7l1")
 amount = 1
 lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_jonec")
-draw_pass_1 = ExtResource("10_muqjq")
+draw_pass_1 = ExtResource("10_vlie1")
