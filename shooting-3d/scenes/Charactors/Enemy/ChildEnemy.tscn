@@ -1,33 +1,38 @@
-[gd_scene load_steps=11 format=3 uid="uid://bwbk28tfs0tao"]
+[gd_scene load_steps=11 format=3 uid="uid://ot8vfhv4p5de"]
 
-[ext_resource type="Texture2D" uid="uid://bdvs4g2wjeswn" path="res://assets/enemy1_body.png" id="1_7cr6d"]
-[ext_resource type="Script" path="res://scenes/Charactors/Enemy/Enemy.gd" id="1_aaq5x"]
-[ext_resource type="Texture2D" uid="uid://bfevdc5xhts7a" path="res://assets/enemy1_head.png" id="2_i066f"]
-[ext_resource type="Texture2D" uid="uid://bmbscp7ii6bnp" path="res://assets/enemy1_middle.png" id="3_0gkyw"]
-[ext_resource type="Texture2D" uid="uid://dg6ho7i5vkvkt" path="res://assets/enemy1_ring.png" id="4_u88tk"]
+[ext_resource type="Script" path="res://scenes/Charactors/Enemy/ChildEnemy.gd" id="1_46l8w"]
+[ext_resource type="Texture2D" uid="uid://bdvs4g2wjeswn" path="res://assets/enemy1_body.png" id="2_mtb3g"]
+[ext_resource type="Texture2D" uid="uid://bfevdc5xhts7a" path="res://assets/enemy1_head.png" id="3_4elp0"]
+[ext_resource type="Texture2D" uid="uid://bmbscp7ii6bnp" path="res://assets/enemy1_middle.png" id="4_yolk7"]
+[ext_resource type="Texture2D" uid="uid://dg6ho7i5vkvkt" path="res://assets/enemy1_ring.png" id="5_k6sqe"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n2f7j"]
 size = Vector3(10, 10, 5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_76u2n"]
 transparency = 1
-albedo_texture = ExtResource("1_7cr6d")
+albedo_texture = ExtResource("2_mtb3g")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2h7e"]
 transparency = 1
-albedo_texture = ExtResource("2_i066f")
+albedo_texture = ExtResource("3_4elp0")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3gexs"]
 transparency = 1
-albedo_texture = ExtResource("3_0gkyw")
+albedo_texture = ExtResource("4_yolk7")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ati5e"]
 transparency = 1
-albedo_texture = ExtResource("4_u88tk")
+albedo_texture = ExtResource("5_k6sqe")
 
-[node name="Enemy" type="StaticBody3D"]
+[node name="ChildEnemy" type="StaticBody3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+top_level = true
 collision_layer = 2
-script = ExtResource("1_aaq5x")
+script = ExtResource("1_46l8w")
+SPEED = 0.5
+xy_range = 4.0
+z_range = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.75)
@@ -36,32 +41,26 @@ shape = SubResource("BoxShape3D_n2f7j")
 [node name="Body" type="Sprite3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.05)
 material_override = SubResource("StandardMaterial3D_76u2n")
-texture = ExtResource("1_7cr6d")
+texture = ExtResource("2_mtb3g")
 
 [node name="Head" type="Sprite3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0.05)
 material_override = SubResource("StandardMaterial3D_h2h7e")
-texture = ExtResource("2_i066f")
+texture = ExtResource("3_4elp0")
 
 [node name="Middle" type="Sprite3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_3gexs")
-texture = ExtResource("3_0gkyw")
+texture = ExtResource("4_yolk7")
 
 [node name="Ring" type="Sprite3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.1)
 material_override = SubResource("StandardMaterial3D_ati5e")
-texture = ExtResource("4_u88tk")
+texture = ExtResource("5_k6sqe")
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0
-wait_time = 0.05
-autostart = true
-
-[node name="Child" type="Timer" parent="."]
-process_callback = 0
-wait_time = 10.0
+wait_time = 0.3
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="Child" to="." method="_on_child_timeout"]

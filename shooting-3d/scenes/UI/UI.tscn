@@ -17,7 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_koony")
 script = ExtResource("2_42fy7")
-MaxEnemyHP = null
+EnemyHP = 300.0
 
 [node name="HPBar" type="ProgressBar" parent="."]
 layout_mode = 1

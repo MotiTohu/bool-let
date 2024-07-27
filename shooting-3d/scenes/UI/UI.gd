@@ -12,14 +12,14 @@ class_name UI
 			hp_bar.value = v
 
 
-@onready var enemy_hp_bars: Array[ProgressBar] = []
+var enemy_hp_bars: Array[ProgressBar] = []
 const ENEMY_HP_BAR = preload("res://scenes/UI/enemy_hp_bar.tscn")
 @export var MaxEnemyHP :float = 300.0 :
 	set(v):
 		for i in enemy_hp_bars:
 			$EnemyHP.remove_child(i)
 		enemy_hp_bars.clear()
-		for i in ceilf(v/100.0):
+		for i in ceilf(v/100.1):
 			var Bar := ENEMY_HP_BAR.instantiate()
 			if i != 0:
 				Bar.size.x = 400
@@ -32,6 +32,8 @@ const ENEMY_HP_BAR = preload("res://scenes/UI/enemy_hp_bar.tscn")
 @export var EnemyHP :float = 100.0:
 	set(v):
 		EnemyHP = v
+		if not enemy_hp_bars:
+			return 
 		for i in ceilf(MaxEnemyHP/100.0):
 			if i == 0:
 				enemy_hp_bars[i].value = fmod(v,100.1)
@@ -44,4 +46,4 @@ const ENEMY_HP_BAR = preload("res://scenes/UI/enemy_hp_bar.tscn")
 			
 func _ready() -> void:
 	MaxEnemyHP = MaxEnemyHP
-
+	

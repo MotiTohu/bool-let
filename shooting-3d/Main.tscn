@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://cuc8vp65tt001"]
+[gd_scene load_steps=12 format=3 uid="uid://cuc8vp65tt001"]
 
 [ext_resource type="PackedScene" uid="uid://dn0y7naesn817" path="res://scenes/Charactors/Player/Player.tscn" id="1_rktla"]
 [ext_resource type="Script" path="res://scenes/Graphics/BG.gd" id="1_yb4l5"]
 [ext_resource type="Texture2D" uid="uid://dc6qjcd2qtnfa" path="res://assets/target.png" id="2_81f3d"]
-[ext_resource type="Texture2D" uid="uid://nerhflo8p581" path="res://assets/Green_Nebula_06-1024x1024.png" id="2_kve8g"]
 [ext_resource type="Script" path="res://scenes/UI/AimUI.gd" id="3_cdyac"]
 [ext_resource type="PackedScene" uid="uid://bwbk28tfs0tao" path="res://scenes/Charactors/Enemy/Enemy.tscn" id="3_yb7xp"]
 [ext_resource type="Script" path="res://scenes/Graphics/CamCenter.gd" id="4_rtse8"]
@@ -12,14 +11,15 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ou757"]
 bg_color = Color(0.0605065, 0.0516476, 0.255408, 1)
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_oll1n"]
-panorama = ExtResource("2_kve8g")
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_riohe"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
 [sub_resource type="Sky" id="Sky_wvq2f"]
-sky_material = SubResource("PanoramaSkyMaterial_oll1n")
+sky_material = SubResource("ProceduralSkyMaterial_riohe")
 
 [sub_resource type="Environment" id="Environment_ui131"]
-background_mode = 2
+background_mode = 3
 sky = SubResource("Sky_wvq2f")
 glow_enabled = true
 glow_intensity = 1.0
@@ -99,7 +99,5 @@ script = ExtResource("3_cdyac")
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource("6_malv5")]
 unique_name_in_owner = true
-MaxEnemyHP = 300.0
-EnemyHP = 300.0
 
 [connection signal="timeout" from="CanvasLayer/SubViewportContainer/SubViewport/Node3D/BG/Timer" to="CanvasLayer/SubViewportContainer/SubViewport/Node3D/BG" method="_on_timer_timeout"]
