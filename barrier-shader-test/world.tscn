@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cr2m3v183wr1n"]
+[gd_scene load_steps=26 format=3 uid="uid://cr2m3v183wr1n"]
 
 [ext_resource type="Shader" uid="uid://bhyjpd7gtvmg6" path="res://barrier/barrier.tres" id="1_5j8sg"]
 [ext_resource type="Texture2D" uid="uid://p23s7w1h6uuh" path="res://barrier/holo-noise2.png" id="2_6b0nl"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://5h3bk6v6uhf2" path="res://beam/beamnoise1.png" id="7_tqpbj"]
 [ext_resource type="Texture2D" uid="uid://cx5bl7ip7hpuj" path="res://beam/noise1.png" id="9_dlqss"]
 [ext_resource type="ArrayMesh" uid="uid://dcr0gx6q4cm32" path="res://beam/beam3.obj" id="10_vlie1"]
+[ext_resource type="Texture2D" uid="uid://c5dwj2lya64br" path="res://イラスト253.png" id="11_3el6x"]
+[ext_resource type="Shader" uid="uid://d180d45sefpqx" path="res://damage.tres" id="12_b0lae"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3aqy6"]
 render_priority = 0
@@ -71,10 +73,22 @@ shader_parameter/energytexture = ExtResource("9_dlqss")
 gravity = Vector3(0, 0, 0)
 color = Color(6.486, 2.162, 9.729, 0.129)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ecj8j"]
+albedo_color = Color(1, 1, 1, 0)
+albedo_texture = ExtResource("11_3el6x")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_016cf"]
+render_priority = 0
+shader = ExtResource("12_b0lae")
+shader_parameter/alpha_power = 0.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g7cpj"]
+
 [node name="world" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0)
+visible = false
 material_override = SubResource("ShaderMaterial_3aqy6")
 amount = 1
 lifetime = 5.0
@@ -82,6 +96,7 @@ process_material = SubResource("ParticleProcessMaterial_na62r")
 draw_pass_1 = ExtResource("5_q7625")
 
 [node name="Node3D" type="Node3D" parent="."]
+visible = false
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Node3D"]
 material_override = SubResource("ShaderMaterial_ayb07")
@@ -98,3 +113,9 @@ amount = 1
 lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_jonec")
 draw_pass_1 = ExtResource("10_vlie1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 8.74228e-08, -4.37114e-08, -4.37114e-08, 4.37114e-08, -1, -8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_ecj8j")
+material_overlay = SubResource("ShaderMaterial_016cf")
+mesh = SubResource("PlaneMesh_g7cpj")

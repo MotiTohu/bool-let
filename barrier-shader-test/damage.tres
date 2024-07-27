@@ -1,0 +1,50 @@
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://d180d45sefpqx"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_s1e7c"]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_ajl8f"]
+parameter_name = "alpha_material"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_807iv"]
+source = 5
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_mechb"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_a8gun"]
+parameter_name = "alpha_power"
+default_value_enabled = true
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform float alpha_power = 0;
+
+
+
+void fragment() {
+// FloatParameter:6
+	float n_out6p0 = alpha_power;
+
+
+// Output:0
+	ALPHA = n_out6p0;
+
+
+}
+"
+graph_offset = Vector2(-380.733, 160.141)
+nodes/fragment/0/position = Vector2(440, 180)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_s1e7c")
+nodes/fragment/2/position = Vector2(-20, 180)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture2DParameter_ajl8f")
+nodes/fragment/3/position = Vector2(-680, 280)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_807iv")
+nodes/fragment/4/position = Vector2(-260, 280)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatOp_mechb")
+nodes/fragment/5/position = Vector2(120, 320)
+nodes/fragment/6/node = SubResource("VisualShaderNodeFloatParameter_a8gun")
+nodes/fragment/6/position = Vector2(100, 300)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 2, 4, 0, 5, 0, 6, 0, 0, 1)
