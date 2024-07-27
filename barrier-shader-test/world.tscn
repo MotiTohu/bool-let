@@ -8,7 +8,7 @@
 [ext_resource type="Shader" uid="uid://dt82gij4abjb6" path="res://beam/beam.tres" id="6_iss6e"]
 [ext_resource type="ArrayMesh" uid="uid://ctye28fil1hsr" path="res://beam/beam1.obj" id="7_fi1io"]
 [ext_resource type="Texture2D" uid="uid://5h3bk6v6uhf2" path="res://beam/beamnoise1.png" id="7_tqpbj"]
-[ext_resource type="Texture2D" uid="uid://vq1akxy0df77" path="res://beam/noise2.PNG" id="9_vlhjc"]
+[ext_resource type="Texture2D" uid="uid://cx5bl7ip7hpuj" path="res://beam/noise1.png" id="9_dlqss"]
 [ext_resource type="ArrayMesh" uid="uid://dcr0gx6q4cm32" path="res://beam/beam3.obj" id="10_vlie1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3aqy6"]
@@ -18,7 +18,7 @@ shader_parameter/hexspeed = Vector2(0.1, 0)
 shader_parameter/hexsize = Vector2(6, 3)
 shader_parameter/noisespeed = Vector2(-0.05, 0.05)
 shader_parameter/noiseparam = 0.0
-shader_parameter/alpha = 1.0
+shader_parameter/alpha = 3.0
 shader_parameter/holosize = Vector2(1, 1)
 shader_parameter/holospeed = Vector2(-0.1, 0)
 shader_parameter/holoparam = 1.265
@@ -64,8 +64,8 @@ color = Color(3.244, 1.621, 6.486, 0.363)
 render_priority = 0
 shader = ExtResource("6_iss6e")
 shader_parameter/speed = Vector2(1.5, -1)
-shader_parameter/texturepower = 1.5
-shader_parameter/energytexture = ExtResource("9_vlhjc")
+shader_parameter/texturepower = 1.085
+shader_parameter/energytexture = ExtResource("9_dlqss")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jonec"]
 gravity = Vector3(0, 0, 0)
@@ -75,7 +75,6 @@ color = Color(6.486, 2.162, 9.729, 0.129)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0)
-visible = false
 material_override = SubResource("ShaderMaterial_3aqy6")
 amount = 1
 lifetime = 5.0
@@ -93,6 +92,7 @@ draw_pass_1 = ExtResource("7_fi1io")
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1.31134e-07, -1, 0, 1, 1.31134e-07, 0, 0, -0.669768)
+visible = false
 material_override = SubResource("ShaderMaterial_5u7l1")
 amount = 1
 lifetime = 1.5
