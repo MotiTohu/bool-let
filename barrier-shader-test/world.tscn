@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cr2m3v183wr1n"]
+[gd_scene load_steps=23 format=3 uid="uid://cr2m3v183wr1n"]
 
 [ext_resource type="Shader" uid="uid://bhyjpd7gtvmg6" path="res://barrier/barrier.tres" id="1_5j8sg"]
 [ext_resource type="Texture2D" uid="uid://p23s7w1h6uuh" path="res://barrier/holo-noise2.png" id="2_6b0nl"]
@@ -6,12 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://c0753uoreuf8n" path="res://barrier/digitalnoise1.png" id="4_sfd1l"]
 [ext_resource type="ArrayMesh" uid="uid://3m8d0enn1myj" path="res://barrier/barrier6.obj" id="5_q7625"]
 [ext_resource type="Shader" uid="uid://dt82gij4abjb6" path="res://beam/beam.tres" id="6_iss6e"]
+[ext_resource type="Texture2D" uid="uid://vq1akxy0df77" path="res://beam/noise2.PNG" id="7_3goj3"]
 [ext_resource type="ArrayMesh" uid="uid://ctye28fil1hsr" path="res://beam/beam1.obj" id="7_fi1io"]
-[ext_resource type="Texture2D" uid="uid://5h3bk6v6uhf2" path="res://beam/beamnoise1.png" id="7_tqpbj"]
 [ext_resource type="Texture2D" uid="uid://cx5bl7ip7hpuj" path="res://beam/noise1.png" id="9_dlqss"]
 [ext_resource type="ArrayMesh" uid="uid://dcr0gx6q4cm32" path="res://beam/beam3.obj" id="10_vlie1"]
-[ext_resource type="Texture2D" uid="uid://c5dwj2lya64br" path="res://イラスト253.png" id="11_3el6x"]
-[ext_resource type="Shader" uid="uid://d180d45sefpqx" path="res://damage.tres" id="12_b0lae"]
+[ext_resource type="ArrayMesh" uid="uid://b13lnie3en5vr" path="res://missile/afterburner.obj" id="11_3a2o3"]
+[ext_resource type="PackedScene" uid="uid://0duj8vbo2fo2" path="res://missile/missoile.glb" id="12_hmu16"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3aqy6"]
 render_priority = 0
@@ -35,22 +35,24 @@ color = Color(7.027, 0.107, 8.109, 0.027)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ayb07"]
 render_priority = 0
 shader = ExtResource("6_iss6e")
-shader_parameter/speed = Vector2(4, -1)
+shader_parameter/speed = Vector2(1, -2)
 shader_parameter/texturepower = 1.0
-shader_parameter/energytexture = ExtResource("7_tqpbj")
+shader_parameter/energytexture = ExtResource("7_3goj3")
 
 [sub_resource type="Curve" id="Curve_s2q0w"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+max_value = 2.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.202899, 2), 0.0, 0.0, 0, 0, Vector2(0.456522, 1.01099), 0.0, 0.0, 0, 0, Vector2(0.753623, 2), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
 
 [sub_resource type="Curve" id="Curve_46e1u"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.985507, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+max_value = 2.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.268116, 2), 0.0, 0.0, 0, 0, Vector2(0.507246, 0.967033), 0.0, 0.0, 0, 0, Vector2(0.746377, 2), 0.0, 0.0, 0, 0, Vector2(0.985507, 1), 0.0, 0.0, 0, 0]
+point_count = 5
 
 [sub_resource type="Curve" id="Curve_io1is"]
-max_value = 100.0
-_data = [Vector2(0, 0.076923), 0.0, 17.7555, 0, 0, Vector2(0.0797101, 100), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 4.77922, 0, 0]
-point_count = 3
+max_value = 2.0
+_data = [Vector2(0, 2), 0.0, 0.0, 0, 0, Vector2(0.246377, 0.989011), 0.0, 0.0, 0, 0, Vector2(0.478261, 2), 0.0, 0.0, 0, 0, Vector2(0.768116, 1.0989), 0.0, 0.0, 0, 0, Vector2(0.992754, 2), 0.0, 4.77922, 0, 0]
+point_count = 5
 
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_nuskw"]
 curve_x = SubResource("Curve_s2q0w")
@@ -60,7 +62,7 @@ curve_z = SubResource("Curve_io1is")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_13bet"]
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveXYZTexture_nuskw")
-color = Color(3.244, 1.621, 6.486, 0.363)
+color = Color(7.027, 0.25, 3.784, 0.071)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5u7l1"]
 render_priority = 0
@@ -72,17 +74,6 @@ shader_parameter/energytexture = ExtResource("9_dlqss")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jonec"]
 gravity = Vector3(0, 0, 0)
 color = Color(6.486, 2.162, 9.729, 0.129)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ecj8j"]
-albedo_color = Color(1, 1, 1, 0)
-albedo_texture = ExtResource("11_3el6x")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_016cf"]
-render_priority = 0
-shader = ExtResource("12_b0lae")
-shader_parameter/alpha_power = 0.0
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_g7cpj"]
 
 [node name="world" type="Node3D"]
 
@@ -114,8 +105,12 @@ lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_jonec")
 draw_pass_1 = ExtResource("10_vlie1")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 8.74228e-08, -4.37114e-08, -4.37114e-08, 4.37114e-08, -1, -8.74228e-08, 1, 4.37114e-08, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_ecj8j")
-material_overlay = SubResource("ShaderMaterial_016cf")
-mesh = SubResource("PlaneMesh_g7cpj")
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="."]
+material_override = SubResource("ShaderMaterial_ayb07")
+amount = 1
+lifetime = 4.0
+process_material = SubResource("ParticleProcessMaterial_13bet")
+draw_pass_1 = ExtResource("11_3a2o3")
+
+[node name="missoile" parent="." instance=ExtResource("12_hmu16")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
