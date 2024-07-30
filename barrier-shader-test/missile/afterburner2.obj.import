@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dnkw3tx0pijww"
+path="res://.godot/imported/afterburner2.obj-4a2ff2c1115e37d402337424fc20b4aa.mesh"
+
+[deps]
+
+files=["res://.godot/imported/afterburner2.obj-4a2ff2c1115e37d402337424fc20b4aa.mesh"]
+
+source_file="res://missile/afterburner2.obj"
+dest_files=["res://.godot/imported/afterburner2.obj-4a2ff2c1115e37d402337424fc20b4aa.mesh", "res://.godot/imported/afterburner2.obj-4a2ff2c1115e37d402337424fc20b4aa.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
