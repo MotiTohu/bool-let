@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cr2m3v183wr1n"]
+[gd_scene load_steps=23 format=3 uid="uid://cr2m3v183wr1n"]
 
 [ext_resource type="Shader" uid="uid://bhyjpd7gtvmg6" path="res://barrier/barrier.tres" id="1_5j8sg"]
 [ext_resource type="Texture2D" uid="uid://p23s7w1h6uuh" path="res://barrier/holo-noise2.png" id="2_6b0nl"]
@@ -6,11 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://c0753uoreuf8n" path="res://barrier/digitalnoise1.png" id="4_sfd1l"]
 [ext_resource type="ArrayMesh" uid="uid://3m8d0enn1myj" path="res://barrier/barrier6.obj" id="5_q7625"]
 [ext_resource type="Shader" uid="uid://dt82gij4abjb6" path="res://beam/beam.tres" id="6_iss6e"]
-[ext_resource type="Texture2D" uid="uid://vq1akxy0df77" path="res://beam/noise2.PNG" id="7_3goj3"]
 [ext_resource type="ArrayMesh" uid="uid://ctye28fil1hsr" path="res://beam/beam1.obj" id="7_fi1io"]
 [ext_resource type="Texture2D" uid="uid://cx5bl7ip7hpuj" path="res://beam/noise1.png" id="9_dlqss"]
+[ext_resource type="ArrayMesh" uid="uid://dnkw3tx0pijww" path="res://missile/afterburner2.obj" id="10_f3ida"]
 [ext_resource type="ArrayMesh" uid="uid://dcr0gx6q4cm32" path="res://beam/beam3.obj" id="10_vlie1"]
-[ext_resource type="ArrayMesh" uid="uid://b13lnie3en5vr" path="res://missile/afterburner.obj" id="11_3a2o3"]
 [ext_resource type="PackedScene" uid="uid://0duj8vbo2fo2" path="res://missile/missoile.glb" id="12_hmu16"]
 [ext_resource type="Script" path="res://missile/missoile.gd" id="13_6oddv"]
 
@@ -36,9 +35,9 @@ color = Color(7.027, 0.107, 8.109, 0.027)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ayb07"]
 render_priority = 0
 shader = ExtResource("6_iss6e")
-shader_parameter/speed = Vector2(1, -2)
+shader_parameter/speed = Vector2(1, 2)
 shader_parameter/texturepower = 1.0
-shader_parameter/energytexture = ExtResource("7_3goj3")
+shader_parameter/energytexture = ExtResource("3_r5x72")
 
 [sub_resource type="Curve" id="Curve_s2q0w"]
 max_value = 2.0
@@ -63,7 +62,7 @@ curve_z = SubResource("Curve_io1is")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_13bet"]
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveXYZTexture_nuskw")
-color = Color(7.027, 0.25, 3.784, 0.071)
+color = Color(87.027, 1.081, 0, 0.39)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5u7l1"]
 render_priority = 0
@@ -111,7 +110,7 @@ material_override = SubResource("ShaderMaterial_ayb07")
 amount = 1
 lifetime = 4.0
 process_material = SubResource("ParticleProcessMaterial_13bet")
-draw_pass_1 = ExtResource("11_3a2o3")
+draw_pass_1 = ExtResource("10_f3ida")
 
 [node name="missoile" parent="." instance=ExtResource("12_hmu16")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
