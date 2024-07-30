@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://bwbk28tfs0tao" path="res://scenes/Charactors/Enemy/Enemy.tscn" id="1_obewv"]
 [ext_resource type="Script" path="res://scenes/Charactors/Enemy/ChildEnemy.gd" id="2_payns"]
-[ext_resource type="Texture2D" uid="uid://trpqk834tri0" path="res://assets/enemy2_body.png" id="3_iqvu1"]
-[ext_resource type="Texture2D" uid="uid://pqwhqbs0h670" path="res://assets/enemy2_head.png" id="4_uqsen"]
-[ext_resource type="Texture2D" uid="uid://1o4wphyr5xmu" path="res://assets/enemy2_middle.png" id="5_bdlnv"]
-[ext_resource type="Texture2D" uid="uid://deeen6arricaf" path="res://assets/enemy2_ring.png" id="6_mlw1u"]
+[ext_resource type="Texture2D" uid="uid://trpqk834tri0" path="res://assets/sprites/enemy/enemy2/enemy2_body.png" id="3_iqvu1"]
+[ext_resource type="Texture2D" uid="uid://pqwhqbs0h670" path="res://assets/sprites/enemy/enemy2/enemy2_head.png" id="4_uqsen"]
+[ext_resource type="Texture2D" uid="uid://1o4wphyr5xmu" path="res://assets/sprites/enemy/enemy2/enemy2_middle.png" id="5_bdlnv"]
+[ext_resource type="Texture2D" uid="uid://deeen6arricaf" path="res://assets/sprites/enemy/enemy2/enemy2_ring.png" id="6_mlw1u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k4een"]
 transparency = 1
