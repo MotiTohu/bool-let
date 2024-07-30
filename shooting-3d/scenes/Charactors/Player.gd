@@ -1,5 +1,4 @@
-extends CharacterBody3D
-class_name Player
+extends Charactor
 
 @export_category("movement")
 @export var SPEED := 600.0
@@ -9,26 +8,22 @@ class_name Player
 @export_category("shoot")
 @export_enum("1:0","2:1") var shoot_mode := 1
 
-@onready var node_3d := $Node3D
-@onready var collision_shape_3d := $CollisionShape3D
-@onready var blaster := $Node3D/Blaster
-@onready var ray_cast_3d := $RayCast3D
-@onready var ui: = %UI
-
+@onready var aiming: RayCast3D = $Aiming
+@onready var blaster: Sprite3D = $Blaster
 
 var aim_pos : Vector2:
 	get:
 		var target_pos = global_position
 		target_pos.z -= 40.0
-		if ray_cast_3d.is_colliding():
-			target_pos = ray_cast_3d.get_collision_point()
+		if aiming.is_colliding():
+			target_pos = aiming.get_collision_point()
 		var cam := get_viewport().get_camera_3d()
 		return cam.unproject_position(target_pos)
 
 func _move(delta:float)->void:
 	var input_movement := Input.get_vector("left", "right", "down", "up")
 	var input_depth := Input.get_axis("back","front")
-	var direction := (transform.basis * Vector3(input_movement.x,  input_movement.y,0)).normalized()
+	var direction := Vector3(input_movement.x,  input_movement.y,0).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED * delta
 		velocity.y = direction.y * SPEED * delta
@@ -37,13 +32,13 @@ func _move(delta:float)->void:
 		velocity.y = move_toward(velocity.y,0,SPEED * delta)
 	velocity.z = (input_depth * MOVE_DEPTH - position.z) * DEPTH_SPEED * (2.0 if input_depth else 1.0)
 	move_and_slide()
+	# todo export this 
 	position.x = clampf(position.x,-9,9)
 	position.y = clampf(position.y,-5,5)
 
 func _rotate(delta:float)->void:
 	var rotate_to := -Input.get_axis("left","right") * PI / 6
-	collision_shape_3d.rotation.z = lerp_angle(collision_shape_3d.rotation.z,rotate_to,delta * ROTATE_SPEED)
-	node_3d.rotation = collision_shape_3d.rotation
+	rotation.z = lerp_angle(rotation.z,rotate_to,delta * ROTATE_SPEED)
 
 @onready var shoot_interval := $ShootInterval
 const BULLET := preload("res://scenes/Charactors/Player/PlayerBullet.tscn")
@@ -62,9 +57,9 @@ func _shoot():
 		elif shoot_mode == 1:
 			var bullet_l := BULLET.instantiate()
 			var bullet_r := BULLET.instantiate()
-			var bullet_pos := Vector2(.55,0).rotated(node_3d.rotation.z)
-			bullet_pos.x += blaster.global_position.x - node_3d.global_position.x
-			bullet_pos.y += blaster.global_position.y - node_3d.global_position.y
+			var bullet_pos := Vector2(.55,0).rotated(rotation.z)
+			bullet_pos.x += blaster.global_position.x - global_position.x
+			bullet_pos.y += blaster.global_position.y - global_position.y
 			bullet_l.position.x -= bullet_pos.x
 			bullet_l.position.y -= bullet_pos.y
 			bullet_r.position.x += bullet_pos.x
@@ -72,11 +67,9 @@ func _shoot():
 			add_child(bullet_l)
 			add_child(bullet_r)
 			shoot_interval.start(.2)
-		
-func _physics_process(delta:float)->void:
+
+func _physics_process(delta: float) -> void:
 	_move(delta)
 	_rotate(delta)
 	_shoot()
-
-func decrease_hp(diff_value:float)->void:
-	ui.HP -= diff_value
+	super(delta)

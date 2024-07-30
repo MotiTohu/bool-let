@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 	position.y = to.y + offset.y
 	position.z = -40 + sin(delta_sum * 2) * z_range
 
-const ENEMY_BULLET = preload("res://scenes/Charactors/Enemy/EnemyBullet.tscn")
+const ENEMY_BULLET := preload("res://scenes/Charactors/Enemy/EnemyBullet.tscn")
 func _on_timer_timeout() -> void:
 	var bullet := ENEMY_BULLET.instantiate()
 	add_child(bullet)
@@ -26,7 +26,7 @@ func _on_timer_timeout() -> void:
 func decrease_hp(diff_value:float)->void:
 	ui.EnemyHP -= diff_value
 
-const CHILD_ENEMY = preload("res://scenes/Charactors/Enemy/ChildEnemy.tscn")
+const CHILD_ENEMY := preload("res://scenes/Charactors/Enemy/ChildEnemy.tscn")
 func _on_child_timeout() -> void:
 	var child := CHILD_ENEMY.instantiate()
 	child.offset = Vector2(position.x,position.y)

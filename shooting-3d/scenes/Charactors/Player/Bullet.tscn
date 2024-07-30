@@ -1,6 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6fm0nm00aan5"]
+[gd_scene load_steps=4 format=3 uid="uid://b51kyyuj6cfar"]
 
-[ext_resource type="Script" path="res://scenes/Charactors/Player/Bullet.gd" id="1_mj0rq"]
+[sub_resource type="GDScript" id="GDScript_hl6su"]
+script/source = "extends CharacterBody3D
+
+@export var SPEED := 12000.0
+@export var DEL_POS := 200.0
+
+func _physics_process(delta:float)->void:
+	for i in get_slide_collision_count():
+		var col := get_slide_collision(i).get_collider()
+		if col is Enemy:
+			col.decrease_hp(1.0)
+			queue_free()
+	velocity.z = -SPEED * delta
+	move_and_slide()
+	if position.z < -DEL_POS:
+		queue_free()
+"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_758oy"]
 size = Vector3(0.1, 0.1, 0.2)
@@ -19,7 +35,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.98493)
 top_level = true
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("1_mj0rq")
+script = SubResource("GDScript_hl6su")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
