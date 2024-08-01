@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dc6qjcd2qtnfa" path="res://assets/UI/target.png" id="2_81f3d"]
 [ext_resource type="PackedScene" uid="uid://cq74t5frsjjhg" path="res://scenes/Charactors/Player/Player.tscn" id="2_v76n8"]
 [ext_resource type="Script" path="res://scenes/UI/AimUI.gd" id="3_cdyac"]
-[ext_resource type="PackedScene" uid="uid://bwbk28tfs0tao" path="res://scenes/Charactors/Enemy/Enemy.tscn" id="3_yb7xp"]
 [ext_resource type="Script" path="res://scenes/Graphics/CamCenter.gd" id="4_rtse8"]
+[ext_resource type="PackedScene" uid="uid://dkf7uw0k2nb5t" path="res://scenes/Charactors/MainEnemy.tscn" id="4_vxcct"]
 [ext_resource type="PackedScene" uid="uid://b3mbwm3jpoh6t" path="res://scenes/UI/UI.tscn" id="6_malv5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ou757"]
@@ -76,8 +76,8 @@ environment = SubResource("Environment_ui131")
 [node name="Player" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D" instance=ExtResource("2_v76n8")]
 unique_name_in_owner = true
 
-[node name="Enemy" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D" instance=ExtResource("3_yb7xp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
+[node name="MainEnemy" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D" instance=ExtResource("4_vxcct")]
+offset = Vector3(0, 0, -40)
 
 [node name="CamCenter" type="Node3D" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)

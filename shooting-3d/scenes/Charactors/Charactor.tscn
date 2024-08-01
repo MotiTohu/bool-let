@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/Charactors/Charactor.gd" id="1_l0usa"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tovtg"]
-size = Vector3(9, 4, 1)
+size = Vector3(9, 5, 10)
 
 [node name="Charactor" type="CharacterBody3D"]
 top_level = true
@@ -14,3 +14,5 @@ script = ExtResource("1_l0usa")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 shape = SubResource("BoxShape3D_tovtg")
+
+[connection signal="on_damage" from="." to="." method="_on_on_damage"]

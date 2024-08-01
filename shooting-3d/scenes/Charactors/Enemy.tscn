@@ -1,48 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://bher15swug66t"]
+[gd_scene load_steps=3 format=3 uid="uid://bher15swug66t"]
 
 [ext_resource type="PackedScene" uid="uid://duod78noy4hw6" path="res://scenes/Charactors/Charactor.tscn" id="1_pf7um"]
 [ext_resource type="Script" path="res://scenes/Charactors/Enemy.gd" id="2_ajl0o"]
-[ext_resource type="Texture2D" uid="uid://bdvs4g2wjeswn" path="res://assets/sprites/enemy/enemy1/enemy1_body.png" id="3_q5lfl"]
-[ext_resource type="Texture2D" uid="uid://bfevdc5xhts7a" path="res://assets/sprites/enemy/enemy1/enemy1_head.png" id="4_qu1su"]
-[ext_resource type="Texture2D" uid="uid://bmbscp7ii6bnp" path="res://assets/sprites/enemy/enemy1/enemy1_middle.png" id="5_h0tu0"]
-[ext_resource type="Texture2D" uid="uid://dg6ho7i5vkvkt" path="res://assets/sprites/enemy/enemy1/enemy1_ring.png" id="6_m3akt"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4l3v0"]
-transparency = 1
-albedo_texture = ExtResource("3_q5lfl")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hne2h"]
-transparency = 1
-albedo_texture = ExtResource("4_qu1su")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mvyg"]
-transparency = 1
-albedo_texture = ExtResource("5_h0tu0")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5nif"]
-transparency = 1
-albedo_texture = ExtResource("6_m3akt")
 
 [node name="Enemy" instance=ExtResource("1_pf7um")]
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("2_ajl0o")
+behavior = Array[Resource("res://scenes/Charactors/Enemy/EnemyBehavior.gd")]([])
+offset = Vector3(0, 0, 0)
 
-[node name="Body" type="Sprite3D" parent="." index="1"]
-material_override = SubResource("StandardMaterial3D_4l3v0")
-texture = ExtResource("3_q5lfl")
+[node name="BehaviorTimer" type="Timer" parent="." index="1"]
+process_callback = 0
+one_shot = true
 
-[node name="Head" type="Sprite3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-material_override = SubResource("StandardMaterial3D_hne2h")
-texture = ExtResource("4_qu1su")
+[node name="ShotTimer" type="Timer" parent="." index="2"]
+process_callback = 0
 
-[node name="Middle" type="Sprite3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
-material_override = SubResource("StandardMaterial3D_7mvyg")
-texture = ExtResource("5_h0tu0")
-
-[node name="Ring" type="Sprite3D" parent="." index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
-material_override = SubResource("StandardMaterial3D_o5nif")
-texture = ExtResource("6_m3akt")
+[connection signal="on_hp_lost" from="." to="." method="_on_on_hp_lost"]
+[connection signal="timeout" from="BehaviorTimer" to="." method="_on_behavior_timer_timeout"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

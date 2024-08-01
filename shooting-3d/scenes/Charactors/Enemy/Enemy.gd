@@ -1,5 +1,5 @@
 extends StaticBody3D
-class_name Enemy
+#class_name Enemy
 
 @onready var ui: = %UI
 
