@@ -1,10 +1,86 @@
 [gd_scene load_steps=8 format=3 uid="uid://cq74t5frsjjhg"]
 
 [ext_resource type="PackedScene" uid="uid://duod78noy4hw6" path="res://scenes/Charactors/Charactor.tscn" id="1_q74oe"]
-[ext_resource type="Script" path="res://scenes/Charactors/Player/Player.gd" id="2_jsd86"]
 [ext_resource type="Texture2D" uid="uid://dd20xvod0mrl7" path="res://assets/sprites/player/player_body.png" id="3_62tyb"]
 [ext_resource type="Texture2D" uid="uid://db6ak5o5hp3r8" path="res://assets/sprites/player/player_blaster.png" id="4_cakl2"]
-[ext_resource type="Script" path="res://scenes/Charactors/Blaster.gd" id="5_8j4t0"]
+
+[sub_resource type="GDScript" id="GDScript_m7rqc"]
+resource_name = "Player"
+script/source = "extends Charactor
+
+@export_category(\"movement\")
+@export var SPEED := 600.0
+@export var DEPTH_SPEED := 3.0
+@export var ROTATE_SPEED := 3.0
+@export var MOVE_DEPTH := 5.0
+@export_category(\"shoot\")
+@export_enum(\"1:0\",\"2:1\") var shoot_mode := 1
+
+@onready var aiming: RayCast3D = $Aiming
+@onready var blaster: Sprite3D = $Blaster
+
+var aim_pos : Vector2:
+	get:
+		var target_pos = global_position
+		target_pos.z -= 40.0
+		if aiming.is_colliding():
+			target_pos = aiming.get_collision_point()
+		var cam := get_viewport().get_camera_3d()
+		return cam.unproject_position(target_pos)
+
+func _move(delta:float)->void:
+	var input_movement := Input.get_vector(\"left\", \"right\", \"down\", \"up\")
+	var input_depth := Input.get_axis(\"back\",\"front\")
+	var direction := Vector3(input_movement.x,  input_movement.y,0).normalized()
+	if direction:
+		velocity.x = direction.x * SPEED * delta
+		velocity.y = direction.y * SPEED * delta
+	else:
+		velocity.x = move_toward(velocity.x,0,SPEED * delta)
+		velocity.y = move_toward(velocity.y,0,SPEED * delta)
+	velocity.z = (input_depth * MOVE_DEPTH - position.z) * DEPTH_SPEED * (2.0 if input_depth else 1.0)
+	# todo export this 
+	position.x = clampf(position.x,-9,9)
+	position.y = clampf(position.y,-5,5)
+
+func _rotate(delta:float)->void:
+	var rotate_to := -Input.get_axis(\"left\",\"right\") * PI / 6
+	rotation.z = lerp_angle(rotation.z,rotate_to,delta * ROTATE_SPEED)
+
+@onready var shoot_interval := $ShootInterval
+const BULLET := preload(\"res://scenes/Charactors/Player/PlayerBullet.tscn\")
+var shootable := true
+func _on_shoot_interval_timeout()->void:shootable=true
+func _shoot():
+	if Input.is_action_just_pressed(\"change_shoot_mode\"):
+		shoot_mode += 1
+		shoot_mode %= 2
+	if shootable && Input.is_action_pressed(\"shoot\"):
+		shootable = false
+		if shoot_mode == 0:
+			var bullet := BULLET.instantiate()
+			add_child(bullet)
+			shoot_interval.start(.1)
+		elif shoot_mode == 1:
+			var bullet_l := BULLET.instantiate()
+			var bullet_r := BULLET.instantiate()
+			var bullet_pos := Vector2(.55,0).rotated(rotation.z)
+			bullet_pos.x += blaster.global_position.x - global_position.x
+			bullet_pos.y += blaster.global_position.y - global_position.y
+			bullet_l.position.x -= bullet_pos.x
+			bullet_l.position.y -= bullet_pos.y
+			bullet_r.position.x += bullet_pos.x
+			bullet_r.position.y += bullet_pos.y
+			add_child(bullet_l)
+			add_child(bullet_r)
+			shoot_interval.start(.2)
+
+func _physics_process(delta: float) -> void:
+	_move(delta)
+	_rotate(delta)
+	_shoot()
+	super(delta)
+"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mss88"]
 transparency = 1
@@ -14,10 +90,31 @@ albedo_texture = ExtResource("3_62tyb")
 transparency = 1
 albedo_texture = ExtResource("4_cakl2")
 
+[sub_resource type="GDScript" id="GDScript_l7kch"]
+resource_name = "Blaster"
+script/source = "extends Sprite3D
+
+@export var follow_weight := 10.0
+@export var z_offset := 0.2
+@export_category(\"float\")
+@export var float_speed := 1.0
+@export var float_weight := 50.0
+
+var delta_sum := 0.0
+func _physics_process(delta:float)->void:
+	rotation.z += (get_parent().rotation.z - rotation.z) * delta * follow_weight 
+	var to = get_parent().global_position - global_position
+	to.z -= z_offset
+	to.z *= 3
+	global_position += to * delta * follow_weight
+	
+	delta_sum = fmod(delta_sum + delta * float_speed,PI*2)
+	offset.y = sin(delta_sum) * float_weight
+"
+
 [node name="Player" instance=ExtResource("1_q74oe")]
 collision_layer = 1
-collision_mask = 8
-script = ExtResource("2_jsd86")
+script = SubResource("GDScript_m7rqc")
 SPEED = 600.0
 DEPTH_SPEED = 3.0
 ROTATE_SPEED = 3.0
@@ -31,7 +128,6 @@ one_shot = true
 
 [node name="Body" type="Sprite3D" parent="." index="2"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.05)
-top_level = true
 material_override = SubResource("StandardMaterial3D_mss88")
 texture = ExtResource("3_62tyb")
 
@@ -40,7 +136,7 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.05)
 top_level = true
 material_override = SubResource("StandardMaterial3D_rpf8i")
 texture = ExtResource("4_cakl2")
-script = ExtResource("5_8j4t0")
+script = SubResource("GDScript_l7kch")
 
 [node name="Aiming" type="RayCast3D" parent="." index="4"]
 target_position = Vector3(0, 0, -200)
