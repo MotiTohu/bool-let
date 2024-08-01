@@ -47,4 +47,5 @@ func move_Z(delta:float) -> float:
 func move(delta:float)->Vector3:
 	var XY := move_XY(delta)
 	var Z := move_Z(delta)
+	print(Vector3(XY.x,XY.y,Z))
 	return Vector3(XY.x,XY.y,Z)

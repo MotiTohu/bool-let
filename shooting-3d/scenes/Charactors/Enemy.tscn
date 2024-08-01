@@ -8,10 +8,15 @@ collision_layer = 2
 collision_mask = 4
 script = ExtResource("2_ajl0o")
 behavior = Array[Resource("res://scenes/Charactors/Enemy/EnemyBehavior.gd")]([])
+offset = Vector3(0, 0, 0)
 
 [node name="BehaviorTimer" type="Timer" parent="." index="1"]
 process_callback = 0
 one_shot = true
 
+[node name="ShotTimer" type="Timer" parent="." index="2"]
+process_callback = 0
+
 [connection signal="on_hp_lost" from="." to="." method="_on_on_hp_lost"]
 [connection signal="timeout" from="BehaviorTimer" to="." method="_on_behavior_timer_timeout"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

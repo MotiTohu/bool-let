@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://dkf7uw0k2nb5t"]
+[gd_scene load_steps=18 format=3 uid="uid://dkf7uw0k2nb5t"]
 
 [ext_resource type="PackedScene" uid="uid://bher15swug66t" path="res://scenes/Charactors/Enemy.tscn" id="1_6xyc4"]
 [ext_resource type="Script" path="res://scenes/Charactors/Enemy/EnemyBehaviorMove.gd" id="2_i1s3n"]
 [ext_resource type="Texture2D" uid="uid://bdvs4g2wjeswn" path="res://assets/sprites/enemy/enemy1/enemy1_body.png" id="2_mt7a4"]
 [ext_resource type="Texture2D" uid="uid://bfevdc5xhts7a" path="res://assets/sprites/enemy/enemy1/enemy1_head.png" id="3_hjm43"]
 [ext_resource type="Script" path="res://scenes/Charactors/Enemy/EnemyBehavior.gd" id="3_n1r76"]
+[ext_resource type="Script" path="res://scenes/Charactors/Enemy/EnemyBehaviorShot.gd" id="4_pggyd"]
 [ext_resource type="Texture2D" uid="uid://bmbscp7ii6bnp" path="res://assets/sprites/enemy/enemy1/enemy1_middle.png" id="4_tmou0"]
 [ext_resource type="Texture2D" uid="uid://dg6ho7i5vkvkt" path="res://assets/sprites/enemy/enemy1/enemy1_ring.png" id="5_3sstc"]
 
@@ -12,9 +13,12 @@
 resource_name = "MainEnemy"
 script/source = "extends Enemy
 
+func _ready() -> void:
+	super()
+	UIControl.max_enemy_hp = HP
 
 func _on_on_damage(damage: float) -> void:
-	print(HP)
+	UIControl.enemy_hp = HP
 "
 
 [sub_resource type="Resource" id="Resource_gwx37"]
@@ -28,14 +32,21 @@ speed_Z = 1.0
 move_to_Z = 0.0
 circle_size_Z = 5.0
 
+[sub_resource type="Resource" id="Resource_600qt"]
+script = ExtResource("4_pggyd")
+bullet_mode = 0
+max_count = -1
+interval = 0.1
+
 [sub_resource type="Resource" id="Resource_vnfvc"]
 script = ExtResource("3_n1r76")
 duration = 5.0
 next = -1
 move = SubResource("Resource_gwx37")
+shot = SubResource("Resource_600qt")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w7551"]
-size = Vector3(21, 18, 20)
+size = Vector3(11, 10, 20)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ejel7"]
 transparency = 1
@@ -57,29 +68,28 @@ albedo_texture = ExtResource("5_3sstc")
 collision_mask = 0
 script = SubResource("GDScript_lh6pk")
 behavior = Array[ExtResource("3_n1r76")]([SubResource("Resource_vnfvc")])
-offset = Vector3(0, 0, 0)
 HP = 300.0
 
 [node name="CollisionShape3D" parent="." index="0"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -2.98023e-08, 0, -2.78229)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -2.78229)
 shape = SubResource("BoxShape3D_w7551")
 
 [node name="Body" type="Sprite3D" parent="." index="2"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_ejel7")
 texture = ExtResource("2_mt7a4")
 
 [node name="Head" type="Sprite3D" parent="." index="3"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 1)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 1)
 material_override = SubResource("StandardMaterial3D_ti8h3")
 texture = ExtResource("3_hjm43")
 
 [node name="Middle" type="Sprite3D" parent="." index="4"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0.5)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0.5)
 material_override = SubResource("StandardMaterial3D_xt3sb")
 texture = ExtResource("4_tmou0")
 
 [node name="Ring" type="Sprite3D" parent="." index="5"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -0.5)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.5)
 material_override = SubResource("StandardMaterial3D_x855t")
 texture = ExtResource("5_3sstc")

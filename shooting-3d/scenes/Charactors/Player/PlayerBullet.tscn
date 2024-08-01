@@ -22,6 +22,7 @@ collision_layer = 4
 collision_mask = 2
 script = SubResource("GDScript_y68v2")
 MOVE_TO = Vector3(0, 0, -1)
+DEL_POS = 200.0
 
 [node name="CSGCylinder3D" parent="." index="1"]
 material = SubResource("StandardMaterial3D_b2rqc")

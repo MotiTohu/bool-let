@@ -45,5 +45,10 @@ const ENEMY_HP_BAR = preload("res://scenes/UI/enemy_hp_bar.tscn")
 			
 			
 func _ready() -> void:
-	MaxEnemyHP = MaxEnemyHP
+	UIControl.on_max_enemy_hp_changed.connect(func(v:float):MaxEnemyHP=v)
+	UIControl.on_enemy_hp_changed.connect(func(v:float):EnemyHP=v)
+	MaxEnemyHP = UIControl.max_enemy_hp
+	EnemyHP = UIControl.max_enemy_hp
 	
+	UIControl.on_player_hp_changed.connect(func(v:float):HP=v)
+	HP = UIControl.player_hp

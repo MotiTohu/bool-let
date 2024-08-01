@@ -75,11 +75,19 @@ func _shoot():
 			add_child(bullet_r)
 			shoot_interval.start(.2)
 
+func _ready() -> void:
+	UIControl.max_player_hp = HP
+	UIControl.player_hp = HP
+
 func _physics_process(delta: float) -> void:
 	_move(delta)
 	_rotate(delta)
 	_shoot()
 	super(delta)
+
+
+func _on_on_damage(damage: float) -> void:
+	UIControl.player_hp = HP
 "
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mss88"]
@@ -120,6 +128,9 @@ DEPTH_SPEED = 3.0
 ROTATE_SPEED = 3.0
 MOVE_DEPTH = 5.0
 shoot_mode = 1
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.15, 1.43229)
 
 [node name="ShootInterval" type="Timer" parent="." index="1"]
 process_callback = 0
