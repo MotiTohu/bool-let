@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://81yba8bqjog"
+path="res://.godot/imported/synthwave.obj-ce4a64567668e24a2f729973d4085aad.mesh"
+
+[deps]
+
+files=["res://.godot/imported/synthwave.obj-ce4a64567668e24a2f729973d4085aad.mesh"]
+
+source_file="res://synthwave.obj"
+dest_files=["res://.godot/imported/synthwave.obj-ce4a64567668e24a2f729973d4085aad.mesh", "res://.godot/imported/synthwave.obj-ce4a64567668e24a2f729973d4085aad.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

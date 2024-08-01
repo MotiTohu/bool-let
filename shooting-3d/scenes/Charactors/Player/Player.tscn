@@ -31,7 +31,6 @@ one_shot = true
 
 [node name="Body" type="Sprite3D" parent="." index="2"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.05)
-top_level = true
 material_override = SubResource("StandardMaterial3D_mss88")
 texture = ExtResource("3_62tyb")
 
