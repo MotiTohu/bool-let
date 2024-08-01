@@ -39,4 +39,5 @@ const ENEMY_BULLET = preload("res://scenes/Charactors/Enemy/EnemyBullet.tscn")
 func _on_shot_timer_timeout() -> void:
 	if behavior[current_behavior].shot:
 		var bullet := ENEMY_BULLET.instantiate()
-		add_child(bullet)
+		get_parent().add_child(bullet)
+		bullet.global_position = global_position
