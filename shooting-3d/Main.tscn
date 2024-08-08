@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cq74t5frsjjhg" path="res://scenes/Charactors/Player/Player.tscn" id="2_v76n8"]
 [ext_resource type="Script" path="res://scenes/UI/AimUI.gd" id="3_cdyac"]
 [ext_resource type="Script" path="res://scenes/Graphics/CamCenter.gd" id="4_rtse8"]
-[ext_resource type="PackedScene" uid="uid://dkf7uw0k2nb5t" path="res://scenes/Charactors/MainEnemy.tscn" id="4_vxcct"]
+[ext_resource type="PackedScene" uid="uid://dkf7uw0k2nb5t" path="res://scenes/Charactors/Enemy/MainEnemy.tscn" id="4_vxcct"]
 [ext_resource type="PackedScene" uid="uid://b3mbwm3jpoh6t" path="res://scenes/UI/UI.tscn" id="6_malv5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ou757"]

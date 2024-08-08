@@ -1,49 +1,169 @@
-[gd_scene load_steps=11 format=3 uid="uid://bfi7rwccywvn2"]
+[gd_scene load_steps=20 format=3 uid="uid://co6kvcd3g74hi"]
 
-[ext_resource type="PackedScene" uid="uid://bwbk28tfs0tao" path="res://scenes/Charactors/Enemy/Enemy.tscn" id="1_obewv"]
-[ext_resource type="Script" path="res://scenes/Charactors/Enemy/ChildEnemy.gd" id="2_payns"]
+[ext_resource type="PackedScene" uid="uid://bher15swug66t" path="res://scenes/Charactors/Enemy/Enemy.tscn" id="1_5de0g"]
 [ext_resource type="Texture2D" uid="uid://trpqk834tri0" path="res://assets/sprites/enemy/enemy2/enemy2_body.png" id="3_iqvu1"]
 [ext_resource type="Texture2D" uid="uid://pqwhqbs0h670" path="res://assets/sprites/enemy/enemy2/enemy2_head.png" id="4_uqsen"]
 [ext_resource type="Texture2D" uid="uid://1o4wphyr5xmu" path="res://assets/sprites/enemy/enemy2/enemy2_middle.png" id="5_bdlnv"]
 [ext_resource type="Texture2D" uid="uid://deeen6arricaf" path="res://assets/sprites/enemy/enemy2/enemy2_ring.png" id="6_mlw1u"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k4een"]
+[sub_resource type="GDScript" id="GDScript_1xxxe"]
+resource_name = "ChildEnemy"
+script/source = "extends Enemy
+"
+
+[sub_resource type="GDScript" id="GDScript_fu24p"]
+script/source = "class_name EnemyBehaviorMove extends Resource
+
+@export_category(\"XY_Mode\")
+@export_enum(\"TO\",\"CIRCLE\",\"RANDOM\") var move_mode_XY : int
+@export var speed_XY : float = 1.0
+@export var move_to_XY : Vector2 = Vector2.ZERO
+@export var circle_size_XY : float = 5.0
+
+func _init() -> void:
+	noise_XY.seed = randi()
+	noise_Z.seed = randi()
+# code
+var delta_sum_XY : float = 0
+var noise_XY := FastNoiseLite.new()
+func move_XY(delta:float) -> Vector2:
+	delta_sum_XY += delta * speed_XY
+	
+	if move_mode_XY == 0:
+		delta_sum_XY = min(delta_sum_XY,1)
+		return move_to_XY * delta_sum_XY
+	elif move_mode_XY == 1:
+		delta_sum_XY = fmod(delta_sum_XY,PI*2)
+		return Vector2.from_angle(delta_sum_XY) * circle_size_XY
+	else:
+		return Vector2(noise_XY.get_noise_1d(delta_sum_XY) ,noise_XY.get_noise_1d(-delta_sum_XY)) * circle_size_XY
+
+@export_category(\"Z_Mode\")
+@export_enum(\"TO\",\"CIRCLE\",\"RANDOM\") var move_mode_Z : int
+@export var speed_Z : float = 1.0
+@export var move_to_Z : float = 0.0
+@export var circle_size_Z : float = 1.0
+
+var delta_sum_Z : float = 0
+var noise_Z := FastNoiseLite.new()
+func move_Z(delta:float) -> float:
+	delta_sum_Z += delta * speed_Z
+	
+	if move_mode_Z == 0:
+		delta_sum_Z = min(delta_sum_Z,1)
+		return move_to_Z * delta_sum_Z
+	elif move_mode_Z == 1:
+		delta_sum_Z = fmod(delta_sum_Z,PI*2)
+		return sin(delta_sum_Z) * circle_size_Z
+	else:
+		return noise_Z.get_noise_1d(delta_sum_Z) * circle_size_Z 
+
+func move(delta:float)->Vector3:
+	var XY := move_XY(delta)
+	var Z := move_Z(delta)
+	return Vector3(XY.x,XY.y,Z)
+"
+
+[sub_resource type="Resource" id="Resource_cfsxc"]
+script = SubResource("GDScript_fu24p")
+move_mode_XY = 1
+speed_XY = 1.0
+move_to_XY = Vector2(0, 0)
+circle_size_XY = 2.0
+move_mode_Z = 1
+speed_Z = 1.0
+move_to_Z = 0.0
+circle_size_Z = 0.5
+
+[sub_resource type="GDScript" id="GDScript_wb8yl"]
+script/source = "class_name EnemyBehavior extends Resource
+
+@export var duration : float
+@export var next : int = -1
+@export var move : EnemyBehaviorMove
+@export var shot : EnemyBehaviorShot
+@export var child : EnemyBehaviorChild
+"
+
+[sub_resource type="GDScript" id="GDScript_p24lf"]
+script/source = "class_name EnemyBehaviorShot extends Resource
+
+@export_enum(\"nomal\",\"missile\") var bullet_mode : int
+@export var max_count : int = -1
+@export var interval : float = .1
+
+const ENEMY_BULLET = preload(\"res://scenes/Charactors/Enemy/EnemyBullet.tscn\")
+var bullet: Bullet:
+	get:
+		return ENEMY_BULLET.instantiate()
+"
+
+[sub_resource type="Resource" id="Resource_htaj3"]
+script = SubResource("GDScript_p24lf")
+bullet_mode = 0
+max_count = -1
+interval = 0.2
+
+[sub_resource type="Resource" id="Resource_qgr3n"]
+script = SubResource("GDScript_wb8yl")
+duration = 0.0
+next = -1
+move = SubResource("Resource_cfsxc")
+shot = SubResource("Resource_htaj3")
+
+[sub_resource type="GDScript" id="GDScript_ujg4p"]
+script/source = "class_name EnemyBehaviors extends Resource
+
+@export var behaviors : Array[EnemyBehavior] = []
+"
+
+[sub_resource type="Resource" id="Resource_exm5k"]
+script = SubResource("GDScript_ujg4p")
+behaviors = Array[SubResource("GDScript_wb8yl")]([SubResource("Resource_qgr3n")])
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w7551"]
+size = Vector3(3.81299, 5.28369, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dk7j"]
 transparency = 1
 albedo_texture = ExtResource("3_iqvu1")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yc31i"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hrafl"]
 transparency = 1
 albedo_texture = ExtResource("4_uqsen")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ifvwf"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xt3sb"]
 transparency = 1
 albedo_texture = ExtResource("5_bdlnv")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vodpp"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3mx8"]
 transparency = 1
 albedo_texture = ExtResource("6_mlw1u")
 
-[node name="Enemy" instance=ExtResource("1_obewv")]
-script = ExtResource("2_payns")
-SPEED = 0.5
-xy_range = 3.0
-z_range = 5.0
+[node name="ChildEnemy" instance=ExtResource("1_5de0g")]
+collision_mask = 0
+script = SubResource("GDScript_1xxxe")
+behavior = SubResource("Resource_exm5k")
 
-[node name="Body" parent="." index="1"]
-material_override = SubResource("StandardMaterial3D_k4een")
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("BoxShape3D_w7551")
+
+[node name="Body" type="Sprite3D" parent="." index="2"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_7dk7j")
 texture = ExtResource("3_iqvu1")
 
-[node name="Head" parent="." index="2"]
-material_override = SubResource("StandardMaterial3D_yc31i")
+[node name="Head" type="Sprite3D" parent="." index="3"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 1)
+material_override = SubResource("StandardMaterial3D_hrafl")
 texture = ExtResource("4_uqsen")
 
-[node name="Middle" parent="." index="3"]
-material_override = SubResource("StandardMaterial3D_ifvwf")
+[node name="Middle" type="Sprite3D" parent="." index="4"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0.5)
+material_override = SubResource("StandardMaterial3D_xt3sb")
 texture = ExtResource("5_bdlnv")
 
-[node name="Ring" parent="." index="4"]
-material_override = SubResource("StandardMaterial3D_vodpp")
+[node name="Ring" type="Sprite3D" parent="." index="5"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.5)
+material_override = SubResource("StandardMaterial3D_m3mx8")
 texture = ExtResource("6_mlw1u")
-
-[node name="Timer" parent="." index="5"]
-wait_time = 0.3

@@ -1,33 +1,26 @@
-extends StaticBody3D
-#class_name Enemy
+class_name Enemy extends Charactor
 
-@onready var ui: = %UI
+@export var offset := Vector3.ZERO
+@onready var behavior_timer: Timer = $BehaviorTimer
+@onready var shot_timer: Timer = $ShotTimer
 
-@export var SPEED :float = 1.0
-@export var offset: Vector2 = Vector2.ZERO
-@export var xy_range :float = 5.0
-@export var z_range :float = 10.0
+const ENEMY_BULLET = preload("res://scenes/Charactors/Enemy/EnemyBullet.tscn")
+var bullets :Array[PackedScene] = [ENEMY_BULLET]
+var shotable := true
+signal on_shotable
 
-var delta_sum := 0.0
 
-func _process(delta: float) -> void:
-	delta_sum += delta * SPEED
-	delta_sum = fmod(delta_sum,PI*2)
-	var to := Vector2.from_angle(delta_sum) * xy_range
-	position.x = to.x + offset.x
-	position.y = to.y + offset.y
-	position.z = -40 + sin(delta_sum * 2) * z_range
+func shot(i:int,interval:float = -1)->void:
+	shotable = false
+	var bullet :Bullet= bullets[i].instantiate()
+	get_parent().add_child(bullet)
+	bullet.global_position = global_position
+	shot_timer.start(interval)
 
-const ENEMY_BULLET := preload("res://scenes/Charactors/Enemy/EnemyBullet.tscn")
-func _on_timer_timeout() -> void:
-	var bullet := ENEMY_BULLET.instantiate()
-	add_child(bullet)
+func _on_shot_timer_timeout() -> void:
+	shotable = true
 
-func decrease_hp(diff_value:float)->void:
-	ui.EnemyHP -= diff_value
+func _on_on_hp_lost() -> void:
+	queue_free()
 
-const CHILD_ENEMY := preload("res://scenes/Charactors/Enemy/ChildEnemy.tscn")
-func _on_child_timeout() -> void:
-	var child := CHILD_ENEMY.instantiate()
-	child.offset = Vector2(position.x,position.y)
-	add_child(child)
+
