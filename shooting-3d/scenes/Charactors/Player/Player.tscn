@@ -60,10 +60,15 @@ func _shoot():
 		if shoot_mode == 0:
 			var bullet := BULLET.instantiate()
 			add_child(bullet)
+			bullet.global_position = global_position
 			shoot_interval.start(.1)
 		elif shoot_mode == 1:
 			var bullet_l := BULLET.instantiate()
 			var bullet_r := BULLET.instantiate()
+			add_child(bullet_l)
+			add_child(bullet_r)
+			bullet_l.global_position = global_position
+			bullet_r.global_position = global_position
 			var bullet_pos := Vector2(.55,0).rotated(rotation.z)
 			bullet_pos.x += blaster.global_position.x - global_position.x
 			bullet_pos.y += blaster.global_position.y - global_position.y
@@ -71,8 +76,6 @@ func _shoot():
 			bullet_l.position.y -= bullet_pos.y
 			bullet_r.position.x += bullet_pos.x
 			bullet_r.position.y += bullet_pos.y
-			add_child(bullet_l)
-			add_child(bullet_r)
 			shoot_interval.start(.2)
 
 func _ready() -> void:
@@ -86,7 +89,7 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 
 
-func _on_on_damage(damage: float) -> void:
+func _on_on_damage(_damage: float) -> void:
 	UIControl.player_hp = HP
 "
 

@@ -22,5 +22,3 @@ func _on_shot_timer_timeout() -> void:
 
 func _on_on_hp_lost() -> void:
 	queue_free()
-
-
