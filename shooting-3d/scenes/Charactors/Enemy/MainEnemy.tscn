@@ -21,6 +21,9 @@ func _on_on_damage(_damage: float) -> void:
 class main_enemy_behavior:
 	var delta_sum := 0.0
 	var goto := Vector3.ZERO
+	var shot_interval := .5
+	func init()->void:
+		delta_sum = 0.0
 	func move(delta:float)->void:
 		pass
 	func shot()->void:
@@ -29,8 +32,9 @@ class main_enemy_behavior:
 class main_enemy_bahavior_circle extends main_enemy_behavior:
 	func move(delta:float)->void:
 		delta_sum += delta
-		goto = Vector3(sin(delta_sum),cos(delta_sum),0)
-		
+		goto = Vector3(sin(delta_sum),cos(delta_sum),0) * 10.0
+	
+	
 var beh := main_enemy_bahavior_circle.new()
 func _physics_process(delta: float) -> void:
 	beh.move(delta)
