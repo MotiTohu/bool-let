@@ -17,5 +17,4 @@ one_shot = true
 process_callback = 0
 
 [connection signal="on_hp_lost" from="." to="." method="_on_on_hp_lost"]
-[connection signal="timeout" from="BehaviorTimer" to="." method="_on_behavior_timer_timeout"]
 [connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

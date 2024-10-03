@@ -8,38 +8,77 @@
 
 [sub_resource type="GDScript" id="GDScript_7f006"]
 resource_name = "MainEnemy"
-script/source = "extends Enemy
+script/source = "class_name MainEnemy extends Enemy
 
 func _ready() -> void:
 	UIControl.max_enemy_hp = HP
-
+	next_beh()
 func _on_on_damage(_damage: float) -> void:
 	UIControl.enemy_hp = HP
 
 @export var behavior_mode := 0
 
 class main_enemy_behavior:
+	var enm : MainEnemy
 	var delta_sum := 0.0
 	var goto := Vector3.ZERO
-	var shot_interval := .5
-	func init()->void:
+	var duration := 40.0
+	var hp_threshold := 250
+	func _init(_dur:float,_thr:int) -> void:
+		duration = _dur
+		hp_threshold = _thr
+	func init(_enm:MainEnemy)->void:
+		enm = _enm
 		delta_sum = 0.0
-	func move(delta:float)->void:
-		pass
-	func shot()->void:
+	func move(_delta:float)->void:
 		pass
 
 class main_enemy_bahavior_circle extends main_enemy_behavior:
 	func move(delta:float)->void:
 		delta_sum += delta
 		goto = Vector3(sin(delta_sum),cos(delta_sum),0) * 10.0
+
+class main_enemy_bahavior_3x3 extends main_enemy_behavior:
+	var move_cnt := 0
+	func init(enm:MainEnemy)->void:
+		super(enm)
+		move_cnt = 0
+		rand_move()
+	func rand_move()->void:
+		if move_cnt%4==3:enm.shot(0)
+		var xy := Vector2i(randi_range(-1,1),randi_range(-1,1)) 
+		var pos := Vector2(xy) * Vector2(16,9) / 2.0
+		goto = Vector3(pos.x,pos.y,0)
+		move_cnt+=1
+		var timer := Timer.new()
+		timer.one_shot = true
+		timer.timeout.connect(rand_move)
+		enm.add_child(timer)
+		timer.start(5.0)
+
+
+var behaviors : Array[main_enemy_behavior] = [
+	main_enemy_bahavior_circle.new(40,250),
+	main_enemy_bahavior_3x3.new(80,150),
+	main_enemy_bahavior_circle.new(20,100),
+]
+var beh :main_enemy_behavior
+var beh_idx := -1
+func next_beh()->void:
+	beh_idx+=1
+	beh = behaviors[beh_idx]
+	for s in behavior_timer.timeout.get_connections():
+		behavior_timer.timeout.disconnect(s.callable)
+	behavior_timer.timeout.connect(next_beh)
+	behavior_timer.start(beh.duration)
 	
+	beh.init(self)
 	
-var beh := main_enemy_bahavior_circle.new()
 func _physics_process(delta: float) -> void:
 	beh.move(delta)
+	if HP < beh.hp_threshold:next_beh()
 	
-	velocity = 	(beh.goto - position) * .5 + offset
+	velocity = 	(beh.goto - position + offset) * .5
 	move_and_slide()
 "
 
@@ -66,6 +105,7 @@ albedo_texture = ExtResource("5_3sstc")
 collision_mask = 0
 script = SubResource("GDScript_7f006")
 behavior_mode = 0
+HP = 300.0
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -2.78229)
