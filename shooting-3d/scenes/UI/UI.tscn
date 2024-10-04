@@ -2,11 +2,11 @@
 
 [ext_resource type="Theme" uid="uid://ce6jlv373j142" path="res://themes/UI.tres" id="1_koony"]
 [ext_resource type="Script" path="res://scenes/UI/UI.gd" id="2_42fy7"]
-[ext_resource type="Texture2D" uid="uid://5ympvtx5ykca" path="res://assets/UI/UI.png" id="3_7odwv"]
+[ext_resource type="Texture2D" uid="uid://b7yie8bt08d4f" path="res://assets/UI/UI.png" id="3_cphqr"]
 [ext_resource type="PackedScene" uid="uid://cck7gvctshquq" path="res://scenes/UI/enemy_hp_bar.tscn" id="4_e6lbw"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_awlat"]
-texture = ExtResource("3_7odwv")
+texture = ExtResource("3_cphqr")
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -26,10 +26,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -813.0
+offset_left = -808.0
 offset_top = -90.0
-offset_right = -87.0
-offset_bottom = -50.0
+offset_right = -209.0
+offset_bottom = -53.0
 grow_horizontal = 0
 grow_vertical = 0
 value = 100.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dobridlivcsbb"]
 
-[ext_resource type="PackedScene" uid="uid://cuc8vp65tt001" path="res://Main.tscn" id="1_2kb4v"]
+[ext_resource type="PackedScene" uid="uid://cuc8vp65tt001" path="res://main.tscn" id="1_2kb4v"]
 
 [node name="Test" type="Control"]
 layout_mode = 3
