@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://0l10nlugclfu"]
+
+[ext_resource type="PackedScene" uid="uid://gv3cvhwnpfj3" path="res://scenes/Charactors/Bullet.tscn" id="1_beyif"]
+[ext_resource type="Script" path="res://scenes/Charactors/Enemy/Bullets/3x3Bullet.gd" id="2_wuwgi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jd44f"]
+size = Vector3(50, 50, 10)
+
+[node name="Bullet" instance=ExtResource("1_beyif")]
+script = ExtResource("2_wuwgi")
+SPEED = 50.0
+DAMAGE = 50.0
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="0"]
+shape = SubResource("BoxShape3D_jd44f")
+
+[node name="CollisionShape3D" parent="." index="1"]
+visible = false

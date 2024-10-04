@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://csw3dexi5pxhx"]
+
+[ext_resource type="PackedScene" uid="uid://gv3cvhwnpfj3" path="res://scenes/Charactors/Bullet.tscn" id="1_nqbrv"]
+[ext_resource type="Script" path="res://scenes/Charactors/Enemy/Bullets/EnemyBullet.gd" id="2_2jtht"]
+
+[node name="EnemyBullet" instance=ExtResource("1_nqbrv")]
+collision_mask = 1
+script = ExtResource("2_2jtht")
+SPEED = 50.0
+DAMAGE = 2.0
