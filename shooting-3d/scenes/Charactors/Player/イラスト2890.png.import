@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5ympvtx5ykca"
-path="res://.godot/imported/UI.png-c2a3e7704e242893b0f20c1d2316afc0.ctex"
+uid="uid://dad0qn0dxj0rr"
+path="res://.godot/imported/イラスト2890.png-136ed70da44d022315d566d5a74a897c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UI/UI.png"
-dest_files=["res://.godot/imported/UI.png-c2a3e7704e242893b0f20c1d2316afc0.ctex"]
+source_file="res://scenes/Charactors/Player/イラスト2890.png"
+dest_files=["res://.godot/imported/イラスト2890.png-136ed70da44d022315d566d5a74a897c.ctex"]
 
 [params]
 
