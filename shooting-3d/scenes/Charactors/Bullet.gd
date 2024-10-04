@@ -5,6 +5,8 @@ class_name Bullet extends Area3D
 @export var DEL_POS := 0.0
 @export var DAMAGE := 1.0
 
+const EFFECT := preload("res://scenes/Graphics/effect_playerhit.tscn")
+
 func _ready() -> void:
 	MOVE_TO = MOVE_TO.normalized()
 
@@ -20,4 +22,8 @@ func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body is Charactor:
 		body.decrease_hp(DAMAGE)
+		if body is Enemy:
+			var effect := EFFECT.instantiate()
+			add_child(effect)
+			effect.global_position = global_position
 		queue_free()

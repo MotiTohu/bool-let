@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdhf4717a4y30"]
+[gd_scene load_steps=10 format=3 uid="uid://bdhf4717a4y30"]
 
 [ext_resource type="Texture2D" uid="uid://cvx0jglp22ld3" path="res://assets/effects/hit/1-a.png" id="1_6hjdj"]
 [ext_resource type="Texture2D" uid="uid://b8xontn3lusam" path="res://assets/effects/hit/1-0.png" id="1_nrmkm"]
@@ -7,14 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://dpobl0iyog30l" path="res://assets/effects/hit/1-d.png" id="4_oelrj"]
 [ext_resource type="Texture2D" uid="uid://d0efbkkt5k8ui" path="res://assets/effects/hit/1-e.png" id="5_yi0el"]
 [ext_resource type="Texture2D" uid="uid://b0q1u7biko8p5" path="res://assets/effects/hit/1-f.png" id="7_mtbry"]
+[ext_resource type="Script" path="res://scenes/Graphics/effect_playerhit.gd" id="8_ap5ww"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b4pio"]
 animations = [{
-"frames": [],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_nrmkm")
@@ -43,9 +39,11 @@ animations = [{
 }]
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 sprite_frames = SubResource("SpriteFrames_b4pio")
 animation = &"hit"
 frame = 6
 frame_progress = 1.0
+script = ExtResource("8_ap5ww")
 
-[node name="Timer" type="Timer" parent="."]
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
