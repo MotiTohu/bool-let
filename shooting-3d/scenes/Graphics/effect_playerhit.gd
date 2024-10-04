@@ -5,5 +5,5 @@ func _ready() -> void:
 	print("hit")
 
 func _on_animation_finished():
-	print("hit")
+	print("dlt")
 	queue_free()
