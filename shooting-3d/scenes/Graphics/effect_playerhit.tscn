@@ -40,7 +40,6 @@ animations = [{
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
-billboard = 1
 sprite_frames = SubResource("SpriteFrames_b4pio")
 animation = &"hit"
 frame = 6

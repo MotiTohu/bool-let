@@ -19,7 +19,7 @@ const ENEMY_HP_BAR = preload("res://scenes/UI/enemy_hp_bar.tscn")
 		for i in enemy_hp_bars:
 			$EnemyHP.remove_child(i)
 		enemy_hp_bars.clear()
-		for i in ceilf(v/100.1):
+		for i in ceilf((v-0.1)/100.0):
 			var Bar := ENEMY_HP_BAR.instantiate()
 			if i != 0:
 				Bar.size.x = 400

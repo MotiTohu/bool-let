@@ -24,6 +24,7 @@ func _on_body_entered(body: Node3D) -> void:
 		body.decrease_hp(DAMAGE)
 		if body is Enemy:
 			var effect := EFFECT.instantiate()
-			add_child(effect)
+			body.add_child(effect)
 			effect.global_position = global_position
+			effect.rotation.z = randf_range(0,2.0)*PI 
 		queue_free()

@@ -1,9 +1,8 @@
 extends AnimatedSprite3D
 
 func _ready() -> void:
-	play("hit")
-	print("hit")
+	play()
+	#print("hit")
 
 func _on_animation_finished():
-	print("dlt")
 	queue_free()

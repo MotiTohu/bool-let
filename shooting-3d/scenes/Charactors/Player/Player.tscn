@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cq74t5frsjjhg"]
+[gd_scene load_steps=14 format=3 uid="uid://cq74t5frsjjhg"]
 
 [ext_resource type="PackedScene" uid="uid://duod78noy4hw6" path="res://scenes/Charactors/Charactor.tscn" id="1_q74oe"]
-[ext_resource type="Texture2D" uid="uid://dd20xvod0mrl7" path="res://assets/sprites/player/player_body.png" id="3_62tyb"]
+[ext_resource type="Texture2D" uid="uid://b6ibc3j1gevwv" path="res://assets/sprites/player/player_4.png" id="2_lfbbg"]
+[ext_resource type="Texture2D" uid="uid://c8jkj5sjjqktj" path="res://assets/sprites/player/player_3.png" id="3_o122x"]
+[ext_resource type="Texture2D" uid="uid://ceteik2qdsohe" path="res://assets/sprites/player/player_2.png" id="4_8cww4"]
 [ext_resource type="Texture2D" uid="uid://db6ak5o5hp3r8" path="res://assets/sprites/player/player_blaster.png" id="4_cakl2"]
+[ext_resource type="Texture2D" uid="uid://chlhpjbnw26aq" path="res://assets/sprites/player/player_1.png" id="5_00ile"]
 
 [sub_resource type="GDScript" id="GDScript_m7rqc"]
 resource_name = "Player"
@@ -95,7 +98,19 @@ func _on_on_damage(_damage: float) -> void:
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mss88"]
 transparency = 1
-albedo_texture = ExtResource("3_62tyb")
+albedo_texture = ExtResource("2_lfbbg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_osoo5"]
+transparency = 1
+albedo_texture = ExtResource("3_o122x")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02ybj"]
+transparency = 1
+albedo_texture = ExtResource("4_8cww4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swyd5"]
+transparency = 1
+albedo_texture = ExtResource("5_00ile")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rpf8i"]
 transparency = 1
@@ -141,18 +156,33 @@ wait_time = 0.2
 one_shot = true
 
 [node name="Body" type="Sprite3D" parent="." index="2"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.05)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, -0.05)
 material_override = SubResource("StandardMaterial3D_mss88")
-texture = ExtResource("3_62tyb")
+texture = ExtResource("2_lfbbg")
 
-[node name="Blaster" type="Sprite3D" parent="." index="3"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.05)
+[node name="Body2" type="Sprite3D" parent="." index="3"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0.0637744)
+material_override = SubResource("StandardMaterial3D_osoo5")
+texture = ExtResource("3_o122x")
+
+[node name="Body3" type="Sprite3D" parent="." index="4"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0.216973)
+material_override = SubResource("StandardMaterial3D_02ybj")
+texture = ExtResource("4_8cww4")
+
+[node name="Body4" type="Sprite3D" parent="." index="5"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0.467238)
+material_override = SubResource("StandardMaterial3D_swyd5")
+texture = ExtResource("5_00ile")
+
+[node name="Blaster" type="Sprite3D" parent="." index="6"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.139124)
 top_level = true
 material_override = SubResource("StandardMaterial3D_rpf8i")
 texture = ExtResource("4_cakl2")
 script = SubResource("GDScript_l7kch")
 
-[node name="Aiming" type="RayCast3D" parent="." index="4"]
+[node name="Aiming" type="RayCast3D" parent="." index="7"]
 target_position = Vector3(0, 0, -200)
 collision_mask = 2
 collide_with_areas = true

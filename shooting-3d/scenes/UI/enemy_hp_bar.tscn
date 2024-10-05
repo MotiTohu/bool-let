@@ -13,8 +13,8 @@ corner_radius_top_left = 10
 corner_radius_bottom_right = 10
 
 [node name="EnemyHPBar" type="ProgressBar"]
-offset_right = 726.0
-offset_bottom = 40.0
+offset_right = 680.0
+offset_bottom = 27.0
 theme_override_styles/background = SubResource("StyleBoxFlat_87lmb")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xq6uq")
 value = 100.0
