@@ -1,37 +1,33 @@
-[gd_scene load_steps=10 format=3 uid="uid://bdhf4717a4y30"]
+[gd_scene load_steps=9 format=3 uid="uid://bdhf4717a4y30"]
 
-[ext_resource type="Texture2D" uid="uid://cvx0jglp22ld3" path="res://assets/effects/hit/1-a.png" id="1_6hjdj"]
-[ext_resource type="Texture2D" uid="uid://b8xontn3lusam" path="res://assets/effects/hit/1-0.png" id="1_nrmkm"]
-[ext_resource type="Texture2D" uid="uid://cis2i7qc5i0db" path="res://assets/effects/hit/1-b.png" id="2_3ilmm"]
-[ext_resource type="Texture2D" uid="uid://bo5a3uown6a77" path="res://assets/effects/hit/1-c.png" id="3_vaab4"]
-[ext_resource type="Texture2D" uid="uid://dpobl0iyog30l" path="res://assets/effects/hit/1-d.png" id="4_oelrj"]
-[ext_resource type="Texture2D" uid="uid://d0efbkkt5k8ui" path="res://assets/effects/hit/1-e.png" id="5_yi0el"]
-[ext_resource type="Texture2D" uid="uid://b0q1u7biko8p5" path="res://assets/effects/hit/1-f.png" id="7_mtbry"]
+[ext_resource type="Texture2D" uid="uid://dqjk7cqxjlr2f" path="res://assets/effects/hit/1-a.png" id="1_rc76c"]
+[ext_resource type="Texture2D" uid="uid://bofymd2m6q1at" path="res://assets/effects/hit/1-b.png" id="2_4480e"]
+[ext_resource type="Texture2D" uid="uid://djhd1pb3uq00e" path="res://assets/effects/hit/1-c.png" id="3_awwey"]
+[ext_resource type="Texture2D" uid="uid://b6w2v38u1uutw" path="res://assets/effects/hit/1-d.png" id="4_3it1l"]
+[ext_resource type="Texture2D" uid="uid://be7l5fwvn8ghg" path="res://assets/effects/hit/1-e.png" id="5_h0dcs"]
+[ext_resource type="Texture2D" uid="uid://dh7bhyvkm7et1" path="res://assets/effects/hit/1-f.png" id="6_h4ibn"]
 [ext_resource type="Script" path="res://scenes/Graphics/effect_playerhit.gd" id="8_ap5ww"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b4pio"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_nrmkm")
+"texture": ExtResource("1_rc76c")
 }, {
 "duration": 1.0,
-"texture": ExtResource("1_6hjdj")
+"texture": ExtResource("2_4480e")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_3ilmm")
+"texture": ExtResource("3_awwey")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_vaab4")
+"texture": ExtResource("4_3it1l")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_oelrj")
+"texture": ExtResource("5_h0dcs")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_yi0el")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_mtbry")
+"texture": ExtResource("6_h4ibn")
 }],
 "loop": false,
 "name": &"hit",
@@ -39,9 +35,10 @@ animations = [{
 }]
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D"]
+shaded = true
 sprite_frames = SubResource("SpriteFrames_b4pio")
 animation = &"hit"
-frame = 6
+frame = 5
 frame_progress = 1.0
 script = ExtResource("8_ap5ww")
 
