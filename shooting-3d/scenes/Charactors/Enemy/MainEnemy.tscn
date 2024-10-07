@@ -62,18 +62,25 @@ class main_enemy_bahavior_circle extends main_enemy_behavior:
 
 class main_enemy_bahavior_3x3 extends main_enemy_behavior:
 	var move_cnt := 0
+	var timer := Timer.new()
 	func init(enm:MainEnemy)->void:
 		super(enm)
 		move_cnt = 0
 		rand_move()
+	func exit()->void:
+		super()
+		timer.stop()
+		timer.queue_free()
 	func rand_move()->void:
 		var xy := Vector2i(randi_range(-1,1),randi_range(-1,1)) 
 		var pos := Vector2(xy) * Vector2(16,9) / 2.0
 		goto = Vector3(pos.x,pos.y,0)
 		move_cnt+=1
-		var timer := Timer.new()
+		timer = Timer.new()
 		timer.one_shot = true
-		timer.timeout.connect(rand_move)
+		timer.timeout.connect(func():
+			rand_move()
+			)
 		enm.add_child(timer)
 		timer.start(5.0)
 		enm.shot(1)
@@ -100,6 +107,8 @@ func next_beh()->void:
 		behavior_timer.timeout.disconnect(s.callable)
 	behavior_timer.timeout.connect(next_beh)
 	behavior_timer.start(beh.duration)
+	
+	print(behavior_timer.timeout.get_connections())
 	
 	beh.init(self)
 	

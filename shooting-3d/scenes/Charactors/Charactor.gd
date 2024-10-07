@@ -5,8 +5,9 @@ signal on_hp_lost
 signal on_damage(damage:float)
 
 func decrease_hp(diff:float)->void:
-	HP -= diff
-	if HP < 0:
+	HP=maxf(0,HP-diff)
+	if HP <= 0:
+		on_damage.emit(diff)
 		on_hp_lost.emit()
 		return
 	else:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cq74t5frsjjhg"]
+[gd_scene load_steps=15 format=3 uid="uid://cq74t5frsjjhg"]
 
 [ext_resource type="PackedScene" uid="uid://duod78noy4hw6" path="res://scenes/Charactors/Charactor.tscn" id="1_q74oe"]
 [ext_resource type="Texture2D" uid="uid://b6ibc3j1gevwv" path="res://assets/sprites/player/player_4.png" id="2_lfbbg"]
@@ -96,6 +96,9 @@ func _on_on_damage(_damage: float) -> void:
 	UIControl.player_hp = HP
 "
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_7mdvl"]
+size = Vector3(8, 4.15649, 10)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mss88"]
 transparency = 1
 albedo_texture = ExtResource("2_lfbbg")
@@ -148,7 +151,8 @@ MOVE_DEPTH = 5.0
 shoot_mode = 1
 
 [node name="CollisionShape3D" parent="." index="0"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, -0.15, 1.43229)
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.0692505, 1.43229)
+shape = SubResource("BoxShape3D_7mdvl")
 
 [node name="ShootInterval" type="Timer" parent="." index="1"]
 process_callback = 0

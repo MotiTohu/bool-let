@@ -1,18 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://0l10nlugclfu"]
+[gd_scene load_steps=6 format=3 uid="uid://0l10nlugclfu"]
 
 [ext_resource type="PackedScene" uid="uid://gv3cvhwnpfj3" path="res://scenes/Charactors/Bullet.tscn" id="1_beyif"]
 [ext_resource type="Script" path="res://scenes/Charactors/Enemy/Bullets/3x3Bullet.gd" id="2_wuwgi"]
+[ext_resource type="PackedScene" uid="uid://do37j3m4xopug" path="res://scenes/Charactors/Enemy/Bullets/3x3BuletCollision.tscn" id="3_xpy0b"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jd44f"]
-size = Vector3(50, 50, 10)
+[sub_resource type="BoxShape3D" id="BoxShape3D_yob5a"]
+size = Vector3(5.333, 3, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ydls"]
+metallic = 1.0
+metallic_specular = 0.0
+emission_enabled = true
+emission = Color(0.941176, 0, 0, 1)
+emission_energy_multiplier = 5.0
+grow = true
+grow_amount = 0.05
 
 [node name="Bullet" instance=ExtResource("1_beyif")]
+collision_mask = 1
 script = ExtResource("2_wuwgi")
+move_delay_time = 4.0
 SPEED = 50.0
 DAMAGE = 50.0
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="." index="0"]
-shape = SubResource("BoxShape3D_jd44f")
-
-[node name="CollisionShape3D" parent="." index="1"]
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
+shape = SubResource("BoxShape3D_yob5a")
+
+[node name="CSGCylinder3D" parent="." index="1"]
+visible = false
+material = SubResource("StandardMaterial3D_3ydls")
+
+[node name="MoveDelayTimer" type="Timer" parent="." index="3"]
+wait_time = 5.0
+
+[node name="CollisionShape3D2" parent="." index="4" instance=ExtResource("3_xpy0b")]
+
+[connection signal="timeout" from="MoveDelayTimer" to="." method="_on_move_delay_timer_timeout"]

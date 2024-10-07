@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://do37j3m4xopug"]
+
+[ext_resource type="Texture2D" uid="uid://chr1qjv6i0hnj" path="res://assets/UI/alert/alt2_rect.png" id="1_er2nd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jd44f"]
+size = Vector3(5.333, 3, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_omh6i"]
+transparency = 1
+albedo_color = Color(0, 1, 1, 0.192157)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gyptv"]
+material = SubResource("StandardMaterial3D_omh6i")
+size = Vector3(5.3, 3, 10)
+
+[node name="CollisionShape3D2" type="CollisionShape3D"]
+shape = SubResource("BoxShape3D_jd44f")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.811, 0, 0, 0, 0.716, 0, 0, 0, 0.716, 0, 0, 0)
+top_level = true
+texture = ExtResource("1_er2nd")
+region_enabled = true
+region_rect = Rect2(635, 350, 650, 410)
+
+[node name="CollisionShape3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_gyptv")
