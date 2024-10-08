@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://0l10nlugclfu"]
+[gd_scene load_steps=5 format=3 uid="uid://0l10nlugclfu"]
 
 [ext_resource type="PackedScene" uid="uid://gv3cvhwnpfj3" path="res://scenes/Charactors/Bullet.tscn" id="1_beyif"]
 [ext_resource type="Script" path="res://scenes/Charactors/Enemy/Bullets/3x3Bullet.gd" id="2_wuwgi"]
-[ext_resource type="PackedScene" uid="uid://do37j3m4xopug" path="res://scenes/Charactors/Enemy/Bullets/3x3BuletCollision.tscn" id="3_xpy0b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yob5a"]
 size = Vector3(5.333, 3, 10)
@@ -34,7 +33,5 @@ material = SubResource("StandardMaterial3D_3ydls")
 
 [node name="MoveDelayTimer" type="Timer" parent="." index="3"]
 wait_time = 5.0
-
-[node name="CollisionShape3D2" parent="." index="4" instance=ExtResource("3_xpy0b")]
 
 [connection signal="timeout" from="MoveDelayTimer" to="." method="_on_move_delay_timer_timeout"]

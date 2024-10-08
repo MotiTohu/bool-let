@@ -174,7 +174,6 @@ shape = SubResource("BoxShape3D_w7551")
 
 [node name="eyeflash" type="AnimatedSprite3D" parent="." index="2"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.0628209, 1.25335)
-visible = false
 sprite_frames = SubResource("SpriteFrames_e873v")
 animation = &"eyeflash"
 frame_progress = 0.496156
