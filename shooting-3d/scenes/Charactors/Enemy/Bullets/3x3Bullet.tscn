@@ -26,6 +26,7 @@ DAMAGE = 50.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
 shape = SubResource("BoxShape3D_yob5a")
+disabled = true
 
 [node name="CSGCylinder3D" parent="." index="1"]
 visible = false
