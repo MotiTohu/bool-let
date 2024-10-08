@@ -18,6 +18,7 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 UIControl="*res://scenes/UI/UIControl.gd"
+CamControl="*res://scenes/Graphics/CamControl.gd"
 
 [display]
 

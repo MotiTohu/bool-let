@@ -66,9 +66,11 @@ class main_enemy_bahavior_3x3 extends main_enemy_behavior:
 	func init(enm:MainEnemy)->void:
 		super(enm)
 		move_cnt = 0
+		CamControl.cam_move = false
 		rand_move()
 	func exit()->void:
 		super()
+		CamControl.cam_move = true
 		timer.stop()
 		timer.queue_free()
 	func rand_move()->void:
