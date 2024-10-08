@@ -1,13 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://do37j3m4xopug"]
+[gd_scene load_steps=8 format=3 uid="uid://do37j3m4xopug"]
 
+[ext_resource type="Shader" uid="uid://x5pquu5jhj0f" path="res://assets/shader/3x3BuletCollision.tres" id="1_7sdqa"]
 [ext_resource type="Texture2D" uid="uid://chr1qjv6i0hnj" path="res://assets/UI/alert/alt2_rect.png" id="1_er2nd"]
+[ext_resource type="Texture2D" uid="uid://xys2xw7ic5e" path="res://assets/shader/materials/gradation1.png" id="3_7boyd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jd44f"]
 size = Vector3(5.333, 3, 10)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_klsa4"]
+render_priority = 0
+shader = ExtResource("1_7sdqa")
+shader_parameter/mainsize = Vector2(1, 1)
+shader_parameter/patternsiz = Vector2(1, 1)
+shader_parameter/patternpivot = Vector2(0.5, 0)
+shader_parameter/progless = 1.0
+shader_parameter/power = 1.0
+shader_parameter/maintex = ExtResource("1_er2nd")
+shader_parameter/pattern = ExtResource("3_7boyd")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_omh6i"]
 transparency = 1
-albedo_color = Color(0, 1, 1, 0.192157)
+albedo_color = Color(0.815686, 0, 0.184314, 0)
 
 [sub_resource type="BoxMesh" id="BoxMesh_gyptv"]
 material = SubResource("StandardMaterial3D_omh6i")
@@ -19,6 +32,8 @@ shape = SubResource("BoxShape3D_jd44f")
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.811, 0, 0, 0, 0.716, 0, 0, 0, 0.716, 0, 0, 0)
 top_level = true
+material_override = SubResource("ShaderMaterial_klsa4")
+shaded = true
 texture = ExtResource("1_er2nd")
 region_enabled = true
 region_rect = Rect2(635, 350, 650, 410)
