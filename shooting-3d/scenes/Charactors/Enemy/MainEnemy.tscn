@@ -167,8 +167,8 @@ albedo_texture = ExtResource("5_3sstc")
 [node name="MainEnemy" instance=ExtResource("1_6xyc4")]
 collision_mask = 0
 script = SubResource("GDScript_7f006")
-behavior_mode = 0
 HP = 300.0
+behavior_mode = 0
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -2.78229)
