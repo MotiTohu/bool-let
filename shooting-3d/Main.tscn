@@ -79,7 +79,6 @@ unique_name_in_owner = true
 
 [node name="MainEnemy" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D" instance=ExtResource("4_vxcct")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
-behavior_mode = null
 offset = Vector3(0, 0, -40)
 
 [node name="CamCenter" type="Node3D" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D"]

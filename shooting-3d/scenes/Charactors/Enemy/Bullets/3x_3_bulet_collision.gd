@@ -7,8 +7,9 @@ var progress : float :
 		sprite_3d.material_override.set("shader_parameter/progress",v)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	progress = 5
+	progress = 0
 	var tw := get_tree().create_tween()
-	tw.tween_property(self,"progress",1,4)
+	tw.tween_property(self,"progress",1,2)
+	tw.set_ease(Tween.EASE_IN)
 	tw.play()
 	

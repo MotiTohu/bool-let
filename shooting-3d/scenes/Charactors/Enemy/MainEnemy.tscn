@@ -14,6 +14,7 @@
 [sub_resource type="GDScript" id="GDScript_7f006"]
 resource_name = "MainEnemy"
 script/source = "class_name MainEnemy extends Enemy
+@onready var eyeflash: AnimatedSprite3D = $eyeflash
 
 func _ready() -> void:
 	UIControl.max_enemy_hp = HP
@@ -63,6 +64,7 @@ class main_enemy_bahavior_circle extends main_enemy_behavior:
 class main_enemy_bahavior_3x3 extends main_enemy_behavior:
 	var move_cnt := 0
 	var timer := Timer.new()
+	var timer2 := Timer.new()
 	func init(enm:MainEnemy)->void:
 		super(enm)
 		move_cnt = 0
@@ -86,6 +88,14 @@ class main_enemy_bahavior_3x3 extends main_enemy_behavior:
 		enm.add_child(timer)
 		timer.start(5.0)
 		enm.shot(1)
+		timer2 = Timer.new()
+		timer2.one_shot = true
+		timer2.timeout.connect(func():
+			enm.eyeflash.play(\"eyeflash\")
+			)
+		enm.add_child(timer2)
+		timer2.start(4)
+		
 		
 
 class main_enemy_behavior_static extends main_enemy_behavior:
@@ -120,6 +130,10 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = 	(beh.goto - position + offset) * .5
 	move_and_slide()
+
+
+func _on_eyeflash_animation_finished() -> void:
+	eyeflash.frame = 0
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w7551"]
@@ -143,7 +157,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_tvmtf")
 }],
-"loop": true,
+"loop": false,
 "name": &"eyeflash",
 "speed": 20.0
 }]
@@ -167,8 +181,8 @@ albedo_texture = ExtResource("5_3sstc")
 [node name="MainEnemy" instance=ExtResource("1_6xyc4")]
 collision_mask = 0
 script = SubResource("GDScript_7f006")
-HP = 300.0
 behavior_mode = 0
+HP = 300.0
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -2.78229)
@@ -178,7 +192,6 @@ shape = SubResource("BoxShape3D_w7551")
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.0628209, 1.25335)
 sprite_frames = SubResource("SpriteFrames_e873v")
 animation = &"eyeflash"
-frame_progress = 0.496156
 
 [node name="Body" type="Sprite3D" parent="." index="3"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
@@ -199,3 +212,5 @@ texture = ExtResource("4_tmou0")
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.5)
 material_override = SubResource("StandardMaterial3D_x855t")
 texture = ExtResource("5_3sstc")
+
+[connection signal="animation_finished" from="eyeflash" to="." method="_on_eyeflash_animation_finished"]
