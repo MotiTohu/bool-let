@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://dkf7uw0k2nb5t"]
+[gd_scene load_steps=19 format=3 uid="uid://dkf7uw0k2nb5t"]
 
 [ext_resource type="PackedScene" uid="uid://bher15swug66t" path="res://scenes/Charactors/Enemy/Enemy.tscn" id="1_6xyc4"]
 [ext_resource type="Texture2D" uid="uid://bdvs4g2wjeswn" path="res://assets/sprites/enemy/enemy1/enemy1_body.png" id="2_mt7a4"]
 [ext_resource type="Texture2D" uid="uid://dp52dodfj36g5" path="res://assets/effects/eye_flash/enemy1_f1 .png" id="2_nfm8h"]
+[ext_resource type="Texture2D" uid="uid://behlt1y7t057n" path="res://assets/effects/eye_flash/enemy1_f0.png" id="2_q58yd"]
 [ext_resource type="Texture2D" uid="uid://bfevdc5xhts7a" path="res://assets/sprites/enemy/enemy1/enemy1_head.png" id="3_hjm43"]
 [ext_resource type="Texture2D" uid="uid://crgpas64apfst" path="res://assets/effects/eye_flash/enemy1_f2.png" id="3_riknm"]
 [ext_resource type="Texture2D" uid="uid://cygldjnryxjx6" path="res://assets/effects/eye_flash/enemy1_f3.png" id="4_fmj3p"]
@@ -143,6 +144,9 @@ size = Vector3(11, 10, 20)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_q58yd")
+}, {
+"duration": 1.0,
 "texture": ExtResource("2_nfm8h")
 }, {
 "duration": 1.0,
@@ -189,7 +193,7 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -2.78229)
 shape = SubResource("BoxShape3D_w7551")
 
 [node name="eyeflash" type="AnimatedSprite3D" parent="." index="2"]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.0628209, 1.25335)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.826893, 1.25335)
 sprite_frames = SubResource("SpriteFrames_e873v")
 animation = &"eyeflash"
 
