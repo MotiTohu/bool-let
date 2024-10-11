@@ -104,4 +104,3 @@ script = ExtResource("3_cdyac")
 unique_name_in_owner = true
 
 [connection signal="timeout" from="CanvasLayer/SubViewportContainer/SubViewport/Node3D/BG/Timer" to="CanvasLayer/SubViewportContainer/SubViewport/Node3D/BG" method="_on_timer_timeout"]
-[connection signal="on_hp_lost" from="CanvasLayer/SubViewportContainer/SubViewport/Node3D/MainEnemy" to="CanvasLayer/SubViewportContainer/SubViewport/Node3D/MainEnemy" method="_on_on_hp_lost"]
