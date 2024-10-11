@@ -28,7 +28,7 @@
             </div>
             {#each data.top as score}
             <div id="score">
-                <h2>{score.score}</h2>
+                <h2>{Math.floor(score.score)}</h2>
                 <p>{score.time?.toLocaleTimeString()}</p>
             </div>
             {/each}
@@ -41,7 +41,7 @@
             </div>
             {#each data.resent as score}
             <div id="score">
-                <h2>{score.score}</h2>
+                <h2>{Math.floor(score.score)}</h2>
                 <p>{score.time?.toLocaleTimeString()}</p>
             </div>
             {/each}

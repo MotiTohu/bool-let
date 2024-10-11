@@ -19,7 +19,7 @@ config/icon="res://assets/icon.svg"
 
 UIControl="*res://scenes/UI/UIControl.gd"
 CamControl="*res://scenes/Graphics/CamControl.gd"
-ScoreSender="*res://scenes/ScoreSender.gd"
+ScoreSender="*res://scenes/ScoreSender.tscn"
 
 [display]
 
