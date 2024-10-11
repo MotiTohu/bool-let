@@ -22,10 +22,14 @@ func _ready() -> void:
 	hide()
 	UIControl.max_enemy_hp = HP
 	UIControl.start_game.connect(func():
+		if(beh):beh.exit()
 		beh_idx=-1
 		next_beh()
 		show()
 		)
+	UIControl.clear_game.connect(func():hide())
+	UIControl.failre_game.connect(func():hide())
+	UIControl.reset_game.connect(func():hide())
 func _on_on_damage(_damage: float) -> void:
 	UIControl.enemy_hp = HP
 
@@ -88,8 +92,10 @@ class main_enemy_bahavior_3x3 extends main_enemy_behavior:
 	func exit()->void:
 		super()
 		CamControl.cam_move = true
-		timer.stop()
-		timer.queue_free()
+		if(timer):
+			timer.queue_free()
+		if(timer2):
+			timer2.queue_free()
 	func rand_move()->void:
 		var xy := Vector2i(randi_range(-1,1),randi_range(-1,1)) 
 		var pos := Vector2(xy) * Vector2(16,9) / 2.0
@@ -155,6 +161,7 @@ func _on_eyeflash_animation_finished() -> void:
 
 func _on_mainenemy_hp_lost() -> void:
 	UIControl.clear_game.emit()
+	hide()
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w7551"]

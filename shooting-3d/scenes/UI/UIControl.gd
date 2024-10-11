@@ -42,19 +42,30 @@ func _ready() -> void:
 		SCORE = 60 * 3 * 100
 		remaining_time = 60 * 3
 		)
-	clear_game.connect(func():game_status=GAME_STATUS.CLEAR)
-	failre_game.connect(func():game_status=GAME_STATUS.FAILURE)
+	clear_game.connect(func():
+		moveable_enxt_ui = false
+		game_status=GAME_STATUS.CLEAR
+		await get_tree().create_timer(5).timeout
+		moveable_enxt_ui = true
+		)
+	failre_game.connect(func():
+		moveable_enxt_ui = false
+		game_status=GAME_STATUS.FAILURE
+		await get_tree().create_timer(5).timeout
+		moveable_enxt_ui = true
+		)
 	var timer := get_tree().create_timer(0.1)
 	timer.timeout.connect(func():reset_game.emit())
 	
 @export var SCORE := 0.0
 @export var remaining_time := 0.0
+var moveable_enxt_ui := true
 func is_pressded_any_button() -> bool:
 	return Input.is_action_just_pressed("shoot") or Input.is_action_just_pressed("change_shoot_mode") or Input.is_action_just_pressed("back") or Input.is_action_just_pressed("front")
 func _process(delta: float) -> void:
-	if game_status == GAME_STATUS.RESET and is_pressded_any_button():
+	if moveable_enxt_ui and game_status == GAME_STATUS.RESET and is_pressded_any_button():
 		start_game.emit()
-	if game_status == GAME_STATUS.FAILURE and is_pressded_any_button():
+	if moveable_enxt_ui and game_status == GAME_STATUS.FAILURE and is_pressded_any_button():
 		reset_game.emit()
 	if game_status == GAME_STATUS.START:
 		SCORE -= delta * 100

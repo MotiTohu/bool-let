@@ -65,11 +65,12 @@ func _ready() -> void:
 	UIControl.reset_game.connect(reset_game)
 	UIControl.start_game.connect(start_game)
 	UIControl.clear_game.connect(clear_game)
+	UIControl.clear_game.connect(func():clear_ui.show_score(UIControl.SCORE))
 	UIControl.failre_game.connect(failure_game)
 
 func _process(_delta: float) -> void:
-	score_label.text = str(int(UIControl.SCORE))
-	time.text = str(int(UIControl.remaining_time * 10))
+	score_label.text = str(int(UIControl.SCORE)).replace("1"," 1")
+	time.text = str(int(UIControl.remaining_time * 10)).replace("1"," 1")
 	time_bar.value = UIControl.remaining_time * 10
 
 func reset_game()->void:

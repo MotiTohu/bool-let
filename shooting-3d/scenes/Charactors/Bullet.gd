@@ -9,6 +9,10 @@ const EFFECT := preload("res://scenes/Graphics/effect_playerhit.tscn")
 
 func _ready() -> void:
 	MOVE_TO = MOVE_TO.normalized()
+	UIControl.start_game.connect(queue_free)
+	UIControl.clear_game.connect(queue_free)
+	UIControl.reset_game.connect(queue_free)
+	UIControl.failre_game.connect(queue_free)
 
 func _physics_process(delta: float) -> void:
 	position += MOVE_TO * SPEED * delta

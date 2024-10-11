@@ -6,6 +6,7 @@ const _3X3_BULET_COLLISION = preload("res://scenes/Charactors/Enemy/Bullets/3x3B
 var _speed := 0.0
 
 func _ready() -> void:
+	super()
 	move_delay_timer.wait_time = move_delay_time
 	move_delay_timer.start()
 	_speed = SPEED

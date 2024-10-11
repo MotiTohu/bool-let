@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b3mbwm3jpoh6t"]
+[gd_scene load_steps=19 format=3 uid="uid://b3mbwm3jpoh6t"]
 
 [ext_resource type="Theme" uid="uid://ce6jlv373j142" path="res://themes/UI.tres" id="1_koony"]
 [ext_resource type="Script" path="res://scenes/UI/UI.gd" id="2_42fy7"]
@@ -6,6 +6,8 @@
 [ext_resource type="LabelSettings" uid="uid://dsm4ual6ontin" path="res://scenes/UI/UI_Label.tres" id="4_ev3w3"]
 [ext_resource type="Texture2D" uid="uid://b422mni6yenrn" path="res://assets/title/イラスト278b.png" id="4_pjdny"]
 [ext_resource type="Script" path="res://scenes/UI/clear_ui.gd" id="6_yj34h"]
+[ext_resource type="FontFile" uid="uid://cycax1mam5e10" path="res://assets/fonts/YomiyasuSansSerif-Glitch.otf" id="7_sc5n8"]
+[ext_resource type="FontFile" uid="uid://cbhjv8feqbbd6" path="res://assets/fonts/YomiyasuSansSerif.otf" id="7_vj0uu"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_23ui7"]
 texture = ExtResource("4_pjdny")
@@ -15,7 +17,8 @@ region_rect = Rect2(0, 134, 540, 99)
 texture = ExtResource("3_4ed2r")
 
 [sub_resource type="LabelSettings" id="LabelSettings_jui0g"]
-font_size = 50
+font = ExtResource("7_vj0uu")
+font_size = 70
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hwndd"]
 bg_color = Color(0.145098, 0.701961, 0.388235, 0.843137)
@@ -28,15 +31,28 @@ corner_radius_top_left = 10
 corner_radius_bottom_right = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_nxhvb"]
+font = ExtResource("7_sc5n8")
+font_size = 400
+font_color = Color(1, 1, 0.392157, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rwpx0"]
+font = ExtResource("7_vj0uu")
+font_size = 200
+font_color = Color(1, 1, 0.392157, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jsf5f"]
+font = ExtResource("7_vj0uu")
 font_size = 200
 font_color = Color(1, 1, 0.392157, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7n4sl"]
-font_size = 200
+font = ExtResource("7_sc5n8")
+font_size = 400
 font_color = Color(1, 0.254902, 0.392157, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_wlcw8"]
-font_size = 50
+font = ExtResource("7_vj0uu")
+font_size = 100
 font_color = Color(1, 0.254902, 0.392157, 1)
 
 [node name="UI" type="Control"]
@@ -121,7 +137,6 @@ layout_mode = 2
 
 [node name="MainUI" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -171,7 +186,7 @@ offset_left = 1230.0
 offset_top = 41.0
 offset_right = 1513.0
 offset_bottom = 110.0
-text = "200"
+text = "0"
 label_settings = SubResource("LabelSettings_jui0g")
 horizontal_alignment = 2
 
@@ -265,14 +280,20 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="ClearUI/VBoxContainer/Control2/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Score:"
-label_settings = SubResource("LabelSettings_nxhvb")
+size_flags_vertical = 1
+text = "Score "
+label_settings = SubResource("LabelSettings_rwpx0")
+horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="Score" type="Label" parent="ClearUI/VBoxContainer/Control2/HBoxContainer"]
+[node name="clear_score" type="Label" parent="ClearUI/VBoxContainer/Control2/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-label_settings = SubResource("LabelSettings_nxhvb")
+size_flags_vertical = 1
+text = "000"
+label_settings = SubResource("LabelSettings_jsf5f")
+vertical_alignment = 1
 
 [node name="Control4" type="Control" parent="ClearUI/VBoxContainer"]
 custom_minimum_size = Vector2(0, 200)
@@ -280,6 +301,7 @@ layout_mode = 2
 
 [node name="FailureUI" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

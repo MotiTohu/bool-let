@@ -1,5 +1,8 @@
-[gd_resource type="LabelSettings" format=3 uid="uid://dsm4ual6ontin"]
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dsm4ual6ontin"]
+
+[ext_resource type="FontFile" uid="uid://cbhjv8feqbbd6" path="res://assets/fonts/YomiyasuSansSerif.otf" id="1_cj44j"]
 
 [resource]
-font_size = 70
+font = ExtResource("1_cj44j")
+font_size = 100
 font_color = Color(1, 1, 0.392157, 1)
