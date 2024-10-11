@@ -1,17 +1,24 @@
-[gd_scene load_steps=19 format=3 uid="uid://b3mbwm3jpoh6t"]
+[gd_scene load_steps=27 format=3 uid="uid://b3mbwm3jpoh6t"]
 
 [ext_resource type="Theme" uid="uid://ce6jlv373j142" path="res://themes/UI.tres" id="1_koony"]
 [ext_resource type="Script" path="res://scenes/UI/UI.gd" id="2_42fy7"]
 [ext_resource type="Texture2D" uid="uid://ccv0hvn7vyfvh" path="res://assets/UI/UI.png" id="3_4ed2r"]
 [ext_resource type="LabelSettings" uid="uid://dsm4ual6ontin" path="res://scenes/UI/UI_Label.tres" id="4_ev3w3"]
 [ext_resource type="Texture2D" uid="uid://b422mni6yenrn" path="res://assets/title/title.png" id="4_pjdny"]
+[ext_resource type="Texture2D" uid="uid://bpfmi1njrinso" path="res://assets/title/start.png" id="5_x1iwv"]
 [ext_resource type="Script" path="res://scenes/UI/clear_ui.gd" id="6_yj34h"]
 [ext_resource type="FontFile" uid="uid://cycax1mam5e10" path="res://assets/fonts/YomiyasuSansSerif-Glitch.otf" id="7_sc5n8"]
 [ext_resource type="FontFile" uid="uid://cbhjv8feqbbd6" path="res://assets/fonts/YomiyasuSansSerif.otf" id="7_vj0uu"]
+[ext_resource type="Texture2D" uid="uid://rar6a2fy31g6" path="res://assets/title/clear.png" id="10_k52jp"]
+[ext_resource type="Texture2D" uid="uid://db268f3ol1lie" path="res://assets/title/thx.png" id="11_66w5c"]
+[ext_resource type="Texture2D" uid="uid://cyi2q7k6nccoy" path="res://assets/title/score.png" id="12_bwplt"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_23ui7"]
 texture = ExtResource("4_pjdny")
 region_rect = Rect2(0, 134, 540, 99)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pmy35"]
+texture = ExtResource("5_x1iwv")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_awlat"]
 texture = ExtResource("3_4ed2r")
@@ -30,10 +37,19 @@ bg_color = Color(0.396078, 0.866667, 0.243137, 0.733333)
 corner_radius_top_left = 10
 corner_radius_bottom_right = 10
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_83jft"]
+texture = ExtResource("11_66w5c")
+
 [sub_resource type="LabelSettings" id="LabelSettings_nxhvb"]
 font = ExtResource("7_sc5n8")
 font_size = 400
 font_color = Color(1, 1, 0.392157, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_phm3n"]
+texture = ExtResource("10_k52jp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tdj2c"]
+texture = ExtResource("12_bwplt")
 
 [sub_resource type="LabelSettings" id="LabelSettings_rwpx0"]
 font = ExtResource("7_vj0uu")
@@ -43,7 +59,6 @@ font_color = Color(1, 1, 0.392157, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_jsf5f"]
 font = ExtResource("7_vj0uu")
 font_size = 200
-font_color = Color(1, 1, 0.392157, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7n4sl"]
 font = ExtResource("7_sc5n8")
@@ -114,6 +129,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="StartUI/VSplitContainer/Control2"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -131,12 +147,21 @@ text = "Press any button to start"
 label_settings = ExtResource("4_ev3w3")
 horizontal_alignment = 1
 
+[node name="Panel" type="Panel" parent="StartUI/VSplitContainer/Control2"]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 123.0
+offset_right = 1555.0
+offset_bottom = 184.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_pmy35")
+
 [node name="Control4" type="Control" parent="StartUI/VSplitContainer"]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
 [node name="MainUI" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -231,6 +256,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_yj34h")
 
+[node name="Panel2" type="Panel" parent="ClearUI"]
+layout_mode = 2
+offset_left = 600.0
+offset_top = 914.0
+offset_right = 1337.0
+offset_bottom = 971.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_83jft")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="ClearUI"]
 layout_mode = 1
 anchors_preset = 15
@@ -248,6 +281,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="ClearUI/VBoxContainer/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -263,21 +297,40 @@ grow_vertical = 2
 text = "Clear!"
 label_settings = SubResource("LabelSettings_nxhvb")
 
+[node name="Panel" type="Panel" parent="ClearUI/VBoxContainer/Control"]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 70.0
+offset_right = 1646.0
+offset_bottom = 269.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_phm3n")
+
 [node name="Control2" type="Control" parent="ClearUI/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="ClearUI/VBoxContainer/Control2"]
+layout_mode = 2
+offset_left = 575.0
+offset_top = 88.0
+offset_right = 1073.0
+offset_bottom = 192.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_tdj2c")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ClearUI/VBoxContainer/Control2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 416.0
-offset_right = -305.0
+offset_left = 1100.0
+offset_top = -24.0
+offset_right = -94.0
+offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="ClearUI/VBoxContainer/Control2/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -301,13 +354,21 @@ layout_mode = 2
 
 [node name="FailureUI" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Panel2" type="Panel" parent="FailureUI"]
+visible = false
+layout_mode = 2
+offset_left = 1187.0
+offset_top = 956.0
+offset_right = 1917.0
+offset_bottom = 1017.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_83jft")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="FailureUI"]
 layout_mode = 1
@@ -359,7 +420,7 @@ offset_right = 331.0
 offset_bottom = 136.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "press any button to restart"
+text = "press any button to return title"
 label_settings = SubResource("LabelSettings_wlcw8")
 horizontal_alignment = 1
 vertical_alignment = 1
