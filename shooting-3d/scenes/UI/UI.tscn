@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/UI/UI.gd" id="2_42fy7"]
 [ext_resource type="Texture2D" uid="uid://ccv0hvn7vyfvh" path="res://assets/UI/UI.png" id="3_4ed2r"]
 [ext_resource type="LabelSettings" uid="uid://dsm4ual6ontin" path="res://scenes/UI/UI_Label.tres" id="4_ev3w3"]
-[ext_resource type="Texture2D" uid="uid://b422mni6yenrn" path="res://assets/title/イラスト278b.png" id="4_pjdny"]
+[ext_resource type="Texture2D" uid="uid://b422mni6yenrn" path="res://assets/title/title.png" id="4_pjdny"]
 [ext_resource type="Script" path="res://scenes/UI/clear_ui.gd" id="6_yj34h"]
 [ext_resource type="FontFile" uid="uid://cycax1mam5e10" path="res://assets/fonts/YomiyasuSansSerif-Glitch.otf" id="7_sc5n8"]
 [ext_resource type="FontFile" uid="uid://cbhjv8feqbbd6" path="res://assets/fonts/YomiyasuSansSerif.otf" id="7_vj0uu"]
