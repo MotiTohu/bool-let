@@ -84,12 +84,12 @@ func start_game()->void:
 	start_ui.hide()
 	clear_ui.hide()
 	failure_ui.hide()
-func clear_game(score:int)->void:
+func clear_game()->void:
 	main_ui.hide()
 	start_ui.hide()
 	clear_ui.show()
 	failure_ui.hide()
-	clear_ui.show_score(score)
+	clear_ui.show_score(UIControl.SCORE)
 func failure_game()->void:
 	main_ui.hide()
 	start_ui.hide()

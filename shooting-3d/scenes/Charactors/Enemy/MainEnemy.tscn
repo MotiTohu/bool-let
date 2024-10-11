@@ -160,6 +160,7 @@ func _on_eyeflash_animation_finished() -> void:
 
 
 func _on_mainenemy_hp_lost() -> void:
+	print(\"lost hp\")
 	UIControl.clear_game.emit()
 	hide()
 "

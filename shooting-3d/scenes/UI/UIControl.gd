@@ -36,7 +36,12 @@ signal clear_game
 signal failre_game
 
 func _ready() -> void:
-	reset_game.connect(func():game_status=GAME_STATUS.RESET)
+	reset_game.connect(func():
+		moveable_enxt_ui = false
+		game_status=GAME_STATUS.RESET
+		await get_tree().create_timer(5).timeout
+		moveable_enxt_ui = true
+		)
 	start_game.connect(func():
 		game_status=GAME_STATUS.START
 		SCORE = 60 * 3 * 100
@@ -65,7 +70,7 @@ func is_pressded_any_button() -> bool:
 func _process(delta: float) -> void:
 	if moveable_enxt_ui and game_status == GAME_STATUS.RESET and is_pressded_any_button():
 		start_game.emit()
-	if moveable_enxt_ui and game_status == GAME_STATUS.FAILURE and is_pressded_any_button():
+	if moveable_enxt_ui and (game_status == GAME_STATUS.FAILURE or game_status == GAME_STATUS.CLEAR) and is_pressded_any_button():
 		reset_game.emit()
 	if game_status == GAME_STATUS.START:
 		SCORE -= delta * 100
