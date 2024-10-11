@@ -4,6 +4,14 @@ class_name Charactor extends CharacterBody3D
 signal on_hp_lost
 signal on_damage(damage:float)
 
+var def_hp:=0.0
+func _ready() -> void:
+	def_hp = HP
+	UIControl.start_game.connect(func():
+		HP=def_hp
+		on_damage.emit(0)
+		)
+
 func decrease_hp(diff:float)->void:
 	HP=maxf(0,HP-diff)
 	if HP <= 0:

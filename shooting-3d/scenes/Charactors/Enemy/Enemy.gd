@@ -11,7 +11,17 @@ var bullets :Array[PackedScene] = [ENEMY_BULLET,_3X3_BULLET]
 var shotable := true
 signal on_shotable
 
-
+func _ready() -> void:
+	super()
+	UIControl.start_game.connect(reset_bullet)
+	UIControl.reset_game.connect(reset_bullet)
+	UIControl.failre_game.connect(reset_bullet)
+	UIControl.clear_game.connect(reset_bullet)
+	
+func reset_bullet()->void:
+	for i in get_parent().get_children():
+			if i is Bullet:
+				i.queue_free()
 func shot(i:int,interval:float = -1)->void:
 	shotable = false
 	var bullet :Bullet= bullets[i].instantiate()
@@ -24,3 +34,7 @@ func _on_shot_timer_timeout() -> void:
 
 func _on_on_hp_lost() -> void:
 	queue_free()
+
+
+func _on_enemy_damage(damage: float) -> void:
+	UIControl.SCORE += damage * 100

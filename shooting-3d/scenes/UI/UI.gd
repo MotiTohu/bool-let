@@ -1,8 +1,7 @@
-@tool
 extends Control
 class_name UI
-
-@onready var hp_bar: ProgressBar = $HPBar
+@onready var enemy_hp: Control = %EnemyHP
+@onready var hp_bar: ProgressBar = %HPBar
 @export_range(0.0,100.0) var HP :float = 100.0:
 	get:
 		return HP
@@ -17,7 +16,7 @@ const ENEMY_HP_BAR = preload("res://scenes/UI/enemy_hp_bar.tscn")
 @export var MaxEnemyHP :float = 300.0 :
 	set(v):
 		for i in enemy_hp_bars:
-			$EnemyHP.remove_child(i)
+			enemy_hp.remove_child(i)
 		enemy_hp_bars.clear()
 		for i in ceilf((v-0.1)/100.0):
 			var Bar := ENEMY_HP_BAR.instantiate()
@@ -25,7 +24,7 @@ const ENEMY_HP_BAR = preload("res://scenes/UI/enemy_hp_bar.tscn")
 				Bar.size.x = 400
 				Bar.size.y = 20
 				Bar.position.y += 35 + i * 30
-			$EnemyHP.add_child(Bar)
+			enemy_hp.add_child(Bar)
 			enemy_hp_bars.push_back(Bar)
 		MaxEnemyHP = v
 		EnemyHP = v
@@ -44,6 +43,16 @@ const ENEMY_HP_BAR = preload("res://scenes/UI/enemy_hp_bar.tscn")
 					enemy_hp_bars[i].value = 0.0
 			
 			
+
+@onready var main_ui: Control = %MainUI
+@onready var start_ui: Control = %StartUI
+@onready var clear_ui: Control = %ClearUI
+@onready var failure_ui: Control = %FailureUI
+
+@onready var score_label: Label = %SCORE
+@onready var time: Label = %TIME
+@onready var time_bar: ProgressBar = %TimeBar
+
 func _ready() -> void:
 	UIControl.on_max_enemy_hp_changed.connect(func(v:float):MaxEnemyHP=v)
 	UIControl.on_enemy_hp_changed.connect(func(v:float):EnemyHP=v)
@@ -52,3 +61,36 @@ func _ready() -> void:
 	
 	UIControl.on_player_hp_changed.connect(func(v:float):HP=v)
 	HP = UIControl.player_hp
+	
+	UIControl.reset_game.connect(reset_game)
+	UIControl.start_game.connect(start_game)
+	UIControl.clear_game.connect(clear_game)
+	UIControl.failre_game.connect(failure_game)
+
+func _process(_delta: float) -> void:
+	score_label.text = str(int(UIControl.SCORE))
+	time.text = str(int(UIControl.remaining_time * 10))
+	time_bar.value = UIControl.remaining_time * 10
+
+func reset_game()->void:
+	main_ui.hide()
+	start_ui.show()
+	clear_ui.hide()
+	failure_ui.hide()
+	
+func start_game()->void:
+	main_ui.show()
+	start_ui.hide()
+	clear_ui.hide()
+	failure_ui.hide()
+func clear_game(score:int)->void:
+	main_ui.hide()
+	start_ui.hide()
+	clear_ui.show()
+	failure_ui.hide()
+	clear_ui.show_score(score)
+func failure_game()->void:
+	main_ui.hide()
+	start_ui.hide()
+	clear_ui.hide()
+	failure_ui.show()

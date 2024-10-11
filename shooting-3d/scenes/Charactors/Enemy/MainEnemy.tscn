@@ -18,8 +18,14 @@ script/source = "class_name MainEnemy extends Enemy
 @onready var eyeflash: AnimatedSprite3D = $eyeflash
 
 func _ready() -> void:
+	super()
+	hide()
 	UIControl.max_enemy_hp = HP
-	next_beh()
+	UIControl.start_game.connect(func():
+		beh_idx=-1
+		next_beh()
+		show()
+		)
 func _on_on_damage(_damage: float) -> void:
 	UIControl.enemy_hp = HP
 
@@ -42,6 +48,14 @@ class main_enemy_behavior:
 	func move(_delta:float)->void:
 		pass
 
+class main_enemy_behavior_start extends  main_enemy_behavior:
+	func init(enm:MainEnemy) -> void:
+		super(enm)
+		enm.position.y -= 20
+		goto = Vector3(0,-20,0)
+	func move(delta:float)->void:
+		delta_sum += delta
+		goto = Vector3(0,-20,0) * (1-delta_sum)
 class main_enemy_bahavior_circle extends main_enemy_behavior:
 	var shot_timer : Timer
 	func init(enm:MainEnemy)->void:
@@ -104,6 +118,8 @@ class main_enemy_behavior_static extends main_enemy_behavior:
 		pass
 
 var behaviors : Array[main_enemy_behavior] = [
+	main_enemy_behavior_start.new(1,0),
+	main_enemy_behavior_static.new(4,0),
 	main_enemy_bahavior_circle.new(40,250),
 	main_enemy_bahavior_3x3.new(80,150),
 	main_enemy_bahavior_circle.new(20,100),
@@ -120,21 +136,25 @@ func next_beh()->void:
 		behavior_timer.timeout.disconnect(s.callable)
 	behavior_timer.timeout.connect(next_beh)
 	behavior_timer.start(beh.duration)
-	
-	print(behavior_timer.timeout.get_connections())
+
 	
 	beh.init(self)
 	
 func _physics_process(delta: float) -> void:
-	beh.move(delta)
-	if HP < beh.hp_threshold:next_beh()
-	
-	velocity = 	(beh.goto - position + offset) * .5
-	move_and_slide()
+	if(UIControl.game_status == UIControl.GAME_STATUS.START):
+		beh.move(delta)
+		if HP < beh.hp_threshold:next_beh()
+		
+		velocity = 	(beh.goto - position + offset) * .5
+		move_and_slide()
 
 
 func _on_eyeflash_animation_finished() -> void:
 	eyeflash.frame = 0
+
+
+func _on_mainenemy_hp_lost() -> void:
+	UIControl.clear_game.emit()
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w7551"]
@@ -217,4 +237,5 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.5)
 material_override = SubResource("StandardMaterial3D_x855t")
 texture = ExtResource("5_3sstc")
 
+[connection signal="on_hp_lost" from="." to="." method="_on_mainenemy_hp_lost"]
 [connection signal="animation_finished" from="eyeflash" to="." method="_on_eyeflash_animation_finished"]

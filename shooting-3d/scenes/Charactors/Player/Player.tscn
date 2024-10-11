@@ -54,7 +54,7 @@ func _rotate(delta:float)->void:
 const BULLET := preload(\"res://scenes/Charactors/Player/PlayerBullet.tscn\")
 var shootable := true
 func _on_shoot_interval_timeout()->void:shootable=true
-func _shoot():
+func _shoot()->void:
 	if Input.is_action_just_pressed(\"change_shoot_mode\"):
 		shoot_mode += 1
 		shoot_mode %= 2
@@ -82,18 +82,23 @@ func _shoot():
 			shoot_interval.start(.2)
 
 func _ready() -> void:
+	super()
 	UIControl.max_player_hp = HP
 	UIControl.player_hp = HP
 
 func _physics_process(delta: float) -> void:
 	_move(delta)
 	_rotate(delta)
-	_shoot()
+	if(UIControl.game_status == UIControl.GAME_STATUS.START):_shoot()
 	super(delta)
 
-
-func _on_on_damage(_damage: float) -> void:
+func _on_on_damage(damage: float) -> void:
 	UIControl.player_hp = HP
+	UIControl.SCORE -= damage * 1000
+
+
+func _on_player_hp_lost() -> void:
+	UIControl.failre_game.emit()
 "
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7mdvl"]
@@ -193,4 +198,5 @@ collide_with_areas = true
 debug_shape_custom_color = Color(1, 1, 0, 1)
 debug_shape_thickness = 5
 
+[connection signal="on_hp_lost" from="." to="." method="_on_player_hp_lost"]
 [connection signal="timeout" from="ShootInterval" to="." method="_on_shoot_interval_timeout"]
