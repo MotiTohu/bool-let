@@ -156,18 +156,38 @@ class main_enemy_behavior_forming extends main_enemy_behavior:
 		super()
 		if(timer):timer.queue_free()
 	func move(delta:float)->void:
-		delta_sum += delta * 10
-		goto.x = noise.get_noise_1d(delta_sum) * 16
-		goto.y = noise.get_noise_1d(-delta_sum) * 9
-		print(goto)
+		delta_sum += delta * 30
+		goto.x = noise.get_noise_1d(delta_sum) * 20
+		goto.y = noise.get_noise_1d(-delta_sum) * 12
+
+class main_enemy_behavior_warp extends main_enemy_behavior:
+	var timer := Timer.new()
+	func init(enm:MainEnemy)->void:
+		super(enm)
+		timer = Timer.new()
+		timer.one_shot = false
+		timer.wait_time = 2
+		timer.autostart = true
+		timer.timeout.connect(rand_move)
+		enm.add_child(timer)
+		timer.start()
+	func exit()->void:
+		super()
+		if(timer):timer.queue_free()
+	
+	func rand_move()->void:
+		goto = Vector3(randf_range(-16,16),randf_range(-9,9),0)
+		
+	
 
 var behaviors : Array[main_enemy_behavior] = [
 	main_enemy_behavior_start.new(1,0),
 	main_enemy_behavior_static.new(4,0),
-	main_enemy_behavior_forming.new(40,250),
-	main_enemy_bahavior_circle.new(40,250),
-	main_enemy_bahavior_3x3.new(80,150),
-	main_enemy_bahavior_circle.new(20,100),
+	main_enemy_behavior_warp.new(40,250),
+	main_enemy_bahavior_circle.new(40,200),
+	main_enemy_behavior_forming.new(40,150),
+	main_enemy_behavior_child_enemy.new(40,100),
+	main_enemy_bahavior_3x3.new(40,50),
 	main_enemy_behavior_static.new(160,-100)
 ]
 var beh :main_enemy_behavior

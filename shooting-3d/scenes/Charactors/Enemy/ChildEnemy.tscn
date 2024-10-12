@@ -18,7 +18,8 @@ var noise : FastNoiseLite
 func _ready() -> void:
 	noise = FastNoiseLite.new()
 	noise.seed = randi()
-	
+	await get_tree().create_timer(randf_range(0,3)).timeout
+	shot_timer.start()
 	
 var delta_sum := 0.0
 
@@ -82,7 +83,6 @@ texture = ExtResource("6_mlw1u")
 
 [node name="ShotTimer" parent="." index="6"]
 wait_time = 3.0
-autostart = true
 
 [connection signal="on_hp_lost" from="." to="." method="_on_on_hp_lost"]
 [connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timeout"]

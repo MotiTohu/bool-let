@@ -27,4 +27,4 @@ func _on_shot_timer_timeout() -> void:
 
 
 func _on_enemy_damage(damage: float) -> void:
-	UIControl.SCORE += damage * 100
+	UIControl.SCORE += damage * 1000
