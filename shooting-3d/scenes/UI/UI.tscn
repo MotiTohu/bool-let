@@ -183,7 +183,7 @@ offset_right = -209.0
 offset_bottom = -53.0
 grow_horizontal = 0
 grow_vertical = 0
-max_value = 300.0
+max_value = 1000.0
 value = 100.0
 show_percentage = false
 
