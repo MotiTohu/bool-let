@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3webal4it0d5"]
+
+[ext_resource type="PackedScene" uid="uid://csw3dexi5pxhx" path="res://scenes/Charactors/Enemy/Bullets/EnemyBullet.tscn" id="1_d7kfe"]
+[ext_resource type="Script" path="res://scenes/Charactors/Enemy/Bullets/forming_bullet.gd" id="2_dls6l"]
+[ext_resource type="PackedScene" uid="uid://dcatiecwgbcvc" path="res://assets/sprites/weapons&effects/missile.glb" id="2_mpu1q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_38rl6"]
+size = Vector3(0.5, 0.5, 1)
+
+[node name="EnemyBullet" instance=ExtResource("1_d7kfe")]
+collision_mask = 5
+script = ExtResource("2_dls6l")
+MOVE_TO = null
+SPEED = 10.0
+DEL_POS = null
+DAMAGE = 10.0
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_38rl6")
+
+[node name="CSGCylinder3D" parent="." index="1"]
+visible = false
+
+[node name="missile" parent="." index="2" instance=ExtResource("2_mpu1q")]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0, 0.5)
+
+[node name="VisibleOnScreenNotifier3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+aabb = AABB(-0.5, -0.5, -1, 1, 1, 2)
+
+[connection signal="body_entered" from="." to="." method="_on_any_entered"]

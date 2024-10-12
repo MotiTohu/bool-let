@@ -39,12 +39,12 @@ func _ready() -> void:
 	reset_game.connect(func():
 		moveable_enxt_ui = false
 		game_status=GAME_STATUS.RESET
-		await get_tree().create_timer(5).timeout
+		await get_tree().create_timer(3).timeout
 		moveable_enxt_ui = true
 		)
 	start_game.connect(func():
 		game_status=GAME_STATUS.START
-		SCORE = 60 * 3 * 100
+		SCORE = 60 * 3 * 1000
 		remaining_time = 60 * 3
 		for i in get_children():
 			if i is Enemy:
@@ -53,13 +53,13 @@ func _ready() -> void:
 	clear_game.connect(func():
 		moveable_enxt_ui = false
 		game_status=GAME_STATUS.CLEAR
-		await get_tree().create_timer(5).timeout
+		await get_tree().create_timer(3).timeout
 		moveable_enxt_ui = true
 		)
 	failre_game.connect(func():
 		moveable_enxt_ui = false
 		game_status=GAME_STATUS.FAILURE
-		await get_tree().create_timer(5).timeout
+		await get_tree().create_timer(3).timeout
 		moveable_enxt_ui = true
 		)
 	var timer := get_tree().create_timer(0.1)

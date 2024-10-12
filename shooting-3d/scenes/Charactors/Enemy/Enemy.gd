@@ -4,10 +4,10 @@ class_name Enemy extends Charactor
 @onready var behavior_timer: Timer = $BehaviorTimer
 @onready var shot_timer: Timer = $ShotTimer
 
-
+const FORMING_BULLET = preload("res://scenes/Charactors/Enemy/Bullets/FormingBullet.tscn")
 const _3X3_BULLET = preload("res://scenes/Charactors/Enemy/Bullets/3x3Bullet.tscn")
 const ENEMY_BULLET = preload("res://scenes/Charactors/Enemy/Bullets/EnemyBullet.tscn")
-var bullets :Array[PackedScene] = [ENEMY_BULLET,_3X3_BULLET]
+var bullets :Array[PackedScene] = [ENEMY_BULLET,_3X3_BULLET,FORMING_BULLET]
 var shotable := true
 signal on_shotable
 

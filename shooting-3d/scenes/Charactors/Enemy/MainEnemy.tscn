@@ -71,6 +71,7 @@ class main_enemy_bahavior_circle extends main_enemy_behavior:
 		shot_timer.autostart = true
 		shot_timer.timeout.connect(_shot)
 		enm.add_child(shot_timer)
+		shot_timer.start()
 	func exit()->void:
 		shot_timer.queue_free()
 	func _shot()->void:
@@ -138,15 +139,35 @@ class main_enemy_behavior_static extends main_enemy_behavior:
 	func move(_delta:float)->void:
 		pass
 
+class main_enemy_behavior_forming extends main_enemy_behavior:
+	var timer := Timer.new()
+	var noise : FastNoiseLite
+	func init(enm:MainEnemy)->void:
+		super(enm)
+		timer = Timer.new()
+		timer.one_shot = false
+		timer.wait_time = 3
+		timer.autostart = true
+		timer.timeout.connect(func():enm.shot(2))
+		enm.add_child(timer)
+		noise = FastNoiseLite.new()
+		noise.seed = randi()
+	func exit()->void:
+		super()
+		if(timer):timer.queue_free()
+	func move(delta:float)->void:
+		delta_sum += delta * 10
+		goto.x = noise.get_noise_1d(delta_sum) * 16
+		goto.y = noise.get_noise_1d(-delta_sum) * 9
+		print(goto)
+
 var behaviors : Array[main_enemy_behavior] = [
 	main_enemy_behavior_start.new(1,0),
 	main_enemy_behavior_static.new(4,0),
+	main_enemy_behavior_forming.new(40,250),
 	main_enemy_bahavior_circle.new(40,250),
 	main_enemy_bahavior_3x3.new(80,150),
-	main_enemy_behavior_child_enemy.new(100,0),
 	main_enemy_bahavior_circle.new(20,100),
-	main_enemy_bahavior_3x3.new(80,50),
-	main_enemy_behavior_child_enemy.new(100,0),
 	main_enemy_behavior_static.new(160,-100)
 ]
 var beh :main_enemy_behavior
@@ -231,6 +252,7 @@ albedo_texture = ExtResource("5_3sstc")
 collision_mask = 0
 script = SubResource("GDScript_7f006")
 behavior_mode = 0
+HP = 300.0
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -2.78229)

@@ -15,8 +15,8 @@ func _ready() -> void:
 	UIControl.failre_game.connect(queue_free)
 
 func _physics_process(delta: float) -> void:
-	position += MOVE_TO * SPEED * delta
-	if DEL_POS != 0 &&  position.z < -DEL_POS:
+	global_position += MOVE_TO * SPEED * delta
+	if DEL_POS != 0 &&  global_position.z < -DEL_POS:
 		queue_free()
 
 func _on_visible_on_screen_notifier_3d_screen_exited() -> void:

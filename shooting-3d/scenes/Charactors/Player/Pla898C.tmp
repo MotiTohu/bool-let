@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://duod78noy4hw6" path="res://scenes/Charactors/Charactor.tscn" id="1_q74oe"]
 [ext_resource type="Texture2D" uid="uid://b6ibc3j1gevwv" path="res://assets/sprites/player/player_4.png" id="2_lfbbg"]
-[ext_resource type="Script" path="res://scenes/Charactors/Player/Player.gd" id="2_xo378"]
+[ext_resource type="Script" path="res://scenes/Charactors/Player/player.gd" id="2_xo378"]
 [ext_resource type="Texture2D" uid="uid://c8jkj5sjjqktj" path="res://assets/sprites/player/player_3.png" id="3_o122x"]
 [ext_resource type="Texture2D" uid="uid://ceteik2qdsohe" path="res://assets/sprites/player/player_2.png" id="4_8cww4"]
 [ext_resource type="Texture2D" uid="uid://db6ak5o5hp3r8" path="res://assets/sprites/player/player_blaster.png" id="4_cakl2"]
@@ -61,7 +61,6 @@ DEPTH_SPEED = 3.0
 ROTATE_SPEED = 3.0
 MOVE_DEPTH = 5.0
 shoot_mode = 1
-HP = 1000.0
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0.0692505, 1.43229)

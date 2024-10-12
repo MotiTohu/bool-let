@@ -4,11 +4,9 @@ var defaultsiz = 5
 
 var progress : float :
 	set(v):
-		print(v)
 		sprite_3d.material_override.set("shader_parameter/progress",v)
 var alpha : float :
 	set(v):
-		print("!",v)
 		sprite_3d.material_override.set("shader_parameter/alpha",v)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
