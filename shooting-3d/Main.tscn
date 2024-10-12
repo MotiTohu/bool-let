@@ -76,6 +76,7 @@ environment = SubResource("Environment_ui131")
 
 [node name="Player" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D" instance=ExtResource("2_v76n8")]
 unique_name_in_owner = true
+HP = 300.0
 
 [node name="MainEnemy" parent="CanvasLayer/SubViewportContainer/SubViewport/Node3D" instance=ExtResource("4_vxcct")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
