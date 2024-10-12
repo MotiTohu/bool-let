@@ -10,10 +10,8 @@ size = Vector3(0.5, 0.5, 1)
 [node name="EnemyBullet" instance=ExtResource("1_d7kfe")]
 collision_mask = 5
 script = ExtResource("2_dls6l")
-MOVE_TO = null
 SPEED = 10.0
-DEL_POS = null
-DAMAGE = 10.0
+DAMAGE = 50.0
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

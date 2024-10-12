@@ -20,7 +20,7 @@ collision_mask = 1
 script = ExtResource("2_wuwgi")
 move_delay_time = 4.0
 SPEED = 50.0
-DAMAGE = 50.0
+DAMAGE = 70.0
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

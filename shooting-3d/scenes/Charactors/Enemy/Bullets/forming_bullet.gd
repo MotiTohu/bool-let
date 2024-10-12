@@ -3,7 +3,7 @@ extends  Bullet
 var player : MainPlayer
 func _ready() -> void:
 	player = get_viewport().get_child(0).find_child("Player")
-	MOVE_TO = Vector3(randf_range(-1,1),randf_range(-1,1),.5).normalized()
+	MOVE_TO = Vector3(randf_range(-2,2),randf_range(-2,2),.5).normalized()
 	look_at(MOVE_TO,Vector3(0,0,1))
 
 

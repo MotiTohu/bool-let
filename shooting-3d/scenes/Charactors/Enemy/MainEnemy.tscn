@@ -162,6 +162,7 @@ class main_enemy_behavior_forming extends main_enemy_behavior:
 
 class main_enemy_behavior_warp extends main_enemy_behavior:
 	var timer := Timer.new()
+	var timer2 := Timer.new()
 	func init(enm:MainEnemy)->void:
 		super(enm)
 		timer = Timer.new()
@@ -171,12 +172,18 @@ class main_enemy_behavior_warp extends main_enemy_behavior:
 		timer.timeout.connect(rand_move)
 		enm.add_child(timer)
 		timer.start()
+		timer2 = Timer.new()
+		timer2.one_shot = false
+		timer2.wait_time = .2
+		timer2.timeout.connect(func():enm.shot(0))
+		enm.add_child(timer2)
+		timer2.start()
 	func exit()->void:
 		super()
 		if(timer):timer.queue_free()
-	
+		if(timer2):timer2.queue_free()
 	func rand_move()->void:
-		goto = Vector3(randf_range(-16,16),randf_range(-9,9),0)
+		goto = Vector3(randf_range(-10,10),randf_range(-6,6),0)
 		
 	
 
