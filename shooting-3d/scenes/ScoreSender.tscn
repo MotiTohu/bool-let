@@ -4,7 +4,7 @@
 
 [node name="ScoreSender" type="Node"]
 script = ExtResource("1_0krof")
-URL = "http://192.168.1.16:5173/data"
+URL = "http://192.168.234.29:4173/data"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 

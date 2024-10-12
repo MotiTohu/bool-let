@@ -25,10 +25,14 @@ func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body is Charactor:
+		if body is not Enemy:
+			if ! body.damaga_able:
+				queue_free()
 		body.decrease_hp(DAMAGE)
 		if body is Enemy:
 			var effect := EFFECT.instantiate()
 			body.add_child(effect)
 			effect.global_position = global_position
-			effect.rotation.z = randf_range(0,2.0)*PI 
+			effect.rotation.z = randf_range(0,2.0)*PI
+			
 		queue_free()

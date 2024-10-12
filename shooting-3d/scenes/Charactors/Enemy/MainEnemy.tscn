@@ -116,8 +116,23 @@ class main_enemy_bahavior_3x3 extends main_enemy_behavior:
 			)
 		enm.add_child(timer2)
 		timer2.start(4)
-		
-		
+const CHILD_ENEMY = preload(\"res://scenes/Charactors/Enemy/ChildEnemy.tscn\")
+class main_enemy_behavior_child_enemy extends  main_enemy_behavior:
+	func init(enm:MainEnemy)->void:
+		super(enm)
+		for i in 5:
+			var c := CHILD_ENEMY.instantiate()
+			c.delta_sum += randf_range(-30,30)
+			enm.add_child(c)
+		goto = Vector3.ZERO
+		goto.y -= 15
+	func move(_delta)->void:
+		var flg=true
+		for i in enm.get_children():
+			if i is Enemy:
+				flg=false
+		if flg:
+			enm.next_beh()
 
 class main_enemy_behavior_static extends main_enemy_behavior:
 	func move(_delta:float)->void:
@@ -128,7 +143,10 @@ var behaviors : Array[main_enemy_behavior] = [
 	main_enemy_behavior_static.new(4,0),
 	main_enemy_bahavior_circle.new(40,250),
 	main_enemy_bahavior_3x3.new(80,150),
+	main_enemy_behavior_child_enemy.new(100,0),
 	main_enemy_bahavior_circle.new(20,100),
+	main_enemy_bahavior_3x3.new(80,50),
+	main_enemy_behavior_child_enemy.new(100,0),
 	main_enemy_behavior_static.new(160,-100)
 ]
 var beh :main_enemy_behavior
@@ -214,7 +232,6 @@ albedo_texture = ExtResource("5_3sstc")
 collision_mask = 0
 script = SubResource("GDScript_7f006")
 behavior_mode = 0
-HP = 300.0
 
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -2.78229)

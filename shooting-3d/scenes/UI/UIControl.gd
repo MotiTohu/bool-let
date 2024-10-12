@@ -46,6 +46,9 @@ func _ready() -> void:
 		game_status=GAME_STATUS.START
 		SCORE = 60 * 3 * 100
 		remaining_time = 60 * 3
+		for i in get_children():
+			if i is Enemy:
+				i.queue_free()
 		)
 	clear_game.connect(func():
 		moveable_enxt_ui = false
@@ -75,3 +78,5 @@ func _process(delta: float) -> void:
 	if game_status == GAME_STATUS.START:
 		SCORE -= delta * 100
 		remaining_time -= delta 
+		if remaining_time < 0:
+			failre_game.emit()

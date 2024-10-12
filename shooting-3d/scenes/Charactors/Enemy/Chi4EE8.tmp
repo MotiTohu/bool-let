@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://co6kvcd3g74hi"]
+[gd_scene load_steps=13 format=3 uid="uid://co6kvcd3g74hi"]
 
 [ext_resource type="PackedScene" uid="uid://bher15swug66t" path="res://scenes/Charactors/Enemy/Enemy.tscn" id="1_5de0g"]
 [ext_resource type="Texture2D" uid="uid://trpqk834tri0" path="res://assets/sprites/enemy/enemy2/enemy2_body.png" id="3_iqvu1"]
@@ -13,25 +13,21 @@ script/source = "extends Enemy
 func _on_on_hp_lost() -> void:
 	queue_free()
 
-var noise : FastNoiseLite
+@export var noise : Noise
 
 func _ready() -> void:
-	noise = FastNoiseLite.new()
 	noise.seed = randi()
-	print(HP)
-	
-	
+
 var delta_sum := 0.0
-
 func _physics_process(delta: float) -> void:
-	delta_sum += delta * 10
-	position.x = noise.get_noise_1d(delta_sum) * 12
-	position.y = noise.get_noise_1d(-delta_sum) * 6
-
-
-func _on_shot_timeout() -> void:
-	shot(0)
+	delta_sum += delta * 3
+	print(noise.get_noise_1d(delta_sum))
+	position.x = noise.get_noise_1d(delta_sum) * 5
+	position.y = noise.get_noise_1d(-delta_sum) * 5
 "
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bgi80"]
+noise_type = 5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w7551"]
 size = Vector3(3.81299, 5.28369, 20)
@@ -56,7 +52,7 @@ albedo_texture = ExtResource("6_mlw1u")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
 collision_mask = 0
 script = SubResource("GDScript_1xxxe")
-HP = 2.0
+noise = SubResource("FastNoiseLite_bgi80")
 
 [node name="CollisionShape3D" parent="." index="0"]
 shape = SubResource("BoxShape3D_w7551")
@@ -81,9 +77,4 @@ transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, -0.5)
 material_override = SubResource("StandardMaterial3D_m3mx8")
 texture = ExtResource("6_mlw1u")
 
-[node name="ShotTimer" parent="." index="6"]
-wait_time = 3.0
-autostart = true
-
 [connection signal="on_hp_lost" from="." to="." method="_on_on_hp_lost"]
-[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timeout"]

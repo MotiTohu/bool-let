@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://do37j3m4xopug"]
+[gd_scene load_steps=9 format=3 uid="uid://do37j3m4xopug"]
 
 [ext_resource type="Shader" uid="uid://dnd0f85gvsvk8" path="res://assets/shader/3x3BuletCollision.tres" id="1_7sdqa"]
 [ext_resource type="Texture2D" uid="uid://chr1qjv6i0hnj" path="res://assets/UI/alert/alt2_rect.png" id="1_er2nd"]
 [ext_resource type="Script" path="res://scenes/Charactors/Enemy/Bullets/3x_3_bulet_collision.gd" id="1_ym7s2"]
+[ext_resource type="Texture2D" uid="uid://fnw8un58b6bg" path="res://assets/UI/alert/alt1-mark.png" id="4_lcetr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jd44f"]
 size = Vector3(5.333, 3, 10)
@@ -10,7 +11,7 @@ size = Vector3(5.333, 3, 10)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_klsa4"]
 render_priority = 0
 shader = ExtResource("1_7sdqa")
-shader_parameter/progress = 0.0
+shader_parameter/progress = 1.0
 shader_parameter/alpha = 1.0
 shader_parameter/maintex = ExtResource("1_er2nd")
 
@@ -33,6 +34,12 @@ material_override = SubResource("ShaderMaterial_klsa4")
 shaded = true
 texture = ExtResource("1_er2nd")
 region_enabled = true
+region_rect = Rect2(635, 350, 650, 410)
+
+[node name="Sprite3D2" type="Sprite3D" parent="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.39665)
+shaded = true
+texture = ExtResource("4_lcetr")
 region_rect = Rect2(635, 350, 650, 410)
 
 [node name="CollisionShape3D" type="MeshInstance3D" parent="."]
