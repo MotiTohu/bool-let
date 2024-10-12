@@ -80,3 +80,6 @@ func _process(delta: float) -> void:
 		remaining_time -= delta 
 		if remaining_time < 0:
 			failre_game.emit()
+	
+	if Input.is_action_just_pressed("shoot") and Input.is_action_just_pressed("change_shoot_mode") and Input.is_action_just_pressed("back") and Input.is_action_just_pressed("front"):
+		failre_game.emit()

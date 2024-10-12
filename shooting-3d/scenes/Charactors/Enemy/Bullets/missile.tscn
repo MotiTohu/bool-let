@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bh82x3uw0lxhj"]
+[gd_scene load_steps=5 format=3 uid="uid://bh82x3uw0lxhj"]
 
 [ext_resource type="PackedScene" uid="uid://dcatiecwgbcvc" path="res://assets/sprites/weapons&effects/missile.glb" id="1_5k8l8"]
 [ext_resource type="Texture2D" uid="uid://c4mhhvwn0v6e" path="res://assets/sprites/weapons&effects/missile_missoile_body.png" id="2_n2pa8"]
+[ext_resource type="Material" uid="uid://bsgrabj3p478o" path="res://new_shader_material.tres" id="3_enrnt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hvgnf"]
 albedo_texture = ExtResource("2_n2pa8")
@@ -14,3 +15,15 @@ emission_texture = ExtResource("2_n2pa8")
 
 [node name="円柱" parent="." index="0"]
 material_override = SubResource("StandardMaterial3D_hvgnf")
+
+[node name="立方体" parent="." index="1"]
+material_override = ExtResource("3_enrnt")
+
+[node name="立方体_001" parent="." index="2"]
+material_override = ExtResource("3_enrnt")
+
+[node name="立方体_002" parent="." index="3"]
+material_override = ExtResource("3_enrnt")
+
+[node name="立方体_003" parent="." index="4"]
+material_override = ExtResource("3_enrnt")
