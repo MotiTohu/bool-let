@@ -39,7 +39,7 @@ animations = [{
 }]
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 sprite_frames = SubResource("SpriteFrames_8edrq")
 animation = &"explosion"
 frame = 6

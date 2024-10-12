@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3webal4it0d5"]
+[gd_scene load_steps=5 format=3 uid="uid://cyenccnpfb3t3"]
 
 [ext_resource type="PackedScene" uid="uid://csw3dexi5pxhx" path="res://scenes/Charactors/Enemy/Bullets/EnemyBullet.tscn" id="1_d7kfe"]
 [ext_resource type="Script" path="res://scenes/Charactors/Enemy/Bullets/forming_bullet.gd" id="2_dls6l"]
-[ext_resource type="PackedScene" uid="uid://dcatiecwgbcvc" path="res://assets/sprites/weapons&effects/missile.glb" id="2_mpu1q"]
+[ext_resource type="PackedScene" uid="uid://bh82x3uw0lxhj" path="res://scenes/Charactors/Enemy/Bullets/missile.tscn" id="3_ogy6f"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_38rl6"]
 size = Vector3(0.5, 0.5, 1)
@@ -22,7 +22,7 @@ shape = SubResource("BoxShape3D_38rl6")
 [node name="CSGCylinder3D" parent="." index="1"]
 visible = false
 
-[node name="missile" parent="." index="2" instance=ExtResource("2_mpu1q")]
+[node name="missile" parent="." index="2" instance=ExtResource("3_ogy6f")]
 transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0, 0.5)
 
 [node name="VisibleOnScreenNotifier3D" parent="." index="3"]
