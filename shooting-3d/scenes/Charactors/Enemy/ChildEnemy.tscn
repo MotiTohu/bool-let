@@ -18,7 +18,6 @@ var noise : FastNoiseLite
 func _ready() -> void:
 	noise = FastNoiseLite.new()
 	noise.seed = randi()
-	print(HP)
 	
 	
 var delta_sum := 0.0
